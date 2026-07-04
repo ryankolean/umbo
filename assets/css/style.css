@@ -337,6 +337,9 @@ p { margin: 0 0 1.1em; }
 .figure-illus { margin: 0; }
 .figure-illus figcaption { text-align: center; font-family: var(--font-ui); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-2); margin-top: .9rem; }
 
+/* real team portraits */
+.portrait { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 1.4rem; border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--brass) 30%, transparent); box-shadow: var(--shadow-soft); }
+
 /* oyster-man mascot floats in the pinup frame */
 .mascot-frame { position: relative; display: grid; place-items: center; padding: clamp(2rem,4vw,3.5rem); background: var(--cream-2); border: 1px solid var(--brass); box-shadow: var(--shadow-soft); overflow: hidden; }
 .mascot-frame::before { content:""; position: absolute; inset: .5rem; border: 1px solid color-mix(in srgb,var(--brass) 55%, transparent); pointer-events: none; z-index: 2; }
