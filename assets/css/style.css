@@ -19,6 +19,9 @@
   --brass:      #B0853B;
   --brass-2:    #9A722F;
   --sea:        #33524B;
+  --sage:       #B4C0AF;
+  --sage-2:     #9FAE97;
+  --sage-deep:  #6E8168;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-script:  'Yellowtail', cursive;
@@ -87,8 +90,10 @@ p { margin: 0 0 1.1em; }
 .btn__arrow { transition: transform .4s var(--ease); }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
-/* ---------- shell ornament ---------- */
-.shell { display: inline-block; color: var(--brass); }
+/* ---------- shell ornament (real engraving as <img>) ---------- */
+.shell { display: inline-block; vertical-align: middle; height: auto; width: 2.3rem; }
+.shell--sm { width: 1.9rem; }
+.shell--lg { width: 3.2rem; }
 .divider {
   display: flex; align-items: center; justify-content: center; gap: 1.2rem;
   color: var(--brass); margin: 0;
@@ -150,8 +155,8 @@ p { margin: 0 0 1.1em; }
 }
 .hero__shell-bg {
   position: absolute; inset: 0; margin: auto;
-  width: min(1000px, 130vw); color: var(--brass);
-  opacity: .10; pointer-events: none; z-index: 0;
+  width: min(660px, 82vw); height: auto;
+  opacity: .13; pointer-events: none; z-index: 0;
 }
 .hero__inner { position: relative; z-index: 2; max-width: 940px; }
 .hero__eyebrow { margin-bottom: 1.6rem; }
@@ -316,6 +321,43 @@ p { margin: 0 0 1.1em; }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { margin-top: clamp(2.5rem,5vw,4rem); padding-top: 1.6rem; border-top: 1px solid color-mix(in srgb,var(--cream-2) 16%, transparent);
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .74rem; letter-spacing: .1em; color: color-mix(in srgb,var(--cream-2) 55%, transparent); }
+
+/* ============================================================
+   BRAND ASSETS (real logo, engravings, pattern)
+   ============================================================ */
+/* header + footer wordmark logo */
+.brand__logo { height: 1.55rem; width: auto; display: block; }
+.site-header.is-stuck .brand__logo { height: 1.4rem; }
+.footer-brand .brand__logo { height: 1.8rem; margin-bottom: 1rem; }
+@media (max-width: 680px){ .brand__logo{ height: 1.35rem; } }
+
+/* real illustration inside frames + slots */
+.illus { display: block; width: 100%; height: auto; }
+.pinup-frame .illus { background: var(--cream); }
+.figure-illus { margin: 0; }
+.figure-illus figcaption { text-align: center; font-family: var(--font-ui); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-2); margin-top: .9rem; }
+
+/* oyster-man mascot floats in the pinup frame */
+.mascot-frame { position: relative; display: grid; place-items: center; padding: clamp(2rem,4vw,3.5rem); background: var(--cream-2); border: 1px solid var(--brass); box-shadow: var(--shadow-soft); overflow: hidden; }
+.mascot-frame::before { content:""; position: absolute; inset: .5rem; border: 1px solid color-mix(in srgb,var(--brass) 55%, transparent); pointer-events: none; z-index: 2; }
+.mascot-frame .illus { width: min(78%, 320px); position: relative; z-index: 1; }
+.mascot-frame .pattern-wash { position:absolute; inset:0; background: var(--sage); opacity:.18; z-index:0; }
+
+/* dark-section shells + logo use cream variants (set in HTML via src) */
+
+/* sage "she sells sea shells" pattern band */
+.pattern-band { position: relative; padding: clamp(3.5rem,7vw,6rem) 0; background: var(--sage); overflow: hidden; text-align: center; }
+.pattern-band__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.pattern-band__inner { position: relative; z-index: 2; }
+.pattern-band .plate { display: inline-block; background: var(--cream); padding: clamp(1.6rem,3vw,2.6rem) clamp(2rem,4vw,3.4rem); border: 1px solid var(--oxblood); box-shadow: 0 20px 50px -28px rgba(71,21,21,.6); }
+.pattern-band .plate .brand__logo { height: 2.2rem; margin: 0 auto .8rem; }
+.pattern-band .plate p { margin: 0; font-family: var(--font-display); font-style: italic; color: var(--oxblood); font-size: 1.05rem; }
+
+/* "Coming Soon-ish!" script graphic */
+.script-graphic { display: block; width: clamp(180px, 26vw, 300px); height: auto; }
+
+/* engraving icon that leads a card/eyebrow */
+.mark-lead { display: block; margin-bottom: 1rem; }
 
 /* ============================================================
    REVEAL ANIMATION
