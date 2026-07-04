@@ -353,6 +353,15 @@ p { margin: 0 0 1.1em; }
 .pattern-band .plate .brand__logo { height: 2.2rem; margin: 0 auto .8rem; }
 .pattern-band .plate p { margin: 0; font-family: var(--font-display); font-style: italic; color: var(--oxblood); font-size: 1.05rem; }
 
+/* "she sells sea shells!" marching parade frieze (full-bleed) */
+.parade-band { position: relative; background: var(--sage); padding: clamp(2.6rem,5vw,4.5rem) var(--gutter) clamp(2rem,4vw,3rem); text-align: center; overflow: hidden; }
+.parade-band::before, .parade-band::after { content:""; position:absolute; left:0; right:0; height:1px; background: color-mix(in srgb, var(--sage-deep) 45%, transparent); }
+.parade-band::before { top:0; } .parade-band::after { bottom:0; }
+.parade-band__art { width: min(1320px, 100%); height: auto; margin: 0 auto; display: block; }
+.parade-band__cta { margin-top: 1.4rem; }
+.parade-band .btn--ghost { --fg: var(--oxblood); border-color: color-mix(in srgb, var(--oxblood) 45%, transparent); }
+.parade-band .btn--ghost:hover { background: var(--oxblood); --fg: var(--cream-2); }
+
 /* "Coming Soon-ish!" script graphic */
 .script-graphic { display: block; width: clamp(180px, 26vw, 300px); height: auto; }
 
