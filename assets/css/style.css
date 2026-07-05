@@ -7,21 +7,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Jost:ital,wght@0,300..700;1,400..500&family=Yellowtail&display=swap');
 
 :root {
-  --cream:      #EFECDC;
-  --cream-2:    #F6F3E7;
-  --cream-3:    #E7E2CF;
-  --oxblood:    #471515;
-  --oxblood-2:  #611E1E;
-  --ink:        #33201A;
-  --coral:      #D9765A;
-  --coral-2:    #C25E42;
-  --blush:      #EDB6A4;
-  --brass:      #B0853B;
-  --brass-2:    #9A722F;
-  --sea:        #33524B;
-  --sage:       #B4C0AF;
-  --sage-2:     #9FAE97;
-  --sage-deep:  #6E8168;
+  /* Brand palette: parchment · gold · sage, anchored by a near-black ink. */
+  --cream:      #E8E3CE;   /* parchment — page base */
+  --cream-2:    #F1EDDD;   /* lighter tint — cards, section tint */
+  --cream-3:    #DCD6BC;   /* deeper tint — hero gradient */
+  --oxblood:    #2B2117;   /* ink (espresso) — dark sections + strong headings */
+  --oxblood-2:  #1D160E;
+  --ink:        #2E241A;   /* body text */
+  --coral:      #D3A75A;   /* gold — buttons, script accents, highlights */
+  --coral-2:    #A5761E;   /* deep gold — eyebrows, hover, labels */
+  --blush:      #E7CB8C;   /* light gold — accents on dark sections */
+  --brass:      #C79A44;   /* gold hairlines / ornament */
+  --brass-2:    #94711F;   /* deep gold — small label text, numbers */
+  --sea:        #5C6E56;
+  --sage:       #A9B8A4;   /* sage — pattern/parade band, secondary */
+  --sage-2:     #8C9E86;
+  --sage-deep:  #5C6E56;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-script:  'Yellowtail', cursive;
@@ -85,8 +86,8 @@ p { margin: 0 0 1.1em; }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); background: var(--oxblood-2); }
 .btn--ghost { --bg: transparent; --fg: var(--oxblood); border-color: color-mix(in srgb, var(--oxblood) 40%, transparent); }
 .btn--ghost:hover { background: var(--oxblood); color: var(--cream-2); }
-.btn--coral { --bg: var(--coral); --fg: #fff; }
-.btn--coral:hover { background: var(--coral-2); }
+.btn--coral { --bg: var(--coral); --fg: var(--oxblood); }
+.btn--coral:hover { background: var(--coral-2); --fg: var(--cream-2); }
 .btn__arrow { transition: transform .4s var(--ease); }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
