@@ -280,15 +280,12 @@ p { margin: 0 0 1.1em; }
 .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.4rem,3vw,3rem); text-align: center; }
 .info h3 { font-family: var(--font-ui); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); margin-bottom: .8rem; }
 .info p { font-family: var(--font-display); font-size: 1.25rem; color: var(--oxblood); line-height: 1.4; }
-.map-slot {
-  margin-top: 2.5rem; aspect-ratio: 21/7; border-radius: var(--radius);
-  background:
-    radial-gradient(circle at 30% 40%, color-mix(in srgb,var(--sea) 22%, transparent), transparent 40%),
-    repeating-linear-gradient(0deg, color-mix(in srgb,var(--oxblood) 6%, var(--cream-2)) 0 24px, var(--cream-2) 24px 48px);
-  border: 1px solid color-mix(in srgb,var(--oxblood) 18%, transparent);
-  display: grid; place-content: center; color: var(--brass-2);
-  font-family: var(--font-ui); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+.map-embed {
+  margin-top: 2.5rem; aspect-ratio: 2.3/1; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid color-mix(in srgb,var(--oxblood) 18%, transparent); box-shadow: var(--shadow-soft);
 }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(.88) contrast(.98); }
+@media (max-width: 680px) { .map-embed { aspect-ratio: 4/5; } }
 
 /* ---------- newsletter ---------- */
 .newsletter { text-align: center; }
