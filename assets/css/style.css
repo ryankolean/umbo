@@ -326,6 +326,11 @@ p { margin: 0 0 1.1em; }
 /* ============================================================
    BRAND ASSETS (real logo, engravings, pattern)
    ============================================================ */
+/* brand wordmark used as a display headline (matches the real logotype) */
+.wordmark-display { display: block; height: auto; margin-inline: auto; }
+.hero .wordmark-display { width: min(560px, 76vw); margin-top: .5rem; }
+.page-hero .wordmark-display { width: min(400px, 62vw); margin-top: .35rem; }
+
 /* header + footer wordmark logo */
 .brand__logo { height: 1.55rem; width: auto; display: block; }
 .site-header.is-stuck .brand__logo { height: 1.4rem; }
