@@ -236,6 +236,9 @@ p { margin: 0 0 1.1em; }
 .menu-row__name { font-family: var(--font-display); font-size: 1.3rem; color: var(--oxblood); }
 .menu-row__desc { grid-column: 1 / -1; font-size: .92rem; color: color-mix(in srgb, var(--ink) 70%, transparent); max-width: 60ch; }
 .menu-row__price { font-family: var(--font-ui); font-size: .9rem; letter-spacing: .1em; color: var(--brass-2); white-space: nowrap; }
+.menu-row__tag { font-family: var(--font-ui); font-style: normal; font-size: .58rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--coral-2); margin-left: .55em; white-space: nowrap; }
+.menu-note { max-width: 720px; margin: 0 auto 1.4rem; text-align: center; font-size: .9rem; font-style: italic; color: color-mix(in srgb, var(--ink) 66%, transparent); }
+.menu-prefixe .menu-row__name em { font-family: var(--font-ui); font-style: normal; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--coral-2); margin-right: .6em; }
 .menu-cat { margin: clamp(2.5rem,5vw,4rem) 0 1.2rem; text-align: center; }
 .menu-cat h3 { font-size: 1.9rem; }
 .menu-cat .script { font-size: 1.4rem; display:block; }
