@@ -191,6 +191,10 @@ p { margin: 0 0 1.1em; }
 .section--dark h2, .section--dark h3 { color: var(--cream-2); }
 .section--dark .eyebrow { color: var(--blush); }
 .section--dark .muted { color: color-mix(in srgb, var(--cream-2) 72%, transparent); }
+.section--sage { background: var(--sage); }
+.section--sage .eyebrow { color: var(--oxblood-2); }
+.section--sage .muted { color: color-mix(in srgb, var(--ink) 76%, transparent); }
+.section--sage .card { background: color-mix(in srgb, var(--cream-2) 88%, var(--sage)); }
 .section__head { max-width: 720px; margin: 0 auto clamp(2.5rem,5vw,4rem); text-align: center; }
 .section__head h2 { font-size: clamp(2.2rem, 5.5vw, 4rem); margin-top: 1rem; }
 .section__head p { margin-top: 1.2rem; font-size: 1.06rem; }
@@ -410,8 +414,8 @@ p { margin: 0 0 1.1em; }
 .pattern-band .plate p { margin: 0; font-family: var(--font-display); font-style: italic; color: var(--oxblood); font-size: 1.05rem; }
 
 /* "she sells sea shells!" marching parade frieze (full-bleed) */
-.parade-band { position: relative; background: var(--sage); padding: clamp(2.6rem,5vw,4.5rem) var(--gutter) clamp(2rem,4vw,3rem); text-align: center; overflow: hidden; }
-.parade-band::before, .parade-band::after { content:""; position:absolute; left:0; right:0; height:1px; background: color-mix(in srgb, var(--sage-deep) 45%, transparent); }
+.parade-band { position: relative; background: var(--coral); padding: clamp(2.6rem,5vw,4.5rem) var(--gutter) clamp(2rem,4vw,3rem); text-align: center; overflow: hidden; }
+.parade-band::before, .parade-band::after { content:""; position:absolute; left:0; right:0; height:1px; background: color-mix(in srgb, var(--oxblood) 28%, transparent); }
 .parade-band::before { top:0; } .parade-band::after { bottom:0; }
 .parade-band__art { width: min(1320px, 100%); height: auto; margin: 0 auto; display: block; }
 .parade-band__cta { margin-top: 1.4rem; }
@@ -420,6 +424,18 @@ p { margin: 0 0 1.1em; }
 
 /* "Coming Soon-ish!" script graphic */
 .script-graphic { display: block; width: clamp(180px, 26vw, 300px); height: auto; }
+
+/* The Room — autoscrolling photo carousel */
+.room-carousel { margin-top: clamp(2rem,4vw,3.2rem); overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+          mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.room-carousel__track { display: flex; width: max-content; animation: room-scroll 36s linear infinite; }
+.room-carousel:hover .room-carousel__track { animation-play-state: paused; }
+.room-carousel__track img { height: clamp(280px,40vw,440px); width: auto; aspect-ratio: 1; object-fit: cover; flex: 0 0 auto;
+  margin-right: clamp(.8rem,2vw,1.4rem); border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb,var(--brass) 24%, transparent); box-shadow: var(--shadow-soft); }
+@keyframes room-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .room-carousel__track { animation: none; } }
 
 /* engraving icon that leads a card/eyebrow */
 .mark-lead { display: block; margin-bottom: 1rem; }
