@@ -436,10 +436,9 @@ p { margin: 0 0 1.1em; }
   border: 1px solid color-mix(in srgb,var(--brass) 24%, transparent); box-shadow: var(--shadow-soft); }
 @keyframes room-scroll { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .room-carousel__track { animation: none; } }
-/* carousel framed inside the side-by-side layout */
+/* single framed photo inside the side-by-side layout */
 .room-frame { position: relative; margin: 0; min-width: 0; padding: .7rem; background: var(--cream-2); border: 1px solid var(--brass); box-shadow: var(--shadow-soft); }
-.room-frame .room-carousel { margin-top: 0; width: 100%; }
-.room-frame .room-carousel__track img { height: clamp(240px, 32vw, 360px); margin-right: .7rem; box-shadow: none; }
+.room-frame .room-photo { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 
 /* engraving icon that leads a card/eyebrow */
 .mark-lead { display: block; margin-bottom: 1rem; }
