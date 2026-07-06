@@ -161,19 +161,20 @@ p { margin: 0 0 1.1em; }
 }
 .hero__inner { position: relative; z-index: 2; max-width: 940px; }
 .hero__eyebrow { margin-bottom: 1.6rem; }
+.hero__eyebrow::before { display: none; }
 .hero h1 {
   font-size: clamp(3.2rem, 11vw, 8.6rem);
   font-optical-sizing: auto;
   font-weight: 400;
   letter-spacing: -.02em;
 }
-.hero h1 .script { display: block; font-size: .62em; margin-bottom: -.12em; }
+.hero h1 .script { display: block; font-size: .62em; margin-bottom: -.12em; transform: translateX(-24%); }
 .hero__lede {
   max-width: 33ch; margin: 1.8rem auto 2.4rem;
   font-size: clamp(1rem, 1.5vw, 1.18rem); color: var(--ink);
 }
 .hero__lede strong { color: var(--oxblood); font-weight: 600; }
-.hero__cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.hero__cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 11rem; }
 .hero__meta {
   position: absolute; bottom: 2rem; left: 0; right: 0; z-index: 2;
   display: flex; justify-content: center; gap: 1.4rem; flex-wrap: wrap;
