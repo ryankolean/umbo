@@ -2,6 +2,9 @@
 (function () {
   'use strict';
 
+  // Opt into JS-only reveal styling (content is visible by default without this).
+  document.documentElement.classList.add('js');
+
   // Sticky header state
   var header = document.querySelector('.site-header');
   var onScroll = function () {
@@ -29,17 +32,24 @@
     });
   }
 
-  // Scroll reveals
-  var reveals = document.querySelectorAll('[data-reveal]');
+  // Scroll reveals — progressive enhancement, guaranteed to reveal.
+  var reveals = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  var revealAll = function () { reveals.forEach(function (el) { el.classList.add('in'); }); };
   if ('IntersectionObserver' in window && reveals.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     reveals.forEach(function (el) { io.observe(el); });
+    // A hidden/backgrounded tab pauses animations and defers IntersectionObserver,
+    // which would leave content stuck invisible — reveal everything in that case.
+    if (document.hidden) revealAll();
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) revealAll(); });
+    // Final safety net: never let anything stay hidden.
+    window.addEventListener('load', function () { setTimeout(revealAll, 2500); });
   } else {
-    reveals.forEach(function (el) { el.classList.add('in'); });
+    revealAll();
   }
 
   // Footer year
