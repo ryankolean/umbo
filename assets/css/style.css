@@ -66,10 +66,10 @@ p { margin: 0 0 1.1em; }
   display: inline-flex; align-items: center; gap: .8em;
 }
 .eyebrow::before { content:""; width: 34px; height: 1px; background: currentColor; opacity: .6; }
-.script { font-family: var(--font-script); font-weight: 400; color: var(--coral); letter-spacing: 0; }
+.script { font-family: var(--font-script); font-weight: 400; color: #9A6B18; letter-spacing: 0; }
 .serif  { font-family: var(--font-display); }
 .center { text-align: center; }
-.muted  { color: color-mix(in srgb, var(--ink) 66%, transparent); }
+.muted  { color: color-mix(in srgb, var(--ink) 72%, transparent); }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -195,7 +195,7 @@ p { margin: 0 0 1.1em; }
 .section--sage { background: var(--sage); }
 .section--sage .eyebrow { color: var(--oxblood-2); }
 .section--sage .script { color: #4E3A12; }
-.section--sage .muted { color: color-mix(in srgb, var(--ink) 76%, transparent); }
+.section--sage .muted { color: color-mix(in srgb, var(--ink) 82%, transparent); }
 .section--sage .card { background: color-mix(in srgb, var(--cream-2) 88%, var(--sage)); }
 .section__head { max-width: 720px; margin: 0 auto clamp(2.5rem,5vw,4rem); text-align: center; }
 .section__head h2 { font-size: clamp(2.2rem, 5.5vw, 4rem); margin-top: 1rem; }
@@ -229,7 +229,7 @@ p { margin: 0 0 1.1em; }
 .card:hover::after { opacity: 1; }
 .card .shell { margin-bottom: 1.2rem; }
 .card h3 { font-size: 1.6rem; margin-bottom: .6rem; }
-.card__no { position: absolute; top: 1.2rem; right: 1.4rem; font-family: var(--font-display); font-style: italic; color: color-mix(in srgb, var(--brass) 55%, transparent); font-size: 1.1rem; }
+.card__no { position: absolute; top: 1.2rem; right: 1.4rem; font-family: var(--font-display); font-style: italic; color: var(--coral-2); font-size: 1.1rem; }
 
 /* ---------- menu preview / lists ---------- */
 .menu-list { max-width: 760px; margin-inline: auto; }
@@ -244,12 +244,12 @@ p { margin: 0 0 1.1em; }
 .menu-row__price { font-family: var(--font-ui); font-size: .9rem; letter-spacing: .1em; color: var(--brass-2); white-space: nowrap; }
 .menu-row__tag { font-family: var(--font-ui); font-style: normal; font-size: .58rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--coral-2); margin-left: .55em; white-space: nowrap; }
 @media (max-width: 680px) { .menu-grid .menu-row__tag { display: none; } }
-.menu-note { max-width: 720px; margin: 0 auto 1.4rem; text-align: center; font-size: .9rem; font-style: italic; color: color-mix(in srgb, var(--ink) 66%, transparent); }
+.menu-note { max-width: 720px; margin: 0 auto 1.4rem; text-align: center; font-size: .9rem; font-style: italic; color: color-mix(in srgb, var(--ink) 72%, transparent); }
 .menu-prefixe .menu-row__name em { font-family: var(--font-ui); font-style: normal; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--coral-2); margin-right: .6em; }
 .menu-cat { margin: clamp(1.5rem,3vw,2.4rem) 0 .7rem; text-align: center; }
 .menu-cat:first-child { margin-top: 0; }
 .menu-cat h3 { font-size: 1.5rem; }
-.menu-cat .script { font-size: 1.05rem; display:block; }
+.menu-cat .script { font-size: 1.05rem; display:block; color: #4E3A12; }
 
 /* two-column menu: food left, drinks right (tablet+); stacked on mobile */
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); align-items: start; }
@@ -350,7 +350,8 @@ p { margin: 0 0 1.1em; }
 .page-hero__shell { position: absolute; inset: 0; margin: auto; width: min(520px, 68vw); height: auto; opacity: .12; pointer-events: none; z-index: 0; }
 .page-hero > :not(.page-hero__shell) { position: relative; z-index: 1; }
 .page-hero h1 { font-size: clamp(2.6rem, 8vw, 6rem); }
-.page-hero h1 .script { display:block; font-size: .5em; color: var(--coral); }
+.page-hero h1 .script { display:block; font-size: .5em; color: #9A6B18; }
+.page-hero .eyebrow::before { display: none; }
 .page-hero p { max-width: 46ch; margin: 1.2rem auto 0; font-size: 1.05rem; }
 
 /* ============================================================
