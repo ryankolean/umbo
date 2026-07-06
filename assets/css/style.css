@@ -194,6 +194,7 @@ p { margin: 0 0 1.1em; }
 .section--dark .muted { color: color-mix(in srgb, var(--cream-2) 72%, transparent); }
 .section--sage { background: var(--sage); }
 .section--sage .eyebrow { color: var(--oxblood-2); }
+.section--sage .script { color: #4E3A12; }
 .section--sage .muted { color: color-mix(in srgb, var(--ink) 76%, transparent); }
 .section--sage .card { background: color-mix(in srgb, var(--cream-2) 88%, var(--sage)); }
 .section__head { max-width: 720px; margin: 0 auto clamp(2.5rem,5vw,4rem); text-align: center; }
