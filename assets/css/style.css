@@ -475,6 +475,10 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
     background: color-mix(in srgb,var(--cream) 97%, transparent); backdrop-filter: blur(6px);
     transform: translateX(100%); transition: transform .5s var(--ease); }
   .nav.open { transform: none; }
+  /* backdrop-filter on the sticky header creates a containing block that would
+     trap the fixed nav inside the header bar; drop it while the menu is open so
+     the overlay covers the full viewport regardless of scroll position */
+  .site-header:has(.nav.open) { backdrop-filter: none; }
   .nav a.nav__link { font-size: 1.1rem; }
   .nav-toggle { display: grid; place-items: center; z-index: 120; position: relative; }
   .cards, .info-grid, .footer-grid, .gallery { grid-template-columns: 1fr; }
