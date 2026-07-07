@@ -120,9 +120,9 @@ p { margin: 0 0 1.1em; }
   box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent);
   padding-block: .7rem;
 }
-.brand { display: flex; flex-direction: column; line-height: .9; }
+.brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: .9; }
 .brand__word { font-family: var(--font-script); font-size: clamp(1.9rem, 4vw, 2.5rem); color: var(--oxblood); }
-.brand__sub  { font-family: var(--font-ui); font-size: .58rem; font-weight: 500; letter-spacing: .42em; text-transform: uppercase; color: var(--coral-2); padding-left: .35em; }
+.brand__sub  { font-family: var(--font-ui); font-size: .58rem; font-weight: 500; letter-spacing: .42em; text-transform: uppercase; color: var(--coral-2); white-space: nowrap; }
 
 .nav { display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.2rem); }
 .nav a.nav__link {
@@ -377,10 +377,10 @@ p { margin: 0 0 1.1em; }
 .page-hero .wordmark-display { width: min(400px, 62vw); margin-top: .35rem; }
 
 /* header + footer wordmark logo */
-.brand__logo { height: 1.55rem; width: auto; display: block; }
-.site-header.is-stuck .brand__logo { height: 1.4rem; }
+.brand__logo { height: 2.4rem; width: auto; display: block; }
+.site-header.is-stuck .brand__logo { height: 2rem; }
 .footer-brand .brand__logo { height: 1.8rem; margin-bottom: 1rem; }
-@media (max-width: 680px){ .brand__logo{ height: 1.35rem; } }
+@media (max-width: 680px){ .brand__logo{ height: 1.9rem; } }
 
 /* real illustration inside frames + slots */
 .illus { display: block; width: 100%; height: auto; }
