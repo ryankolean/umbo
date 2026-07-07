@@ -421,6 +421,10 @@ p { margin: 0 0 1.1em; }
 .parade-band::before, .parade-band::after { content:""; position:absolute; left:0; right:0; height:1px; background: color-mix(in srgb, var(--oxblood) 28%, transparent); }
 .parade-band::before { top:0; } .parade-band::after { bottom:0; }
 .parade-stage { position: relative; width: min(1320px, 100%); aspect-ratio: 1847 / 509; margin: 0 auto; }
+/* original hand-drawn notes — shown only when the animation is off (below).
+   display:none keeps this from downloading for animated visitors. */
+.parade-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: url(../img/parade/notes-static.png) center / 100% 100% no-repeat; display: none; }
 .parade-ch { position: absolute; height: auto; transform-origin: bottom center; will-change: transform; }
 .parade-letters { position: absolute; height: auto; }
 /* placement is % of the 1847×509 source art, so the sprites reassemble the
@@ -449,11 +453,13 @@ p { margin: 0 0 1.1em; }
 @media (prefers-reduced-motion: reduce) {
   .parade-ch { animation: none !important; transform: none !important; }
   .note { display: none !important; }
+  .parade-stage::after { display: block; }
 }
 /* Kill switch — add class "parade-band--static" to the .parade-band section
-   to turn the animation off entirely (static frieze remains). */
+   to turn the animation off entirely (static frieze + original notes remain). */
 .parade-band--static .parade-ch { animation: none !important; transform: none !important; }
 .parade-band--static .note { display: none !important; }
+.parade-band--static .parade-stage::after { display: block; }
 .parade-band__cta { margin-top: 1.4rem; }
 .parade-band .btn--ghost { --fg: var(--oxblood); border-color: color-mix(in srgb, var(--oxblood) 45%, transparent); }
 .parade-band .btn--ghost:hover { background: var(--oxblood); --fg: var(--cream-2); }
