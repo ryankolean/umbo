@@ -450,6 +450,10 @@ p { margin: 0 0 1.1em; }
   .parade-ch { animation: none !important; transform: none !important; }
   .note { display: none !important; }
 }
+/* Kill switch — add class "parade-band--static" to the .parade-band section
+   to turn the animation off entirely (static frieze remains). */
+.parade-band--static .parade-ch { animation: none !important; transform: none !important; }
+.parade-band--static .note { display: none !important; }
 .parade-band__cta { margin-top: 1.4rem; }
 .parade-band .btn--ghost { --fg: var(--oxblood); border-color: color-mix(in srgb, var(--oxblood) 45%, transparent); }
 .parade-band .btn--ghost:hover { background: var(--oxblood); --fg: var(--cream-2); }
