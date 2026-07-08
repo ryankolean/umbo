@@ -532,3 +532,11 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto; }
   html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+/* ---------- FAQ ---------- */
+.faq { max-width: 760px; }
+.faq__list { margin: 0; }
+.faq__item { padding: clamp(1.1rem,2.5vw,1.6rem) 0; border-top: 1px solid color-mix(in srgb, var(--oxblood) 14%, transparent); }
+.faq__item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--oxblood) 14%, transparent); }
+.faq__item dt { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem,2.2vw,1.4rem); color: var(--oxblood); margin-bottom: .5rem; }
+.faq__item dd { margin: 0; max-width: 64ch; }
