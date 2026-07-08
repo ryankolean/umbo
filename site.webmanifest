@@ -1,0 +1,14 @@
+{
+  "name": "Umbo — Oyster Bar, Traverse City",
+  "short_name": "Umbo",
+  "description": "An oyster bar & restaurant in Traverse City, Michigan — oysters, tinned fish, caviar, and coastal fare.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#E8E3CE",
+  "theme_color": "#E8E3CE",
+  "icons": [
+    { "src": "favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
