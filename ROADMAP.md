@@ -1,39 +1,48 @@
 # Umbo website — roadmap
 
-Living list of planned work. Current base URL: `https://ryankolean.github.io/umbo/`
-(GitHub Pages project site). Last updated 2026-07-08.
+Living list of planned work. Current base URL: `https://eatumbo.com/`
+(GitHub Pages, apex custom domain). Last updated 2026-09-07.
 
 ---
 
-## 1. Move to a custom domain  ← do this for real SEO
+## 1. Move to a custom domain  ✅ done 2026-09-07
 
-The site currently lives on a GitHub Pages **project path** (`/umbo/`). Two SEO
-files — `robots.txt` and `llms.txt` — are only authoritative when served from a
-**domain root**, so a custom domain (e.g. `umbotraversecity.com`) unlocks their
-full effect and gives the brand a real address.
+The site now serves from the apex **`eatumbo.com`** instead of the GitHub Pages
+project path (`/umbo/`). `robots.txt` and `llms.txt` are only authoritative at a
+domain root, so this is what makes them count.
 
-The transition is scripted so it stays clean:
-
-```bash
-./scripts/set-base-url.sh https://umbotraversecity.com
-```
-
-That one command:
-- rewrites the base URL in every absolute reference — canonicals, Open Graph,
-  Twitter cards, JSON-LD (`url`/`@id`), `sitemap.xml`, `robots.txt`, `llms.txt`;
-- writes the `CNAME` file GitHub Pages needs.
-
-Then:
-1. `git add -A && git commit -m "chore: move to umbotraversecity.com" && git push`
-2. GitHub repo → **Settings → Pages → Custom domain** → enter the domain.
-3. DNS: apex `A`/`AAAA` records to GitHub Pages IPs, or `www` `CNAME` →
-   `ryankolean.github.io`.
-4. Wait for the cert, then enable **Enforce HTTPS**.
-5. Resubmit `sitemap.xml` in Google Search Console and Bing Webmaster Tools;
-   add the new property.
+What was done:
+- `./scripts/set-base-url.sh https://eatumbo.com` — rewrote every absolute
+  reference (canonicals, Open Graph, Twitter cards, JSON-LD `url`/`@id`,
+  `sitemap.xml`, `robots.txt`, `llms.txt`) and wrote the `CNAME` file.
+- GitHub repo → Settings → Pages → Custom domain: `eatumbo.com`.
+- DNS: apex `A`/`AAAA` to the GitHub Pages IPs, `www` `CNAME` →
+  `ryankolean.github.io` (GitHub 301s `www` → apex).
+- Enforce HTTPS once the certificate provisions.
 
 > Keep every absolute URL routed through `set-base-url.sh`. Don't hand-edit
 > domains in individual files — re-run the script instead, so nothing drifts.
+
+### DNS record set (apex on GitHub Pages, Google Workspace mail intact)
+
+| Type  | Host  | Value                        | Note |
+|-------|-------|------------------------------|------|
+| A     | @     | 185.199.108.153              | GitHub Pages |
+| A     | @     | 185.199.109.153              | GitHub Pages |
+| A     | @     | 185.199.110.153              | GitHub Pages |
+| A     | @     | 185.199.111.153              | GitHub Pages |
+| AAAA  | @     | 2606:50c0:8000::153          | GitHub Pages |
+| AAAA  | @     | 2606:50c0:8001::153          | GitHub Pages |
+| AAAA  | @     | 2606:50c0:8002::153          | GitHub Pages |
+| AAAA  | @     | 2606:50c0:8003::153          | GitHub Pages |
+| CNAME | www   | ryankolean.github.io.        | GitHub 301s to apex |
+| MX    | @     | `1 smtp.google.com.`         | **Google Workspace — must not be dropped** |
+| TXT   | @     | `v=spf1 include:_spf.google.com ~all` | **mail auth — must not be dropped** |
+| TXT   | google._domainkey | (DKIM, see `docs/dns-eatumbo.md`) | **mail auth — must not be dropped** |
+
+Squarespace-era records that are deliberately *not* carried over: the apex `A`
+to `198.49.23.145`, `www` `CNAME` → `ext-sq.squarespace.com`, and
+`_domainconnect` → `_domainconnect.domains.squarespace.com`.
 
 ---
 
