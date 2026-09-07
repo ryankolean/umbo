@@ -52,11 +52,52 @@ No `CAA`, no `_dmarc`, no other subdomains found in the sweep.
 > would be a cheap improvement, but it did not exist before — not carried over
 > silently.
 
+## Google Workspace billing — checked, and it is safe (2026-09-07)
+
+The concern was that eatumbo.com's Workspace might be resold by Squarespace, in
+which case transferring the domain away could cancel the mailboxes. **It is
+not.** Confirmed from the Workspace admin console:
+
+- Subscription: **Google Workspace Business Plus**, $22/user/month
+  ($264/user/year), annual plan paid monthly, 3 licences purchased and assigned.
+- Contract ends **Apr 24, 2027**; next billing Oct 1, 2026.
+- Billed **directly by Google** — the subscription has its own Google Payments
+  account, invoices, and self-service "Change payment plan" / "Change renewal
+  settings" controls. No reseller is named anywhere on it.
+
+Contrast the *Domain Registration* subscription in the same console, which
+explicitly reads "with **Squarespace Domains**" and runs on a separate contract
+ending Apr 10, 2027. Two independent subscriptions. Transferring the domain to
+Porkbun ends the Squarespace domain registration and does **not** touch
+Workspace.
+
+Note there are **three** mailboxes on the domain, not one. The MX/SPF/DKIM
+records protect all three.
+
+**What this does not clear:** the DNS zone still lives at
+`ns-cloud-*.googledomains.com`, which hangs off the Squarespace domain
+registration. When the transfer completes and that registration ends, the zone
+may stop being served. That is now the only live risk, and staging the Porkbun
+zone before the transfer lands is what removes it.
+
 ## Order of operations
 
 The transfer to Porkbun must complete before the nameservers can move.
 Building the Porkbun zone **before** flipping NS means mail and web resolve the
 instant the delegation changes — no gap.
+
+0. Pre-stage the zone in Porkbun **before** the transfer completes. Porkbun
+   exposes a DNS editor for an incoming transfer via the details expander on
+   the Manage Transfers row, and `Current Records` starts empty. Staged records
+   are inert until the nameservers move, so this is safe to do early — and it
+   is what makes the cutover instant instead of a scramble.
+
+   Browser automation could not drive that editor (the page never reaches
+   `document_idle`, so `find`/`read_page` time out, and the modal's handlers
+   did not fire on synthetic clicks — no network request was ever issued).
+   **Use the Porkbun API instead:** generate keys under Account → API Access,
+   store them in 1Password, then `POST /api/json/v3/dns/create/eatumbo.com`
+   per record. `dns/retrieve` reads them back for verification.
 
 1. Transfer of `eatumbo.com` to Porkbun completes (registrar status leaves
    `pendingTransfer`).

@@ -1,0 +1,20 @@
+$ORIGIN eatumbo.com.
+$TTL 600
+
+; --- Web: GitHub Pages, apex ---
+@	600	IN	A	185.199.108.153
+@	600	IN	A	185.199.109.153
+@	600	IN	A	185.199.110.153
+@	600	IN	A	185.199.111.153
+@	600	IN	AAAA	2606:50c0:8000::153
+@	600	IN	AAAA	2606:50c0:8001::153
+@	600	IN	AAAA	2606:50c0:8002::153
+@	600	IN	AAAA	2606:50c0:8003::153
+www	600	IN	CNAME	ryankolean.github.io.
+
+; --- Mail: Google Workspace. Carried over verbatim from the Google Cloud DNS zone. ---
+; --- Do not remove. sarah@eatumbo.com depends on all three. ---
+@	3600	IN	MX	1 smtp.google.com.
+@	3600	IN	TXT	"v=spf1 include:_spf.google.com ~all"
+google._domainkey	3600	IN	TXT	( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5K9rkfiboaE97baNCFyozNJgvXX7hk6tJiMoT6NsBF+nLRxEe1Xn7c+rgg9CSzrncVHcAzRE8ZG44TBNLP3c5DHtFh6ypSIjeBB1tjVQ7TjmNjAIKYROZUDAn3+h+ADKxRtTz4QmxuEnBGPg1WrE05vXOEvPBzlaO/fxJV3jOpTkzGWg4Zpc8sd36YZEbLazP" "ngLGyfFjOaVYwmcvRv0aJjpA0hJrYOInVRQY+kZSAVScNzACp+4xjai23wnOAGgw1YNrXu9GmghU2s7pMwinL4XAO1a0zk7BnoJZMn1lwXX9ho7+tEJCHl6XvaoBYLPKSq68GnxpnhjkMrO5OYeVwIDAQAB" )
+
