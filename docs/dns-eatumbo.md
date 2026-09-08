@@ -86,18 +86,17 @@ The transfer to Porkbun must complete before the nameservers can move.
 Building the Porkbun zone **before** flipping NS means mail and web resolve the
 instant the delegation changes — no gap.
 
-0. Pre-stage the zone in Porkbun **before** the transfer completes. Porkbun
-   exposes a DNS editor for an incoming transfer via the details expander on
-   the Manage Transfers row, and `Current Records` starts empty. Staged records
-   are inert until the nameservers move, so this is safe to do early — and it
-   is what makes the cutover instant instead of a scramble.
+0. **The zone cannot be staged ahead of the transfer.** Porkbun renders a DNS
+   editor for a pending incoming transfer — the details expander on the Manage
+   Transfers row, with an empty `Current Records` list and copy inviting you to
+   pre-configure — but the API rejects every write against it with
+   `Could not find domain in account. (001)`. The editor is misleading; there
+   is no way to have the zone waiting. Everything below starts the moment the
+   domain lands in the account.
 
-   Browser automation could not drive that editor (the page never reaches
-   `document_idle`, so `find`/`read_page` time out, and the modal's handlers
-   did not fire on synthetic clicks — no network request was ever issued).
-   **Use the Porkbun API instead:** generate keys under Account → API Access,
-   store them in 1Password, then `POST /api/json/v3/dns/create/eatumbo.com`
-   per record. `dns/retrieve` reads them back for verification.
+   (Browser automation is also a dead end here regardless: the page never
+   reaches `document_idle`, so `find`/`read_page` time out, and the modal's
+   handlers do not fire on synthetic clicks. Use the API.)
 
 1. Transfer of `eatumbo.com` to Porkbun completes (registrar status leaves
    `pendingTransfer`).
