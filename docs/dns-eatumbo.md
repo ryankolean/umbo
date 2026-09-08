@@ -126,8 +126,12 @@ op item create --category=login --title='Porkbun API' --vault='Dev Secrets' \
 ```
 
 Generate the keys at Porkbun under **Account → API Access**, then switch on
-API access for `eatumbo.com` on its own row in Domain Management — Porkbun
-requires that per-domain toggle in addition to the account keys.
+API access for `eatumbo.com` under Domain Management → Details. That per-domain
+toggle is separate from the account keys; without it the API answers
+`Invalid domain` regardless of credentials.
+
+None of this works until the transfer completes — see step 0 above.
+`--check` reports whether the domain has landed yet.
 
 ```bash
 ./scripts/porkbun-zone.py --show-desired           # parse only, no network

@@ -6,11 +6,24 @@ The zone in docs/eatumbo.com.zone is the single source of truth. This reads it,
 diffs it against what Porkbun actually has, and only then writes. Nothing is
 written without --apply.
 
-Credentials come from 1Password, never from the command line or the repo:
+This cannot be run before the transfer completes. Porkbun renders a DNS editor
+for a pending incoming transfer, with an empty record list and copy inviting
+you to pre-configure it, but every write is rejected with "Could not find
+domain in account. (001)". Wait for the domain to appear under Domain
+Management. `--check` reports whether it has landed.
 
-    op item create --category=login --title='Porkbun API' --vault='Dev Secrets' \
-        apikey=pk1_xxx secretapikey=sk1_xxx
+One-time setup:
 
+  1. Porkbun -> Account -> API Access -> create a key. Note the key and secret.
+  2. Domain Management -> eatumbo.com -> Details -> toggle API ACCESS on.
+     This is a per-domain switch, separate from the account keys. Without it
+     the API answers "Invalid domain" no matter how good your credentials are.
+  3. Store both in 1Password:
+
+        op item create --category='API Credential' --title='Porkbun API' \
+            --vault='Dev Secrets' apikey=pk1_xxx secretapikey=sk1_xxx
+
+Credentials are read at run time and never passed as arguments or committed.
 Override the item path with PORKBUN_OP_ITEM. As a fallback for CI, the script
 also accepts PORKBUN_API_KEY / PORKBUN_SECRET_API_KEY from the environment.
 
