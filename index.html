@@ -117,13 +117,15 @@
 <!-- ============ NEWSLETTER ============ -->
 <section class="section section--dark">
   <div class="wrap newsletter" data-reveal>
-    <img class="script-graphic" src="assets/img/coming-cream.png" alt="Coming soon-ish!" style="margin:0 auto 1.4rem">
     <span class="eyebrow">Stay in Touch</span>
     <h2 style="font-size:clamp(2rem,5vw,3.4rem);margin-top:1rem">Join the <span class="script" style="font-size:.7em;color:var(--blush)">mailing list</span></h2>
     <p class="muted">Menus, oyster drops, and the occasional dinner. No noise.</p>
-    <form data-newsletter>
+    <form data-newsletter action="https://formsubmit.co/ajax/sarah@eatumbo.com" method="POST">
       <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <input type="hidden" name="_subject" value="New Umbo mailing-list signup">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" value="">
       <button class="btn btn--coral" type="submit">Sign Up</button>
+      <p class="newsletter__status" role="status" aria-live="polite" hidden></p>
     </form>
   </div>
 </section>
@@ -145,7 +147,7 @@
       </div>
       <div class="footer-col">
         <h4>Say Hello</h4>
-        <a href="tel:+12319442797">(231) 944-2797</a>
+        <a href="sms:+12319442797">(231) 944-2797</a>
         <a href="mailto:sarah@eatumbo.com">sarah@eatumbo.com</a>
         <a href="https://www.instagram.com/umbotraversecity/" target="_blank" rel="noopener">@umbotraversecity</a>
         <a href="events.html">Private Events</a>
