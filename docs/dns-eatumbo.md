@@ -112,6 +112,39 @@ instant the delegation changes — no gap.
 6. Google Search Console + Bing Webmaster Tools: add `eatumbo.com` as a
    property, submit `https://eatumbo.com/sitemap.xml`.
 
+## Running the cutover
+
+`scripts/porkbun-zone.py` drives the Porkbun API from `docs/eatumbo.com.zone`,
+which is the single source of truth. Nothing is written without `--apply`, and
+the script refuses to publish a zone missing MX/TXT.
+
+Credentials live in 1Password and are read at run time — never passed on the
+command line, never committed:
+
+```bash
+op item create --category=login --title='Porkbun API' --vault='Dev Secrets' \
+    apikey=pk1_xxx secretapikey=sk1_xxx
+```
+
+Generate the keys at Porkbun under **Account → API Access**, then switch on
+API access for `eatumbo.com` on its own row in Domain Management — Porkbun
+requires that per-domain toggle in addition to the account keys.
+
+```bash
+./scripts/porkbun-zone.py --show-desired           # parse only, no network
+./scripts/porkbun-zone.py --compare-authoritative  # zone vs live public DNS
+./scripts/porkbun-zone.py --check                  # auth; is the domain here yet
+./scripts/porkbun-zone.py --plan                   # diff, writes nothing
+./scripts/porkbun-zone.py --apply                  # create missing records
+./scripts/porkbun-zone.py --apply --prune          # also drop Porkbun's parking records
+./scripts/porkbun-zone.py --verify                 # assert Porkbun matches the zone
+./scripts/porkbun-zone.py --set-ns                 # cutover, typed confirmation
+```
+
+`--set-ns` refuses to run while any desired record is missing, so the
+nameservers cannot move to an incomplete zone. Expect Porkbun to add its own
+parking `ALIAS` and `www` `CNAME` when the domain lands; `--prune` removes them.
+
 ## Verification
 
 ```bash
