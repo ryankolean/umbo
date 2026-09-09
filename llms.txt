@@ -1,6 +1,6 @@
 # Umbo
 
-> Umbo is an oyster bar and restaurant in Traverse City, Michigan, from chef Cameron Rolka and Sarah Welch — the team behind Marrow and Mink in Detroit. The menu centers on oysters, tinned fish and conservas, caviar, and coastal small plates, with an all-Michigan natural wine list, plus Michigan beer and cider. Dinner service, vintage-seaside room, reservations by phone.
+> Umbo is an oyster bar and restaurant in Traverse City, Michigan, from chef Cameron Rolka and Sarah Welch — the team behind Marrow and Mink in Detroit. The menu centers on oysters, tinned fish and conservas, caviar, and coastal small plates, with an all-Michigan natural wine list, plus Michigan beer and cider. Dinner service, vintage-seaside room, reservations by text.
 
 ## Key facts
 
@@ -10,7 +10,7 @@
 - Phone: (231) 944-2797
 - Email: sarah@eatumbo.com
 - Hours: Thursday–Monday, 4:30pm–9:30pm. Closed Tuesday and Wednesday.
-- Reservations: by phone only, for parties of 2–8. At least a third of the bar is held for walk-ins.
+- Reservations: by text, for parties of 2–8. At least a third of the bar is held for walk-ins.
 - Cuisine: seafood, oysters, tinned fish and conservas, caviar
 - Drinks: all-Michigan natural wine, Michigan beer and cider
 - Price range: $$$
@@ -28,4 +28,4 @@
 ## Contact
 
 - Instagram: https://www.instagram.com/umbotraversecity/
-- Reservations: call (231) 944-2797
+- Reservations: text (231) 944-2797

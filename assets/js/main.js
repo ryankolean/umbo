@@ -56,12 +56,34 @@
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();
 
-  // Newsletter stub (no backend yet)
+  // Newsletter — posts each signup to the form backend (FormSubmit) so the
+  // address is actually captured. Swap the form's `action` to change providers.
   document.querySelectorAll('form[data-newsletter]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = f.querySelector('button');
-      if (btn) { btn.textContent = 'On the list ✓'; btn.disabled = true; }
+      var status = f.querySelector('.newsletter__status');
+      var emailInput = f.querySelector('input[name="email"]');
+      var honey = f.querySelector('input[name="_honey"]');
+      var setStatus = function (msg) { if (status) { status.hidden = false; status.textContent = msg; } };
+      if (honey && honey.value) return;            // bot filled the honeypot
+      if (!f.action) { setStatus('Email sarah@eatumbo.com to sign up.'); return; }
+      if (btn) { btn.disabled = true; btn.textContent = 'Signing up…'; }
+      fetch(f.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: emailInput ? emailInput.value : '', _subject: 'New Umbo mailing-list signup' })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        return r.json();
+      }).then(function () {
+        if (btn) btn.textContent = 'On the list ✓';
+        setStatus('You’re on the list — talk soon.');
+        if (emailInput) emailInput.value = '';
+      }).catch(function () {
+        if (btn) { btn.disabled = false; btn.textContent = 'Sign Up'; }
+        setStatus('Something went wrong — email sarah@eatumbo.com to sign up.');
+      });
     });
   });
 })();
