@@ -55,10 +55,10 @@ API = "https://api.porkbun.com/api/json/v3"
 DOMAIN = "eatumbo.com"
 ZONE_FILE = Path(__file__).resolve().parent.parent / "docs" / f"{DOMAIN}.zone"
 PORKBUN_NS = [
-    "curitiba.ns.porkbun.com",
-    "fortaleza.ns.porkbun.com",
-    "maceio.ns.porkbun.com",
-    "salvador.ns.porkbun.com",
+    "curitiba.porkbun.com",
+    "fortaleza.porkbun.com",
+    "maceio.porkbun.com",
+    "salvador.porkbun.com",
 ]
 # A zone without these is not safe to publish: three mailboxes depend on them.
 REQUIRED_MAIL_TYPES = {"MX", "TXT"}
@@ -161,8 +161,22 @@ def parse_zone(path):
     return records
 
 
+# Porkbun and BIND spell the same record differently: Porkbun stores hostnames
+# with a trailing dot and TXT values wrapped in literal quotes. Comparing the
+# raw strings makes identical records look missing, and "creating" them again
+# yields duplicates — which for SPF is not cosmetic. Two SPF TXT records are a
+# permerror under RFC 7208, so this normalisation is what keeps mail working.
+def normalize(rtype, content):
+    c = content.strip()
+    if rtype in ("CNAME", "MX", "NS", "ALIAS", "SRV"):
+        c = c.rstrip(".")
+    if rtype == "TXT" and len(c) >= 2 and c[0] == '"' and c[-1] == '"':
+        c = c[1:-1]
+    return c
+
+
 def key_of(r):
-    return (r["name"], r["type"], r["content"])
+    return (r["name"], r["type"], normalize(r["type"], r["content"]))
 
 
 # --------------------------------------------------------------------------
@@ -222,7 +236,10 @@ def diff(desired, live):
     missing = [r for r in desired if key_of(r) not in live_keys]
     # Anything Porkbun added that we did not ask for — typically its parking
     # ALIAS and www CNAME, which would fight the GitHub Pages records.
-    extra = [r for r in live if key_of(r) not in desired_keys]
+    # Apex NS is Porkbun's own delegation for the zone: never our business.
+    extra = [r for r in live
+             if key_of(r) not in desired_keys
+             and not (r["type"] == "NS" and r["name"] == "")]
     return missing, extra
 
 
