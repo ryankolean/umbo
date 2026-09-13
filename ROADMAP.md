@@ -1,20 +1,35 @@
 # Umbo website — roadmap
 
 Living list of planned work. Current base URL: `https://eatumbo.com/`
-(GitHub Pages, apex custom domain). Last updated 2026-09-07.
+(GitHub Pages, apex custom domain). Last updated 2026-09-13.
 
 ---
 
-## 1. Move to a custom domain  ✅ done 2026-09-07
+## 1. Move to a custom domain - done 2026-09-13
 
 The site now serves from the apex **`eatumbo.com`** instead of the GitHub Pages
 project path (`/umbo/`). `robots.txt` and `llms.txt` are only authoritative at a
 domain root, so this is what makes them count.
 
-What was done:
-- `./scripts/set-base-url.sh https://eatumbo.com` — rewrote every absolute
-  reference (canonicals, Open Graph, Twitter cards, JSON-LD `url`/`@id`,
-  `sitemap.xml`, `robots.txt`, `llms.txt`) and wrote the `CNAME` file.
+Timeline. The repository side landed 2026-09-07, but DNS did not move until
+2026-09-13, so the site did not actually serve from the apex until then.
+
+- 2026-09-07: `./scripts/set-base-url.sh https://eatumbo.com` rewrote every
+  absolute reference (canonicals, Open Graph, Twitter cards, JSON-LD
+  `url`/`@id`, `sitemap.xml`, `robots.txt`, `llms.txt`). The `CNAME` file was
+  written, then deliberately held back in 7b7e47f so the rebuilt site stayed
+  reachable at the github.io path while the registrar transfer ran.
+- 2026-09-13 05:25 UTC: the Porkbun transfer completed. The Squarespace domain
+  registration ended, Google tore down the DNS zone it hosted, and the registry
+  still delegated to `ns-cloud-*.googledomains.com`. Those nameservers began
+  answering REFUSED. The domain went dark: site and all three mailboxes, for
+  roughly seven hours.
+- 2026-09-13 12:xx UTC: zone corrected in Porkbun, nameservers delegated there,
+  `CNAME` restored in 9d2303a, Pages custom domain set, Enforce HTTPS enabled.
+
+The lesson worth keeping: a registrar transfer tears down the losing
+registrar's hosted DNS zone. Build the destination zone and move the
+nameservers at completion, not afterwards.
 - GitHub repo → Settings → Pages → Custom domain: `eatumbo.com`.
 - DNS: apex `A`/`AAAA` to the GitHub Pages IPs, `www` `CNAME` →
   `ryankolean.github.io` (GitHub 301s `www` → apex).
