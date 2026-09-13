@@ -18,3 +18,6 @@ www	600	IN	CNAME	ryankolean.github.io.
 @	3600	IN	TXT	"v=spf1 include:_spf.google.com ~all"
 google._domainkey	3600	IN	TXT	( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5K9rkfiboaE97baNCFyozNJgvXX7hk6tJiMoT6NsBF+nLRxEe1Xn7c+rgg9CSzrncVHcAzRE8ZG44TBNLP3c5DHtFh6ypSIjeBB1tjVQ7TjmNjAIKYROZUDAn3+h+ADKxRtTz4QmxuEnBGPg1WrE05vXOEvPBzlaO/fxJV3jOpTkzGWg4Zpc8sd36YZEbLazP" "ngLGyfFjOaVYwmcvRv0aJjpA0hJrYOInVRQY+kZSAVScNzACp+4xjai23wnOAGgw1YNrXu9GmghU2s7pMwinL4XAO1a0zk7BnoJZMn1lwXX9ho7+tEJCHl6XvaoBYLPKSq68GnxpnhjkMrO5OYeVwIDAQAB" )
 
+; --- GitHub Pages domain verification. Stops anyone else claiming eatumbo.com
+; --- on Pages if this repo ever stops serving it. Token is account-specific.
+_github-pages-challenge-ryankolean	3600	IN	TXT	"519d5ed987eadd7c841b072fd8d1bc"
