@@ -1,7 +1,7 @@
 # Umbo website — roadmap
 
 Living list of planned work. Current base URL: `https://eatumbo.com/`
-(GitHub Pages, apex custom domain). Last updated 2026-09-13.
+(GitHub Pages, apex custom domain). Last updated 2026-09-14.
 
 ---
 
@@ -63,6 +63,11 @@ to `198.49.23.145`, `www` `CNAME` → `ext-sq.squarespace.com`, and
 
 ## 2. Search presence — after domain move
 
+Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
+(`e265d59`); the rest is below.
+
+- [x] Verify the domain for **GitHub Pages** (`_github-pages-challenge-ryankolean`
+      TXT, applied via `scripts/porkbun-zone.py`), done 2026-09-13.
 - [ ] Verify the domain in **Google Search Console**; submit `sitemap.xml`.
 - [ ] Verify in **Bing Webmaster Tools** (feeds ChatGPT / Copilot answers).
 - [ ] Create / claim **Google Business Profile** (hours, photos, menu link,
@@ -70,6 +75,10 @@ to `198.49.23.145`, `www` `CNAME` → `ext-sq.squarespace.com`, and
 - [ ] Add **Apple Business Connect** listing (feeds Apple Maps + Siri).
 - [ ] Ensure NAP (name, address, phone) is identical across the site, GBP,
       Yelp, and directories.
+
+> Reservations are **by text**, not phone, for parties of 2–5 indoors, with
+> 6+ on the patio first come first served (`9ea1077`). Any listing built from
+> older notes will say "reservations by phone" and will be wrong.
 
 ## 3. Structured data — extend as content grows
 
@@ -81,6 +90,10 @@ to `198.49.23.145`, `www` `CNAME` → `ext-sq.squarespace.com`, and
 
 ## 4. Content / AEO
 
+> `llms.txt` and the visit FAQ each carry the reservation policy, and the
+> visit FAQ answer exists **twice** — once as visible copy and once inside
+> the `FAQPage` JSON-LD. Edit both together or the structured data goes stale.
+
 - [ ] Keep `llms.txt` and the FAQ in sync with real hours, menu, and policies.
 - [ ] Consider a short journal/press page (natural inbound links + fresh crawl
       signal); link any press mentions.
@@ -88,6 +101,17 @@ to `198.49.23.145`, `www` `CNAME` → `ext-sq.squarespace.com`, and
 
 ## 5. Nice-to-have
 
-- [ ] Reservation integration (Resy/Tock) if phone-only changes.
-- [ ] Newsletter signup wiring (currently "coming soon-ish").
+- [ ] Real reservation booking. Phone-only *did* change: it is text-first as
+      of `9ea1077`. This is no longer an off-the-shelf Resy/Tock question:
+      **SUMMIT-83** is the HostStand reservation product and **SUMMIT-111**
+      puts an Umbo agreement on its critical path, so Umbo is likely the
+      pilot. The seating rules it has to model (2–5 indoors, 6+ patio
+      walk-in only, a third of the bar held for walk-ins, a private dining
+      room coming) are recorded on SUMMIT-83. The open stub is PR #11,
+      tracked in **SUMMIT-153**.
+- [ ] Move the mailing list to a real provider. The "coming soon-ish" signup
+      shipped as a `mailto:` in `f8e9d6b` after FormSubmit turned out never to
+      have been confirmed, so earlier signups most likely went nowhere. A real
+      provider is needed before the list is promoted, for CAN-SPAM unsubscribe
+      and a physical address. Tracked in **SUMMIT-149**, due 2026-09-16.
 - [ ] Real 512×512 PWA icon for the web manifest (current max is 180×180).
