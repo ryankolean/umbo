@@ -101,14 +101,22 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 
 ## 5. Nice-to-have
 
-- [ ] Real reservation booking. Phone-only *did* change: it is text-first as
-      of `9ea1077`. This is no longer an off-the-shelf Resy/Tock question:
-      **SUMMIT-83** is the HostStand reservation product and **SUMMIT-111**
-      puts an Umbo agreement on its critical path, so Umbo is likely the
-      pilot. The seating rules it has to model (2–5 indoors, 6+ patio
-      walk-in only, a third of the bar held for walk-ins, a private dining
-      room coming) are recorded on SUMMIT-83. The open stub is PR #11,
-      tracked in **SUMMIT-153**.
+- [x] Real reservation booking: **decided against, 2026-09-15.** Umbo is
+      staying on text-only reservations. Guests text (231) 944-2797 and a
+      person answers, which is what the site has said since `9ea1077`. There
+      is no booking system and none is planned.
+
+      > Umbo is **not** the HostStand pilot. An earlier version of this line
+      > said SUMMIT-111 put an Umbo agreement on HostStand's critical path,
+      > so Umbo was likely the pilot. That is no longer true, and SUMMIT-111
+      > has had every Umbo reference removed. Do not reintroduce Umbo as the
+      > assumed pilot from older notes.
+
+      The seating rules a booking system would have had to model (2 to 5
+      indoors, 6 or more patio walk-in only, a third of the bar held for
+      walk-ins, a private dining room coming) stay recorded on SUMMIT-83 for
+      whoever HostStand's real pilot turns out to be. PR #11, the reservation
+      stub, is drafted rather than merged, tracked in **SUMMIT-153**.
 - [ ] Move the mailing list to a real provider. The "coming soon-ish" signup
       shipped as a `mailto:` in `f8e9d6b` after FormSubmit turned out never to
       have been confirmed, so earlier signups most likely went nowhere. A real
