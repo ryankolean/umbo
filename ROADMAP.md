@@ -111,7 +111,18 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
       tracked in **SUMMIT-153**.
 - [ ] Move the mailing list to a real provider. The "coming soon-ish" signup
       shipped as a `mailto:` in `f8e9d6b` after FormSubmit turned out never to
-      have been confirmed, so earlier signups most likely went nowhere. A real
-      provider is needed before the list is promoted, for CAN-SPAM unsubscribe
-      and a physical address. Tracked in **SUMMIT-149**, due 2026-09-16.
+      have been confirmed, so earlier signups most likely went nowhere. The
+      provider is **Kit**, free Newsletter plan, picked because the real list
+      turned out to be 748 unique addresses, which disqualifies every provider
+      SUMMIT-149 originally proposed. Site-side wiring, the import normalizer
+      and the runbook are done; what remains is not code. Somebody has to
+      create the Kit account under sarah@eatumbo.com, set the physical address
+      for CAN-SPAM, put the real form id into `index.html`, and import the 748.
+      Plan in `docs/proposals/mailing-list.md`, runbook in
+      `docs/mailing-list.md`. Tracked in **SUMMIT-149**, due 2026-09-16.
+
+      > Until the form id is filled in, the signup form deliberately refuses to
+      > post and tells visitors to email instead. That is the failure mode
+      > `f8e9d6b` existed to prevent, so do not "fix" it by pointing the form
+      > somewhere that merely accepts a POST.
 - [ ] Real 512×512 PWA icon for the web manifest (current max is 180×180).

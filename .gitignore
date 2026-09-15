@@ -1,3 +1,7 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Subscriber data must never reach this public repo.
+*.csv
+contacts*
