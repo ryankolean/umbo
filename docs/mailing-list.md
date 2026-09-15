@@ -79,7 +79,30 @@ form does not silently swallow addresses; it tells the visitor to email
 sarah@eatumbo.com instead. So "signups stopped arriving" means check, in order:
 
 1. Is the `action` URL on the form in `index.html` still a real Kit form?
+   Note the host: Kit rebranded from ConvertKit, but form posts are still
+   served from `app.convertkit.com`, not `app.kit.com`. Copy the action out of
+   Kit's own HTML embed rather than typing it, so the host stays right.
 2. Does Kit still list that form under Grow, then Landing Pages & Forms?
 3. Is the email input still named `email_address`? Kit requires that exact
    name, and the wrong name makes the form look like it worked while Kit
    records nothing.
+
+## Known unknown, settle this on the first live signup
+
+The handler in `main.js` posts with `fetch` so the visitor stays on
+eatumbo.com. Whether Kit's endpoint returns the cross-origin headers that
+requires has not been tested against a real form, because the form id did not
+exist when this was written.
+
+The first real signup settles it, and both outcomes are fine:
+
+* **It works.** The visitor sees "Almost there" without leaving the site.
+* **The browser blocks reading the response.** The subscriber still reaches
+  Kit, because the request is sent either way, but the page shows "Something
+  went wrong. Email sarah@eatumbo.com to sign up." That message would be
+  wrong, not the signup.
+
+So check Kit after the first test signup **before** believing an error
+message. If the subscriber is there but the page said it failed, the fix is a
+one-line change in `main.js`: drop the response check, or let the form fall
+through to its native POST.

@@ -225,7 +225,7 @@ keep the visitor on eatumbo.com and show inline status. The previous
 implementation had no such fallback.
 
 ```html
-<form data-newsletter action="https://app.kit.com/forms/FORM_ID/subscriptions" method="post">
+<form data-newsletter action="https://app.convertkit.com/forms/FORM_ID/subscriptions" method="post">
   <label class="sr-only" for="nl-email">Email address</label>
   <input id="nl-email" type="email" name="email_address" placeholder="you@email.com" required autocomplete="email">
   <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
