@@ -6,6 +6,17 @@ squarespace - can we add that to the new site?").
 
 Status: **proposal, awaiting review.** Nothing below has been built.
 
+> **Correction, 2026-09-15.** Every count in this document originally read
+> **seven hundred and forty-eight unique addresses**. That was wrong. It came
+> from a read of the sheet that stopped around row 831, roughly the 2026-03
+> mark. A full CSV export taken on 2026-09-15 has **1,272 data rows and 1,123
+> unique addresses**, running continuously from 2025-06 to 2026-09 with no gap
+> and no lump, so this is the same Squarespace form and the same consent
+> basis, just counted properly. Figures below now read 1,123. **None of the
+> provider reasoning changes**: 1,123 is still far inside Kit's 10,000 free
+> cap, and it rules out Buttondown, Mailchimp and MailerLite by a wider margin
+> than the original undercount did.
+
 ---
 
 ## 1. What we actually have
@@ -15,14 +26,14 @@ shared 2026-09-13. It is a Squarespace form export.
 
 | Fact | Value |
 |---|---|
-| Data rows | 831 |
-| Parseable emails | 830 |
-| **Unique addresses** | **748** |
-| Duplicate rows | 82 (70 addresses repeat) |
+| Data rows | 1,272 |
+| Parseable emails | 1,272 |
+| **Unique addresses** | **1,123** |
+| Duplicate rows | 149 |
 | Malformed | 1 (`REDACTED@ExampleLaw.com,.com,`) |
-| Email cells with a trailing comma | 825 of 831 |
+| Email cells with a trailing comma | 949 of 1,272 |
 | Rows missing a name | 0 |
-| Date range | 2025-06-03 → 2026-03-30 |
+| Date range | 2025-06 → 2026-09 |
 | Implied growth | ~83 signups/month while the form was live |
 
 Top domains: gmail 544, yahoo 51, hotmail 29, aol 20, icloud 20, comcast 19.
@@ -41,11 +52,11 @@ contact data may ever be committed.
 ## 2. Provider decision
 
 SUMMIT-149 proposed Buttondown, Kit, or Mailchimp. That ticket was written
-before anyone counted the list. **At 748 subscribers, two of the three
+before anyone counted the list. **At 1,123 subscribers, two of the three
 candidates are disqualified on the no-cost constraint**, and 2026 tier cuts
 took out a third option:
 
-| Provider | Free subscriber cap | Free sends | Free users | 748 subs? |
+| Provider | Free subscriber cap | Free sends | Free users | 1,123 subs? |
 |---|---|---|---|---|
 | Buttondown | 100 | unlimited | 1 | ✗ |
 | Mailchimp | 250 (cut 2026-02-17) | 500/mo | 1 | ✗ |
@@ -80,10 +91,10 @@ Accepted trade-offs, all reversible by upgrading later:
 
 Five research rounds covering flat free tiers, usage-based pricing,
 discounts, hospitality-specific tools, and self-hosting. Nothing found beats
-Kit for *this* shape of problem, 748 subscribers, one sender, $0, but two
+Kit for *this* shape of problem, 1,123 subscribers, one sender, $0, but two
 findings change the fallback plan, below.
 
-**Disqualified on the 748-subscriber floor:** Buttondown (100), Mailchimp
+**Disqualified on the 1,123-subscriber floor:** Buttondown (100), Mailchimp
 (250), MailerLite (250).
 
 **Viable but less headroom than Kit:** beehiiv (2,500 subs, unlimited sends,
@@ -94,7 +105,7 @@ EmailOctopus (2,500), Sender.net (2,500).
 **Different pricing axis, priced by sends, not list size:**
 
 - *Brevo*: ~unlimited stored contacts, but **300 emails/day** free. One blast
-  to 748 people takes three days of arbitrary list-splitting. Rejected for the
+  to 1,123 people takes three days of arbitrary list-splitting. Rejected for the
   blast use case, which is the entire use case.
 - *Amazon SES*: $0.10 per 1,000 emails, so a blast costs about **$0.075**.
   Effectively free, but SES is raw sending infrastructure, no list
@@ -177,7 +188,7 @@ Three moving parts. Deliberately no fourth.
         ▼
   ┌───────────┐        ┌──────────────────────────┐
   │    Kit    │◀───────│  one-time CSV import     │
-  │ (the list)│        │  748 legacy subscribers  │
+  │ (the list)│        │ 1,123 legacy subscribers │
   └─────┬─────┘        └──────────────────────────┘
         │  Sarah logs in → Broadcasts → New → Send
         ▼
@@ -225,7 +236,7 @@ keep the visitor on eatumbo.com and show inline status. The previous
 implementation had no such fallback.
 
 ```html
-<form data-newsletter action="https://app.convertkit.com/forms/FORM_ID/subscriptions" method="post">
+<form data-newsletter action="https://app.kit.com/forms/FORM_ID/subscriptions" method="post">
   <label class="sr-only" for="nl-email">Email address</label>
   <input id="nl-email" type="email" name="email_address" placeholder="you@email.com" required autocomplete="email">
   <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
@@ -253,7 +264,7 @@ import CSV. Rules, each traceable to something in the real data:
 7. Default output path is outside the repo (`~/umbo-mailing-list/`). The
    script refuses to write inside the working tree.
 
-Expected output: **748 rows.**
+Expected output: **1,123 rows.**
 
 > **Do not feed the script a copy-paste of the sheet.** Reading that sheet
 > through a markdown converter mangles addresses, `first_last@hotmail.com`
@@ -280,7 +291,7 @@ Expected output: **748 rows.**
 **Phase 1, data.**
 
 6. Download the sheet as CSV.
-7. Run `scripts/normalize-contacts.py`, read its report, confirm 748 rows.
+7. Run `scripts/normalize-contacts.py`, read its report, confirm 1,123 rows.
 8. Import to Kit with the tag `legacy-squarespace`. Import as already
    confirmed, these people opted in on the old site and we hold the
    timestamps. Do **not** send them a re-confirmation; re-permission campaigns
@@ -312,7 +323,7 @@ complaints. Expect 3–8% hard bounces on a list this age. Kit suppresses them.
 
 ## 6. Acceptance criteria
 
-- [ ] 748 subscribers in Kit, tagged `legacy-squarespace`; zero PII in the repo
+- [ ] 1,123 subscribers in Kit, tagged `legacy-squarespace`; zero PII in the repo
 - [ ] A signup from the live site reaches Kit, with double opt-in working
 - [ ] The unsubscribe link in a real send works end to end
 - [ ] The form submits with JavaScript disabled
@@ -327,7 +338,7 @@ complaints. Expect 3–8% hard bounces on a list this age. Kit suppresses them.
 
 | Risk | Likelihood | Mitigation |
 |---|---|---|
-| Kit flags a new account importing 748 addresses | Medium | Test import first. Have the consent evidence ready: Squarespace export with per-row timestamps, 2025-06-03 onward. |
+| Kit flags a new account importing 1,123 addresses | Medium | Test import first. Have the consent evidence ready: Squarespace export with per-row timestamps, 2025-06-03 onward. |
 | Kit cuts its free tier, as Mailchimp and MailerLite both did in 2026 | Low near-term | Quarterly CSV export to Drive. Migration is one `action` URL plus an import. |
 | First send to a 15-month-cold list hits spam folders | Medium | Provenance line, clear subject, no attachments. Watch the complaint rate on send one. |
 | Sarah keeps editing the archived sheet, thinking it feeds the list | Medium | Rename it, note in row 1, cover it in the runbook. |
@@ -365,7 +376,7 @@ ticket if wanted.
 ## Appendix A: full provider survey
 
 Comprehensive sweep, 2026-09-13. Every option evaluated against the actual
-constraints: **748 subscribers growing ~83/month, one sender, $0, embeddable
+constraints: **1,123 subscribers growing ~83/month, one sender, $0, embeddable
 on a static site with no build step, provider-handled unsubscribe.**
 
 Rows marked **[v]** were read from the vendor's own pricing page. Everything
@@ -374,7 +385,7 @@ good reason: roundups repeatedly claimed Selzy's free plan carries 1,000
 contacts, and Selzy's own page says **100 contacts / 1,000 emails a month**.
 Assume any unverified number here is optimistic.
 
-### A.1 Hosted ESPs: free tier fits 748
+### A.1 Hosted ESPs: free tier fits 1,123
 
 | Provider | Subs | Sends | Users | Notes |
 |---|---|---|---|---|
@@ -389,7 +400,7 @@ Assume any unverified number here is optimistic.
 | Loops | 1,000 | 4,000/30d | ? | Paid jumps to $49/mo. |
 | MailPoet | 1,000 | 5,000/mo | - | **Requires WordPress.** Not applicable. |
 
-### A.2 Hosted ESPs: free tier too small for 748
+### A.2 Hosted ESPs: free tier too small for 1,123
 
 Benchmark (500) · Mailchimp (250) · MailerLite (250) · Omnisend (250) ·
 CleverReach (250) · Buttondown (100) · Selzy (100) **[v]** · Mailtrap (100) ·
@@ -399,7 +410,7 @@ Every one of these would require paying on day one.
 
 ### A.3 Usage-based / pay-per-email
 
-| Option | Cost per 748-person blast | Verdict |
+| Option | Cost per 1,123-person blast | Verdict |
 |---|---|---|
 | Amazon SES | **~$0.075** | Cheapest sending on earth, but raw infrastructure: no list, no form, no unsubscribe UI, no bounce dashboard. We would own CAN-SPAM ourselves. |
 | Elastic Email | ~$0.075 | Free tier is 100/day, cannot send one blast. |
@@ -485,7 +496,7 @@ confirmed for Kit's free plan:
   Email is the only required column; First Name, tags, and custom fields map
   optionally.
 - **The import action can be set to "Add without confirming"**, which is
-  exactly what the 748 legacy subscribers need, they already opted in, and
+  exactly what the 1,123 legacy subscribers need, they already opted in, and
   this avoids re-confirming them.
 - **Double opt-in is Kit's default** for new form signups, which is what we
   want for the public form.

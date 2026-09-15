@@ -18,7 +18,7 @@ Full reasoning for the provider choice is in
 | Account owner | sarah@eatumbo.com |
 | Login | shared, in the password manager. One login, held by Sarah and Ryan |
 | Signup form | the "Join the mailing list" block on eatumbo.com |
-| Legacy subscribers | 748, imported from the Squarespace export, tagged `legacy-squarespace` |
+| Legacy subscribers | 1,123, imported from the Squarespace export, tagged `legacy-squarespace` |
 | Consent record | the archived `Umbo Contacts` sheet in Drive, timestamps 2025-06-03 onward |
 | Subscriber cap | 10,000 before anything costs money |
 
@@ -35,7 +35,7 @@ broadcast on its own. Do not remove them. US law (CAN-SPAM) requires both on
 promotional email, and Kit handling it is the main reason the list is here
 rather than in an inbox.
 
-**On the first send to the legacy 748**, put a line near the top saying why
+**On the first send to the legacy 1,123**, put a line near the top saying why
 they are hearing from you: "You are getting this because you signed up for
 Umbo's list." The newest of those addresses is months old and the oldest is
 over a year old. That line measurably reduces spam complaints. Expect 3 to 8
@@ -79,9 +79,11 @@ form does not silently swallow addresses; it tells the visitor to email
 sarah@eatumbo.com instead. So "signups stopped arriving" means check, in order:
 
 1. Is the `action` URL on the form in `index.html` still a real Kit form?
-   Note the host: Kit rebranded from ConvertKit, but form posts are still
-   served from `app.convertkit.com`, not `app.kit.com`. Copy the action out of
-   Kit's own HTML embed rather than typing it, so the host stays right.
+   It should be `https://app.kit.com/forms/9922392/subscriptions`. Note the
+   host: older ConvertKit-era documentation and Kit's own React library still
+   say `app.convertkit.com`, but the HTML embed this account generates uses
+   `app.kit.com`. Always copy the action out of Kit's own embed rather than
+   from a guide, because the guides are behind.
 2. Does Kit still list that form under Grow, then Landing Pages & Forms?
 3. Is the email input still named `email_address`? Kit requires that exact
    name, and the wrong name makes the form look like it worked while Kit

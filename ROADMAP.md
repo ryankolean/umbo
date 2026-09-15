@@ -113,11 +113,11 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
       shipped as a `mailto:` in `f8e9d6b` after FormSubmit turned out never to
       have been confirmed, so earlier signups most likely went nowhere. The
       provider is **Kit**, free Newsletter plan, picked because the real list
-      turned out to be 748 unique addresses, which disqualifies every provider
+      turned out to be 1,123 unique addresses, which disqualifies every provider
       SUMMIT-149 originally proposed. Site-side wiring, the import normalizer
       and the runbook are done; what remains is not code. Somebody has to
       create the Kit account under sarah@eatumbo.com, set the physical address
-      for CAN-SPAM, put the real form id into `index.html`, and import the 748.
+      for CAN-SPAM, put the real form id into `index.html`, and import the 1,123.
       Plan in `docs/proposals/mailing-list.md`, runbook in
       `docs/mailing-list.md`. Tracked in **SUMMIT-149**, due 2026-09-16.
 

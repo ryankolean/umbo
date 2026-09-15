@@ -64,6 +64,8 @@ def main():
     ap.add_argument("source", type=pathlib.Path, help="Squarespace export CSV")
     ap.add_argument("-o", "--output", type=pathlib.Path, default=DEFAULT_OUT,
                     help=f"output CSV (default: {DEFAULT_OUT})")
+    ap.add_argument("--expect", type=int, default=None,
+                    help="warn if the unique count is not this number")
     args = ap.parse_args()
 
     out = args.output.expanduser().resolve()
@@ -138,8 +140,8 @@ def main():
 
     print(f"unique      {len(kept)}")
     print(f"wrote       {out}")
-    if len(kept) != 748:
-        print(f"\nNOTE: expected 748 unique addresses, got {len(kept)}. "
+    if args.expect is not None and len(kept) != args.expect:
+        print(f"\nNOTE: expected {args.expect} unique addresses, got {len(kept)}. "
               f"Reconcile before importing.")
 
 

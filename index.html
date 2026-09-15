@@ -120,11 +120,12 @@
     <span class="eyebrow">Stay in Touch</span>
     <h2 style="font-size:clamp(2rem,5vw,3.4rem);margin-top:1rem">Join the <span class="script" style="font-size:.7em;color:var(--blush)">mailing list</span></h2>
     <p class="muted">Menus, oyster drops, and the occasional dinner. No noise.</p>
-    <!-- Kit (free Newsletter plan). Replace this whole action with the one Kit's
-         own HTML embed gives you, host included: Kit still serves form posts from
-         app.convertkit.com after the rebrand. While the action still contains
-         FORM_ID, main.js refuses to post and shows the email fallback instead. -->
-    <form data-newsletter action="https://app.convertkit.com/forms/FORM_ID/subscriptions" method="post">
+    <!-- Kit, free Newsletter plan. Form "Umbo website signup", id 9922392, double
+         opt-in on. Action copied verbatim from Kit's own HTML embed: current Kit
+         serves form posts from app.kit.com, not the old app.convertkit.com. If the
+         action ever contains the literal FORM_ID again, main.js refuses to post and
+         shows the email fallback rather than failing silently. -->
+    <form data-newsletter action="https://app.kit.com/forms/9922392/subscriptions" method="post">
       <input id="nl-email" type="email" name="email_address" placeholder="you@email.com" required autocomplete="email" aria-label="Email address">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
       <button class="btn btn--coral" type="submit">Join <span class="btn__arrow">&rarr;</span></button>
