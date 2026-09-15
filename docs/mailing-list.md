@@ -89,22 +89,24 @@ sarah@eatumbo.com instead. So "signups stopped arriving" means check, in order:
    name, and the wrong name makes the form look like it worked while Kit
    records nothing.
 
-## Known unknown, settle this on the first live signup
+## Cross-origin behaviour, verified 2026-09-15
 
 The handler in `main.js` posts with `fetch` so the visitor stays on
-eatumbo.com. Whether Kit's endpoint returns the cross-origin headers that
-requires has not been tested against a real form, because the form id did not
-exist when this was written.
+eatumbo.com, which only works if Kit returns cross-origin headers. It does.
+Checked directly against the live form:
 
-The first real signup settles it, and both outcomes are fine:
+```
+POST https://app.kit.com/forms/9922392/subscriptions
+Origin: https://eatumbo.com
+-> HTTP 200, {"status":"success"}
+-> access-control-allow-origin: *
+```
 
-* **It works.** The visitor sees "Almost there" without leaving the site.
-* **The browser blocks reading the response.** The subscriber still reaches
-  Kit, because the request is sent either way, but the page shows "Something
-  went wrong. Email sarah@eatumbo.com to sign up." That message would be
-  wrong, not the signup.
+The preflight answers the same way. So the browser can read the response and
+the visitor sees the inline "Almost there" message rather than a false error.
 
-So check Kit after the first test signup **before** believing an error
-message. If the subscriber is there but the page said it failed, the fix is a
-one-line change in `main.js`: drop the response check, or let the form fall
-through to its native POST.
+If that ever changes, the symptom is a page saying "Something went wrong"
+while the subscriber **does** reach Kit anyway, because the request is sent
+either way and only reading the reply is blocked. Check Kit before believing
+that message, and if it comes to it, the fix is one line in `main.js`: drop
+the response check, or let the form fall through to its native POST.
