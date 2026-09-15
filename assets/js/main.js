@@ -56,4 +56,45 @@
   var y = document.querySelector('[data-year]');
   if (y) y.textContent = new Date().getFullYear();
 
+  // Newsletter: posts to Kit, which owns the list, the double opt-in and the
+  // unsubscribe. The form has a real action and method, so with JS off the
+  // browser does a native POST to Kit's own confirmation page. This handler
+  // only intercepts that to keep the visitor on eatumbo.com.
+  // Swap the form's `action` to change providers.
+  document.querySelectorAll('form[data-newsletter]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      var btn = f.querySelector('button');
+      var status = f.querySelector('.newsletter__status');
+      var emailInput = f.querySelector('input[name="email_address"]');
+      var honey = f.querySelector('input[name="_honey"]');
+      var setStatus = function (msg) { if (status) { status.hidden = false; status.textContent = msg; } };
+
+      if (honey && honey.value) { e.preventDefault(); return; }   // bot filled the honeypot
+
+      // The provider form id has not been filled in yet. Do not let a native
+      // POST send anyone to a dead Kit URL. Tell them the path that works.
+      if (!f.action || f.action.indexOf('FORM_ID') !== -1) {
+        e.preventDefault();
+        setStatus('Email sarah@eatumbo.com to sign up.');
+        return;
+      }
+
+      e.preventDefault();
+      if (btn) { btn.disabled = true; btn.textContent = 'Signing up…'; }
+      fetch(f.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(f)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        if (btn) btn.textContent = 'Check your email ✓';
+        setStatus('Almost there. Click the confirmation link we just sent.');
+        if (emailInput) emailInput.value = '';
+      }).catch(function () {
+        if (btn) { btn.disabled = false; btn.textContent = 'Join'; }
+        setStatus('Something went wrong. Email sarah@eatumbo.com to sign up.');
+      });
+    });
+  });
+
 })();
