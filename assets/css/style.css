@@ -7,22 +7,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Jost:ital,wght@0,300..700;1,400..500&family=Yellowtail&display=swap');
 
 :root {
-  /* Brand palette: parchment · gold · sage, anchored by a near-black ink. */
-  --cream:      #E8E3CE;   /* parchment — page base */
-  --cream-2:    #F1EDDD;   /* lighter tint — cards, section tint */
-  --cream-3:    #DCD6BC;   /* deeper tint — hero gradient */
-  --oxblood:    #2B2117;   /* ink (espresso) — dark sections + strong headings */
-  --oxblood-2:  #1D160E;
-  --ink:        #2E241A;   /* body text */
-  --coral:      #D3A75A;   /* gold — buttons, script accents, highlights */
-  --coral-2:    #6A4F1B;   /* deep gold — eyebrows, hover, labels (AA on cream) */
-  --blush:      #E7CB8C;   /* light gold — accents on dark sections */
-  --brass:      #C79A44;   /* gold hairlines / ornament */
-  --brass-2:    #6A4F1B;   /* deep gold — small label text, numbers (AA on cream) */
-  --sea:        #5C6E56;
-  --sage:       #A9B8A4;   /* sage — pattern/parade band, secondary */
-  --sage-2:     #8C9E86;
-  --sage-deep:  #5C6E56;
+  /* Brand palette, from the Umbo brand guidelines.
+     Six named swatches, marked (*). Everything else is a tint or shade
+     derived from one of them, for states the guidelines do not name. */
+  --cream:      #EFECDC;   /* (*) Cream, page base */
+  --cream-2:    #F7F5EA;   /* Cream, lighter tint: cards, text on dark */
+  --cream-3:    #E3DFC9;   /* Cream, deeper tint: hero gradient */
+  --oxblood:    #471515;   /* (*) Wine, dark sections + strong headings */
+  --oxblood-2:  #310E0E;   /* Wine, shade: hover on dark */
+  --ink:        #471515;   /* (*) Wine, body text */
+  --coral:      #DBA74D;   /* (*) Goldenrod, buttons and highlights */
+  --coral-2:    #8C4015;   /* (*) Clay, eyebrows and hover on cream */
+  --blush:      #E8C489;   /* Goldenrod, tint: accents on dark sections */
+  --brass:      #C4943F;   /* Goldenrod, shade: hairlines and ornament */
+  --brass-2:    #60480C;   /* (*) Olive, small label text and numbers */
+  --sea:        #6B7C69;   /* Smoke Teal, shade */
+  --sage:       #ACBBAA;   /* (*) Smoke Teal, pattern and parade band */
+  --sage-2:     #93A491;   /* Smoke Teal, shade */
+  --sage-deep:  #6B7C69;   /* Smoke Teal, deeper shade */
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-script:  'Yellowtail', cursive;
@@ -66,7 +68,7 @@ p { margin: 0 0 1.1em; }
   display: inline-flex; align-items: center; gap: .8em;
 }
 .eyebrow::before { content:""; width: 34px; height: 1px; background: currentColor; opacity: .6; }
-.script { font-family: var(--font-script); font-weight: 400; color: #9A6B18; letter-spacing: 0; }
+.script { font-family: var(--font-script); font-weight: 400; color: var(--coral-2); letter-spacing: 0; }
 .serif  { font-family: var(--font-display); }
 .center { text-align: center; }
 .muted  { color: color-mix(in srgb, var(--ink) 72%, transparent); }
@@ -194,7 +196,7 @@ p { margin: 0 0 1.1em; }
 .section--dark .muted { color: color-mix(in srgb, var(--cream-2) 72%, transparent); }
 .section--sage { background: var(--sage); }
 .section--sage .eyebrow { color: var(--oxblood-2); }
-.section--sage .script { color: #4E3A12; }
+.section--sage .script { color: var(--oxblood); }
 .section--sage .muted { color: color-mix(in srgb, var(--ink) 82%, transparent); }
 .section--sage .card { background: color-mix(in srgb, var(--cream-2) 88%, var(--sage)); }
 .section__head { max-width: 720px; margin: 0 auto clamp(2.5rem,5vw,4rem); text-align: center; }
@@ -249,7 +251,7 @@ p { margin: 0 0 1.1em; }
 .menu-cat { margin: clamp(1.5rem,3vw,2.4rem) 0 .7rem; text-align: center; }
 .menu-cat:first-child { margin-top: 0; }
 .menu-cat h3 { font-size: 1.5rem; }
-.menu-cat .script { font-size: 1.05rem; display:block; color: #4E3A12; }
+.menu-cat .script { font-size: 1.05rem; display:block; color: var(--oxblood); }
 
 /* two-column menu: food left, drinks right (tablet+); stacked on mobile */
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem,4vw,3rem); align-items: start; }
@@ -352,7 +354,7 @@ p { margin: 0 0 1.1em; }
 .page-hero__shell { position: absolute; inset: 0; margin: auto; width: min(520px, 68vw); height: auto; opacity: .12; pointer-events: none; z-index: 0; }
 .page-hero > :not(.page-hero__shell) { position: relative; z-index: 1; }
 .page-hero h1 { font-size: clamp(2.6rem, 8vw, 6rem); }
-.page-hero h1 .script { display:block; font-size: .5em; color: #9A6B18; }
+.page-hero h1 .script { display:block; font-size: .5em; color: var(--coral-2); }
 .page-hero .eyebrow::before { display: none; }
 .page-hero p { max-width: 46ch; margin: 1.2rem auto 0; font-size: 1.05rem; }
 
