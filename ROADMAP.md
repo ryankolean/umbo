@@ -97,7 +97,7 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 - [ ] Keep `llms.txt` and the FAQ in sync with real hours, menu, and policies.
 - [ ] Consider a short journal/press page (natural inbound links + fresh crawl
       signal); link any press mentions.
-- [ ] Per-page Open Graph images (menu, events) instead of the shared card.
+- [x] Per-page Open Graph images (menu, events) instead of the shared card.
 
 ## 5. Nice-to-have
 
