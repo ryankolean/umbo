@@ -2,6 +2,26 @@
 
 Audit date: 2026-10-23. Full findings: [FULL-AUDIT-REPORT.md](FULL-AUDIT-REPORT.md).
 
+## Status at end of 2026-10-23
+
+- **Shipped:**
+  - **PR #25:** C1, H6, H8 (except press `subjectOf`), M5, M6, M8, M9.
+  - **Zone commit `a33d0e4`:** C2.
+  - **PR #21:** M7.
+  - **Backlog PR:**
+    - M1: fonts moved to a `<link>`, image dimensions, a WebP `srcset` for the room photo, small footer images. Local mobile Lighthouse went from 78-86 to 98, LCP from 4.1-4.8 s to 2.2-2.3 s.
+    - M2: press section, `subjectOf` and the `llms.txt` Press list.
+    - M4: `scripts/menu-jsonld.py`.
+    - M11, L3, L4.
+    - L6 in `ROADMAP.md`.
+    - L8: eight unused images removed.
+- **Resolved, no change needed:** M10.
+- **Skipped:**
+  - L2: the "GBP pin" was a Maps viewport center, not a verified point. `hasMap` now points at the Google place instead.
+  - L7: no public Wikidata edits without a sign-off.
+- **Started, needs a person:** H3 Bing. The Google sign-in step stalled under automation.
+- **Waiting on Umbo:** C3, H1, H2, H4, H5, H7, M3, M12, L1. A summary email to Sarah sits in Gmail Drafts, along with correction drafts to Traverse City Tourism and MyNorth.
+
 Owner key: **Ryan** = needs a human sign-in or a business decision. **Code** = a repo change. **Umbo** = needs facts or access from Sarah or Cameron.
 
 ## Critical: fix now

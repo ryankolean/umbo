@@ -68,13 +68,25 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 
 - [x] Verify the domain for **GitHub Pages** (`_github-pages-challenge-ryankolean`
       TXT, applied via `scripts/porkbun-zone.py`), done 2026-09-13.
-- [ ] Verify the domain in **Google Search Console**; submit `sitemap.xml`.
+- [x] Verify the domain in **Google Search Console**; submit `sitemap.xml`.
+      Done 2026-10-23: Domain property owned by ryan.kolean@gmail.com, TXT in
+      `docs/eatumbo.com.zone` (`a33d0e4`), sitemap submitted, recrawl requested
+      for the old `https://www.eatumbo.com/team-1` (now a stub to `about.html`).
 - [ ] Verify in **Bing Webmaster Tools** (feeds ChatGPT / Copilot answers).
-- [ ] Create / claim **Google Business Profile** (hours, photos, menu link,
-      reservations) — the single biggest local-SEO + maps lever for a restaurant.
-- [ ] Add **Apple Business Connect** listing (feeds Apple Maps + Siri).
+      Started 2026-10-23 via Add a site > Import from GSC; the Google sign-in
+      step stalled under automation. Finish it by hand and pick eatumbo.com.
+- [ ] **Google Business Profile** already exists ("Umbo Traverse City", 4.8
+      from 107 reviews, hours correct), but the panel shows "Own this
+      business?" next to an owner-written description, so who controls it is
+      unclear. Confirm access with Sarah, then add the Oyster bar category, the
+      menu link and the text-to-reserve wording.
+- [ ] Claim the **Apple Maps** listing in Apple Business Connect (exists,
+      unclaimed; feeds Apple Maps + Siri).
+- [ ] Claim **Yelp** (exists, unclaimed, 5 reviews; Apple Maps shows Yelp's
+      rating). Create **Tripadvisor** and **Facebook** listings (neither exists).
 - [ ] Ensure NAP (name, address, phone) is identical across the site, GBP,
-      Yelp, and directories.
+      Yelp, and directories. Listings use "Umbo Traverse City"; the site
+      schema carries it as `alternateName`.
 
 > Reservations are **by text**, not phone, for parties of 2–5 indoors, with
 > 6+ on the patio first come first served (`9ea1077`). Any listing built from
@@ -85,8 +97,10 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 - [ ] Add `AggregateRating` / `Review` schema once real reviews exist
       (don't fabricate — Google penalizes self-serving markup).
 - [ ] Add `Event` schema + a listing page when hosting ticketed/one-off events.
-- [ ] Expand `Menu` JSON-LD with per-item pricing + `suitableForDiet` /
-      allergen info as the menu stabilizes.
+- [x] Expand `Menu` JSON-LD with per-item pricing. Generated from the visible
+      rows by `scripts/menu-jsonld.py`, which also writes the catering
+      `OfferCatalog` on `events.html`; rerun it after every menu edit.
+- [ ] Add `suitableForDiet` / allergen info if the menu starts marking it.
 
 ## 4. Content / AEO
 
@@ -95,8 +109,12 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 > the `FAQPage` JSON-LD. Edit both together or the structured data goes stale.
 
 - [ ] Keep `llms.txt` and the FAQ in sync with real hours, menu, and policies.
-- [ ] Consider a short journal/press page (natural inbound links + fresh crawl
-      signal); link any press mentions.
+      When hours change, update all of these together: the five page footers,
+      the visit page Hours block, the FAQ answer (visible copy and JSON-LD),
+      the `Restaurant` hours on `index.html` and `visit.html`, `llms.txt`, and
+      the GBP, Apple, Yelp and Instagram listings.
+- [x] Press: "In the Press" section on `about.html`, mirrored as `subjectOf`
+      in its JSON-LD and as a Press list in `llms.txt`. Keep all three in sync.
 - [x] Per-page Open Graph images (menu, events) instead of the shared card.
 
 ## 5. Nice-to-have

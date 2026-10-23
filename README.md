@@ -18,3 +18,8 @@ structured data and the FAQ where nobody remembers to update it.
 
 Menu changes ship as full content updates: replace the dishes, keep the price
 and any serving note, and leave the dates off.
+
+The structured data repeats every dish and catering package, so after any edit
+to `menu.html` or `events.html` run `./scripts/menu-jsonld.py` and commit the
+result with the change. `./scripts/menu-jsonld.py --check` exits 1 if either
+page has drifted from its visible rows.
