@@ -9,7 +9,7 @@ Owner key: **Ryan** = needs a human sign-in or a business decision. **Code** = a
 | # | Action | Owner | Effort |
 |---|---|---|---|
 | C1 | Add `team-1.html`: a redirect stub (meta refresh + `rel=canonical` to `about.html`, `noindex`). The old Squarespace team page `/team-1` is the **#1 Google result for "Sarah Welch Umbo"** and shows as the "Our Founding Team" sitelink on the brand search, and it returns 404. | Code | 10 min |
-| C2 | Verify eatumbo.com in Google Search Console as a Domain property (TXT through `scripts/porkbun-zone.py --apply`), submit `sitemap.xml`, then URL-inspect `/team-1` and the five pages to request recrawl. Six weeks live with no Search Console; it is also the only way to see which canonical Google picked (see M10). | Ryan, then Code | 20 min |
+| C2 | **Done 2026-10-23.** Domain property verified (owner ryan.kolean@gmail.com, TXT in `docs/eatumbo.com.zone`), `sitemap.xml` submitted, indexing requested for `https://www.eatumbo.com/team-1` (the indexed copy is the www form). Indexing requests for the five pages hit the account's daily quota; all five are already indexed and in the sitemap. | Ryan, then Code | 20 min |
 | C3 | Fix the Instagram bio "Gift Cards" link. It points at the old Squarespace product `/events/p/umbo-gift-card`, which now 404s, going into the holiday gift-card season. Needs a gift-card provider decision (Square, Toast, or a "text us" page) before a link can go back. | Umbo + Ryan | decision |
 
 ## High: within a week
@@ -38,7 +38,7 @@ Owner key: **Ryan** = needs a human sign-in or a business decision. **Code** = a
 | M7 | Merge PR #21 (per-page OG images, mergeable). | Ryan | 5 min |
 | M8 | Custom `404.html` with nav and the visit block, for the expired ticket pages (`/events/p/aurora-shucking`, `/aurorawinedinner`, `/table22`) and anything else old. 404 is the right status for past events. | Code | 30 min |
 | M9 | Link home as `./` (and `https://eatumbo.com/` in `llms.txt`) instead of `index.html`. | Code | 10 min |
-| M10 | Canonical form: Google has indexed `/menu`, `/about`, `/visit`, `/events` extensionless while every canonical and the sitemap say `.html`. After C2, check "Google-selected canonical" in URL Inspection; if Google keeps overriding, switch canonicals, sitemap, nav and `llms.txt` to extensionless. | Code | 30 min |
+| M10 | **Resolved, no change needed.** URL Inspection on `menu.html` shows Google-selected canonical = user-declared `https://eatumbo.com/menu.html`, discovered via the sitemap; the extensionless `site:` listings were display only. | - | - |
 | M11 | Titles and descriptions: add "Oyster Bar" to inner-page titles (25-38 chars today), trim descriptions on menu (203), visit (174) and home (171) to about 155. | Code | 20 min |
 | M12 | Facebook business page (none exists; Meta AI currently describes Umbo as "a new higher-end catering option") and a Downtown Traverse City Association directory listing (not listed). | Ryan + Umbo | 1 h |
 

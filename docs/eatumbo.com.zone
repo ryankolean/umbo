@@ -21,3 +21,7 @@ google._domainkey	3600	IN	TXT	( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCA
 ; --- GitHub Pages domain verification. Stops anyone else claiming eatumbo.com
 ; --- on Pages if this repo ever stops serving it. Token is account-specific.
 _github-pages-challenge-ryankolean	3600	IN	TXT	"519d5ed987eadd7c841b072fd8d1bc"
+
+; --- Google Search Console Domain property, owned by ryan.kolean@gmail.com.
+; --- Google re-checks it periodically; removing it drops verification.
+@	3600	IN	TXT	"google-site-verification=pYHNouk0n-etXAbmr6eZfsLoKxxz62yd5UFPwjNYK0c"
