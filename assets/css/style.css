@@ -4,7 +4,6 @@
    Fraunces (display) · Yellowtail (script) · Jost (UI/body).
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Jost:ital,wght@0,300..700;1,400..500&family=Yellowtail&display=swap');
 
 :root {
   /* Brand palette: parchment · gold · sage, anchored by a near-black ink. */
@@ -50,7 +49,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; }
 h1,h2,h3,h4 { margin: 0; font-family: var(--font-display); font-weight: 500; line-height: 1.02; color: var(--oxblood); letter-spacing: -.01em; }
@@ -228,7 +227,7 @@ p { margin: 0 0 1.1em; }
 .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 .card:hover::after { opacity: 1; }
 .card .shell { margin-bottom: 1.2rem; }
-.card h3 { font-size: 1.6rem; margin-bottom: .6rem; }
+.card h2 { font-size: 1.6rem; margin-bottom: .6rem; }
 .card__no { position: absolute; top: 1.2rem; right: 1.4rem; font-family: var(--font-display); font-style: italic; color: var(--coral-2); font-size: 1.1rem; }
 
 /* ---------- menu preview / lists ---------- */
@@ -248,7 +247,7 @@ p { margin: 0 0 1.1em; }
 .menu-prefixe .menu-row__name em { font-family: var(--font-ui); font-style: normal; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--coral-2); margin-right: .6em; }
 .menu-cat { margin: clamp(1.5rem,3vw,2.4rem) 0 .7rem; text-align: center; }
 .menu-cat:first-child { margin-top: 0; }
-.menu-cat h3 { font-size: 1.5rem; }
+.menu-cat h2, .menu-cat h3 { font-size: 1.5rem; }
 .menu-cat .script { font-size: 1.05rem; display:block; color: #4E3A12; }
 
 /* two-column menu: food left, drinks right (tablet+); stacked on mobile */
@@ -279,7 +278,7 @@ p { margin: 0 0 1.1em; }
   .menu-grid .menu-row__desc { display: none; }
   .menu-prefixe .menu-row__desc { display: block; font-size: .72rem; }
   .menu-cat { margin: 1rem 0 .4rem; }
-  .menu-cat h3 { font-size: 1.18rem; }
+  .menu-cat h2, .menu-cat h3 { font-size: 1.18rem; }
   .menu-cat .script { font-size: .82rem; }
   .menu-note { font-size: .72rem; margin-bottom: .5rem; }
   .page-hero { padding-top: clamp(6rem,18vw,8rem); padding-bottom: 1.4rem; }
@@ -320,7 +319,7 @@ p { margin: 0 0 1.1em; }
 
 /* ---------- visit / info ---------- */
 .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.4rem,3vw,3rem); text-align: center; }
-.info h3 { font-family: var(--font-ui); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); margin-bottom: .8rem; }
+.info h2 { font-family: var(--font-ui); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); margin-bottom: .8rem; }
 .info p { font-family: var(--font-display); font-size: 1.25rem; color: var(--oxblood); line-height: 1.4; }
 .map-embed {
   margin-top: 2.5rem; aspect-ratio: 2.3/1; border-radius: var(--radius); overflow: hidden;
@@ -364,7 +363,7 @@ p { margin: 0 0 1.1em; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(2rem,5vw,4rem); }
 .footer-brand .brand__word { color: var(--cream-2); }
 .footer-brand p { margin-top: 1rem; max-width: 34ch; color: color-mix(in srgb,var(--cream-2) 72%, transparent); font-size: .95rem; }
-.footer-col h4 { font-family: var(--font-ui); font-weight: 600; font-size: .74rem; text-transform: uppercase; letter-spacing: .22em; color: var(--blush); margin-bottom: 1.1rem; }
+.footer-col h2 { font-family: var(--font-ui); font-weight: 600; font-size: .74rem; text-transform: uppercase; letter-spacing: .22em; color: var(--blush); margin-bottom: 1.1rem; }
 .footer-col a, .footer-col p { display: block; color: color-mix(in srgb,var(--cream-2) 82%, transparent); font-size: .95rem; margin-bottom: .6rem; transition: color .3s var(--ease); }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { margin-top: clamp(2.5rem,5vw,4rem); padding-top: 1.6rem; border-top: 1px solid color-mix(in srgb,var(--cream-2) 16%, transparent);
@@ -484,6 +483,16 @@ p { margin: 0 0 1.1em; }
 @media (prefers-reduced-motion: reduce) { .room-carousel__track { animation: none; } }
 /* single framed photo inside the side-by-side layout */
 .room-frame { position: relative; margin: 0; min-width: 0; padding: .7rem; background: var(--cream-2); border: 1px solid var(--brass); box-shadow: var(--shadow-soft); }
+.room-frame picture { display: block; }
+
+/* ---------- press list (about) ---------- */
+.press-list { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; }
+.press-list li { border-top: 1px solid color-mix(in srgb, var(--brass) 35%, transparent); }
+.press-list li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--brass) 35%, transparent); }
+.press-list a { display: grid; gap: .35rem; padding: 1.1rem .2rem; color: inherit; }
+.press-list__outlet { font-family: var(--font-ui); font-weight: 600; font-size: .74rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); }
+.press-list__title { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.45rem); line-height: 1.2; color: var(--oxblood); transition: color .3s var(--ease); }
+.press-list a:hover .press-list__title { color: var(--coral-2); }
 .room-frame .room-photo { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 
 /* engraving icon that leads a card/eyebrow */
