@@ -72,9 +72,11 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
       Done 2026-10-23: Domain property owned by ryan.kolean@gmail.com, TXT in
       `docs/eatumbo.com.zone` (`a33d0e4`), sitemap submitted, recrawl requested
       for the old `https://www.eatumbo.com/team-1` (now a stub to `about.html`).
-- [ ] Verify in **Bing Webmaster Tools** (feeds ChatGPT / Copilot answers).
-      Started 2026-10-23 via Add a site > Import from GSC; the Google sign-in
-      step stalled under automation. Finish it by hand and pick eatumbo.com.
+- [x] Verify in **Bing Webmaster Tools** (feeds ChatGPT / Copilot answers).
+      Done 2026-10-24: added manually under ryan.kolean@gmail.com's Bing
+      account, verified by the CNAME `9f48691b5133a85612487ed1803f4d10` ->
+      `verify.bing.com` in `docs/eatumbo.com.zone`, sitemap submitted. (Import
+      from GSC stalled on Google's sign-in under automation.)
 - [ ] **Google Business Profile** already exists ("Umbo Traverse City", 4.8
       from 107 reviews, hours correct), but the panel shows "Own this
       business?" next to an owner-written description, so who controls it is

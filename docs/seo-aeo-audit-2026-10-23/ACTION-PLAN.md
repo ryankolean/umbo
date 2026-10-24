@@ -19,7 +19,7 @@ Audit date: 2026-10-23. Full findings: [FULL-AUDIT-REPORT.md](FULL-AUDIT-REPORT.
 - **Skipped:**
   - L2: the "GBP pin" was a Maps viewport center, not a verified point. `hasMap` now points at the Google place instead.
   - L7: no public Wikidata edits without a sign-off.
-- **Started, needs a person:** H3 Bing. The Google sign-in step stalled under automation.
+- **Done 2026-10-24:** H3 Bing. Verified by a DNS CNAME and the sitemap submitted.
 - **Waiting on Umbo:** C3, H1, H2, H4, H5, H7, M3, M12, L1. A summary email to Sarah sits in Gmail Drafts, along with correction drafts to Traverse City Tourism and MyNorth.
 
 Owner key: **Ryan** = needs a human sign-in or a business decision. **Code** = a repo change. **Umbo** = needs facts or access from Sarah or Cameron.
