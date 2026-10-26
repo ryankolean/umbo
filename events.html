@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
 <!-- Halloween 2026: hides every [data-promo] block once the pop-in is over (rule in style.css).
      Runs before first paint, so a past event never flashes on screen. -->
-<script>if (Date.now() >= Date.parse('2026-10-31T18:00:00-04:00')) document.documentElement.classList.add('promo-over');</script>
+<script>if (Date.now() >= Date.parse('2026-11-01T00:00:00-04:00')) document.documentElement.classList.add('promo-over');</script>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -60,7 +60,7 @@
 </section>
 
 <!-- Halloween 2026 pop-in: remove this section, its Event JSON-LD, the promo-over script in the head and the index.html
-     promo after Saturday 10/31. It already hides itself from 6pm ET on 10/31. -->
+     promo after Saturday 10/31. It already hides itself from midnight ET on 10/31 (11/01 00:00). -->
 <section class="section section--sage" id="halloween" data-promo>
   <div class="wrap">
     <div class="section__head" data-reveal>
