@@ -31,7 +31,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&amp;display=swap">
 <link rel="stylesheet" href="assets/css/promo.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Restaurant","@id":"https://eatumbo.com/#restaurant","name":"Umbo","alternateName":"Umbo Traverse City","description":"An oyster bar & restaurant in Traverse City, Michigan, from Cameron Rolka & Sarah Welch of Marrow and Mink, Detroit.","url":"https://eatumbo.com/","image":["https://eatumbo.com/assets/img/og.jpg","https://eatumbo.com/assets/img/space/room.jpg","https://eatumbo.com/assets/img/food/oysters-1x1.jpg","https://eatumbo.com/assets/img/food/oysters-4x3.jpg","https://eatumbo.com/assets/img/food/oysters-16x9.jpg"],"logo":"https://eatumbo.com/assets/img/wordmark-ink.png","servesCuisine":["Seafood","Oysters","Tinned fish","Caviar"],"priceRange":"$$$","currenciesAccepted":"USD","email":"sarah@eatumbo.com","telephone":"+1-231-944-2797","address":{"@type":"PostalAddress","streetAddress":"430 E. Front Street","addressLocality":"Traverse City","addressRegion":"MI","postalCode":"49686","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":44.7639813,"longitude":-85.6150539},"hasMap":"https://maps.google.com/?cid=5607100604850190325","areaServed":{"@type":"City","name":"Traverse City"},"acceptsReservations":true,"hasMenu":"https://eatumbo.com/menu.html","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday","Saturday","Sunday","Monday"],"opens":"16:30","closes":"21:30"}],"founder":[{"@type":"Person","@id":"https://eatumbo.com/about.html#cameron-rolka","name":"Cameron Rolka","jobTitle":"Chef","sameAs":["https://www.instagram.com/cameronrolka/","https://www.traversecity.com/food-wine/talent/cameron-rolka/"]},{"@type":"Person","@id":"https://eatumbo.com/about.html#sarah-welch","name":"Sarah Welch","jobTitle":"Managing Partner","sameAs":["https://www.bravotv.com/people/sarah-welch","https://www.instagram.com/chefwelch/","https://www.traversecity.com/food-wine/talent/sarah-welch/"]}],"sameAs":["https://www.instagram.com/umbotraversecity/","https://maps.google.com/?cid=5607100604850190325","https://www.yelp.com/biz/umbo-traverse-city-traverse-city","https://maps.apple.com/place?place-id=I8442B6AFCD965E59","https://www.traversecity.com/food-wine/listing/umbo/6651/"]},{"@type":"WebSite","@id":"https://eatumbo.com/#website","url":"https://eatumbo.com/","name":"Umbo","inLanguage":"en-US","publisher":{"@id":"https://eatumbo.com/#restaurant"}}]}
@@ -57,17 +57,17 @@
 </header>
 
 <!-- ============ EVENT PROMO (Halloween 2026) ============ -->
-<!-- Remove after Saturday 10/31 with promo.css, promo.js, the Cabin Sketch font link and the body class.
+<!-- Remove after Saturday 10/31 with promo.css, promo.js, the Londrina Solid font link and the body class.
      promo.js already hides it from 11/01 on. -->
-<section class="promo-board" data-promo aria-labelledby="promo-board-title">
-  <div class="promo-board__inner">
-    <svg class="promo-burger" viewBox="0 0 120 92" aria-hidden="true"><path d="M16 42 C 18 14, 102 14, 104 42 Z"/><path d="M40 26 l4 -2 M58 22 l4 1 M76 27 l4 -1 M50 33 l3 2 M68 33 l4 -1"/><path d="M12 50 Q 24 43 36 50 T 60 50 T 84 50 T 108 50"/><path class="cheese" d="M22 55 H 98 L 88 64 L 80 58 L 70 66 L 60 58 L 48 65 L 40 58 L 30 63 Z"/><rect x="14" y="58" width="92" height="12" rx="6"/><path d="M16 76 H 104 Q 104 88 92 88 H 28 Q 16 88 16 76 Z"/></svg>
-    <p class="promo-board__kicker">Burger of the day</p>
-    <h2 class="promo-board__title" id="promo-board-title">This Saturday, Umbo is a burger joint</h2>
-    <p class="promo-board__when">Saturday, October 31, <span class="nowrap">noon to 4ish</span></p>
-    <p class="promo-board__facts">Our Bob&rsquo;s Burgers Halloween pop-in. Burgers, normal and punny, plus fries, beer and wine. Come in costume, bring the kids.</p>
+<section class="promo-card" data-promo aria-labelledby="promo-title">
+  <div class="promo-card__frame">
+    <svg class="promo-burger" viewBox="0 0 120 92" aria-hidden="true"><path class="bun ink" d="M16 42 C 18 12, 102 12, 104 42 Z"/><path class="seed" d="M40 26 l4 -2 M58 21 l4 1 M76 27 l4 -1 M50 33 l3 2 M68 33 l4 -1"/><path class="lettuce" d="M14 49 Q 25 42 36 49 T 60 49 T 84 49 T 106 49"/><path class="cheese ink" d="M20 54 H 100 L 90 65 L 81 58 L 70 67 L 60 58 L 48 66 L 40 58 L 30 64 Z"/><rect class="patty ink" x="13" y="58" width="94" height="13" rx="6.5"/><path class="bun ink" d="M16 76 H 104 Q 104 89 91 89 H 29 Q 16 89 16 76 Z"/></svg>
+    <h2 class="promo-title" id="promo-title"><span class="promo-sr">Burger of the Day</span><span aria-hidden="true"><span class="w"><span class="l cap">B</span><span class="l">u</span><span class="l">r</span><span class="l">g</span><span class="l">e</span><span class="l">r</span></span><span class="w"><span class="l cap">o</span><span class="l">f</span></span><span class="w"><span class="l cap">t</span><span class="l">h</span><span class="l">e</span></span><span class="w"><span class="l cap">D</span><span class="l">a</span><span class="l">y</span></span></span></h2>
+    <p class="promo-card__sub">This Saturday, Umbo is a burger joint</p>
+    <p class="promo-card__when">Saturday, October 31, <span class="nowrap">noon to 4ish</span></p>
+    <p class="promo-card__facts">Our Bob&rsquo;s Burgers Halloween pop-in. Burgers, normal and punny, plus fries, beer and wine. Come in costume, bring the kids.</p>
     <a class="promo-cta" href="events.html#halloween">See the details</a>
-    <span class="promo-board__note">No reservations. Just pop in.</span>
+    <span class="promo-card__note">No reservations. Just pop in.</span>
   </div>
 </section>
 
