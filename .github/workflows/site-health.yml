@@ -57,7 +57,7 @@ jobs:
         # is what closes the issue when the site comes back.
         continue-on-error: true
         env:
-          MIN_CERT_DAYS: ${{ inputs.min_cert_days || 14 }}
+          MIN_CERT_DAYS: ${{ inputs.min_cert_days || 400 }}
         run: python3 scripts/site-health.py
 
       - name: Open, update or close the incident
