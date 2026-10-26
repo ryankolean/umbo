@@ -13,7 +13,8 @@ Run this after every menu edit and commit the result with it:
 menu.html: the `Menu` node gets one `MenuSection` per `.menu-cat` heading, each
 with its `MenuItem`s. A single price becomes an `Offer`; "51 | 120" or "20/80"
 (caviar sizes, glass / bottle) becomes an `AggregateOffer`. A section note like
-"$95 per person." becomes the section's own offer (the prix-fixe).
+"$95 per person." becomes the section's own offer (the prix-fixe), and "$46 a
+dozen." becomes an offer for a quantity of 12 (the oysters).
 
 events.html: the catering `Service` gets a `hasOfferCatalog` with every package
 priced as a plain "$N / pp" or "$N / hr". Upgrades (+$), estimates (~$) and
@@ -123,8 +124,12 @@ def menu_sections():
             items.append(item)
         node = {"@type": "MenuSection", "name": section["name"], "hasMenuItem": items}
         per_person = re.search(r"\$(\d+(?:\.\d+)?) per person", section["note"])
+        per_dozen = re.search(r"\$(\d+(?:\.\d+)?) (?:a|per|/) dozen", section["note"])
         if per_person:
             node["offers"] = {"@type": "Offer", "price": per_person.group(1), "priceCurrency": "USD"}
+        elif per_dozen:
+            node["offers"] = {"@type": "Offer", "price": per_dozen.group(1), "priceCurrency": "USD",
+                              "eligibleQuantity": {"@type": "QuantitativeValue", "value": 12}}
         out.append(node)
     return out
 
