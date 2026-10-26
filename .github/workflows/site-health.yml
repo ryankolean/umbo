@@ -1,0 +1,186 @@
+name: Site health
+
+# Availability monitoring for eatumbo.com, for the Umbo maintenance agreement
+# (s.3.2 monitoring, Schedule C Sev 1 response). See docs/monitoring.md.
+#
+# scripts/site-health.py checks the home and menu pages (HTTPS 200 with the
+# street address on the page) and the cert (verifies, 14+ days left). On
+# failure this opens one GitHub issue assigned to Ryan, which emails him. One
+# issue per outage, re-notified at most hourly, closed automatically on
+# recovery with the approximate downtime. The site-down issues are also the
+# outage record for the quarterly report to Sarah (s.3.4).
+#
+# Free and account-free by design. The cost is detection speed: GitHub's
+# scheduler is best-effort, and Fly Trap's identical 15-minute schedule fired
+# about every 4 hours over Aug-Oct 2026 (longest gap 11 hours). It also cannot
+# see a GitHub-wide outage, because the site and this check go down together.
+# What it catches is what breaks a Pages site while GitHub is fine: DNS, the
+# domain, the cert, a bad deploy. For 5-minute checks from outside GitHub, add
+# an UptimeRobot free monitor (docs/monitoring.md).
+
+on:
+  schedule:
+    # Offset from Fly Trap's :07/:22/:37/:52 and away from :00, the slot
+    # GitHub drops most often.
+    - cron: '13,28,43,58 * * * *'
+  workflow_dispatch:
+    inputs:
+      min_cert_days:
+        description: 'Fail if the cert has fewer days left than this. Set it above the real figure to test the alert.'
+        type: number
+        default: 14
+  # Prove a change to the monitor against the live site before it merges.
+  pull_request:
+    paths:
+      - '.github/workflows/site-health.yml'
+      - 'scripts/site-health.py'
+
+permissions:
+  contents: read
+  issues: write
+  # The keep-alive step re-enables this workflow.
+  actions: write
+
+concurrency:
+  group: site-health
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the live site
+        id: health
+        # Do not fail the step: the incident step has to run either way, and it
+        # is what closes the issue when the site comes back.
+        continue-on-error: true
+        env:
+          MIN_CERT_DAYS: ${{ inputs.min_cert_days || 14 }}
+        run: python3 scripts/site-health.py
+
+      - name: Open, update or close the incident
+        uses: actions/github-script@v7
+        env:
+          INCIDENT_STATE: ${{ steps.health.outcome == 'success' && 'healthy' || 'failing' }}
+          INCIDENT_SUMMARY: ${{ steps.health.outputs.summary }}
+          INCIDENT_SOURCE: ${{ github.event_name }}
+          # Set the INCIDENT_ASSIGNEES repo variable to change who gets told.
+          # Each must be a repo collaborator or GitHub silently drops them.
+          INCIDENT_ASSIGNEES: ${{ vars.INCIDENT_ASSIGNEES || 'ryankolean' }}
+        with:
+          script: |
+            // Every value arrives via env, never interpolated into this script,
+            // the standard guard against workflow command injection.
+            const state     = process.env.INCIDENT_STATE
+            const summary   = process.env.INCIDENT_SUMMARY || ''
+            const source    = process.env.INCIDENT_SOURCE
+            const assignees = process.env.INCIDENT_ASSIGNEES.split(',').map((s) => s.trim()).filter(Boolean)
+
+            const { owner, repo } = context.repo
+            const SITE   = 'https://eatumbo.com'
+            const LABEL  = 'site-down'
+            // Hidden marker, so we find our own issue even if a human renames it.
+            const MARKER = '<!-- umbo-site-health-incident -->'
+            const RE_NOTIFY_MS = 60 * 60 * 1000
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`
+            const elapsed = (from) => {
+              const mins = Math.round((Date.now() - new Date(from).getTime()) / 60000)
+              return mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`
+            }
+
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: LABEL, per_page: 100,
+            })
+            const open = openIssues.find((i) => (i.body || '').includes(MARKER)) || null
+
+            if (state !== 'failing') {
+              if (!open) {
+                core.info('Site healthy, no open incident.')
+                return
+              }
+              const down = elapsed(open.created_at)
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: open.number,
+                body: [
+                  `## Recovered`, ``,
+                  `${SITE} is passing every check again (${source} run).`, ``,
+                  `**Down for approximately ${down}**, measured from the first failing run`,
+                  `to this one, so it can overstate the real outage by the gap between runs.`, ``,
+                  summary, ``,
+                  `[Run that confirmed recovery](${runUrl})`,
+                ].join('\n'),
+              })
+              await github.rest.issues.update({ owner, repo, issue_number: open.number, state: 'closed' })
+              core.notice(`Recovered after ~${down}, closed #${open.number}.`)
+              return
+            }
+
+            const body = [
+              MARKER, ``,
+              `## ${SITE} is failing its health check`, ``,
+              `Detected by a **${source}** run.`, ``,
+              summary, ``,
+              `---`, ``,
+              `Sev 1 under the Umbo maintenance agreement (Schedule C): respond within`,
+              `4 hours, after hours on a best-effort basis. The runbook is in`,
+              `[docs/monitoring.md](../blob/master/docs/monitoring.md#when-an-alert-fires).`, ``,
+              `[Latest run](${runUrl})`, ``,
+              `This issue refreshes itself while the site is failing, comments at most once`,
+              `an hour, and closes itself on recovery.`,
+            ].join('\n')
+
+            if (open) {
+              await github.rest.issues.update({ owner, repo, issue_number: open.number, body })
+              const { data: comments } = await github.rest.issues.listComments({
+                owner, repo, issue_number: open.number, per_page: 100,
+              })
+              const last = comments.length ? comments[comments.length - 1].created_at : open.created_at
+              if (Date.now() - new Date(last).getTime() >= RE_NOTIFY_MS) {
+                await github.rest.issues.createComment({
+                  owner, repo, issue_number: open.number,
+                  body: `### Still failing, ${elapsed(open.created_at)} so far\n\n${summary}\n\n[Latest run](${runUrl})`,
+                })
+              }
+              core.warning(`Still failing, updated #${open.number}.`)
+              return
+            }
+
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: LABEL })
+            } catch {
+              await github.rest.issues.createLabel({
+                owner, repo, name: LABEL, color: 'b60205',
+                description: 'eatumbo.com is failing its health check',
+              })
+            }
+            const { data: created } = await github.rest.issues.create({
+              owner, repo, body, labels: [LABEL],
+              title: `[site down] ${SITE} is failing its health check`,
+            })
+            // Assign separately: a stale username fails the whole create call,
+            // and losing the alert because one handle went stale is the worst outcome.
+            try {
+              await github.rest.issues.addAssignees({ owner, repo, issue_number: created.number, assignees })
+            } catch (err) {
+              core.warning(`Opened #${created.number} but could not assign ${assignees.join(', ')}: ${err.message}`)
+            }
+            core.notice(`Site failing, opened #${created.number}.`)
+
+      - name: Keep the schedule alive
+        # GitHub disables scheduled workflows in a public repo after 60 days with
+        # no repository activity, and this site can easily go two quiet months.
+        # Re-enabling on every run is the call keepalive-workflow v2 makes.
+        # GitHub does not document what resets the timer, so the quarterly
+        # calendar task also checks this workflow is still running.
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/site-health.yml/enable"
+
+      - name: Fail the run if the site is unhealthy
+        if: steps.health.outcome != 'success'
+        run: |
+          echo "::error::Site health check failed. See the site-down issue."
+          exit 1
