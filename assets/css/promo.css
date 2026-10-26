@@ -1,50 +1,64 @@
 /* ============================================================
-   EVENT PROMO: diner chalkboard section at the top of the home page.
-   Deliberately not the site palette, so the event reads as an event.
+   EVENT PROMO: Bob's Burgers title card at the top of the home page.
+   The show's logo colors (yellow panel, red frame, red lettering with an
+   ink outline and drop shadow), deliberately not the site palette, so the
+   event reads as an event. Evokes the logo; never use the logo itself.
    Halloween 2026; promo.js removes it after the event.
    ============================================================ */
 :root {
-  --chalkboard: #22302A;
-  --chalkboard-2: #1A2520;
-  --chalk: #EFEDE4;
-  --chalk-dim: color-mix(in srgb, #EFEDE4 78%, transparent);
-  --ketchup: #C63A28;
-  --ketchup-2: #7E1F14;
-  --mustard: #F2C14E;
-  --frame: #6B4B2E;
-  --font-chalk: 'Cabin Sketch', 'Fraunces', Georgia, serif;
+  --promo-yellow: #F8DF20;
+  --promo-red: #EE2631;
+  --promo-ink: #231F20;
+  --promo-bun: #E9A04B;
+  --promo-lettuce: #5DAE3C;
+  --promo-patty: #7A3E1D;
+  --font-promo: 'Londrina Solid', 'Jost', system-ui, sans-serif;
 }
 
-.promo-board {
-  padding: clamp(6.2rem, 12vw, 7.4rem) var(--gutter) clamp(2.2rem, 5vw, 3.2rem);
-  border-bottom: 12px solid var(--frame);
-  color: var(--chalk);
-  background:
-    radial-gradient(60% 50% at 18% 20%, rgba(239,237,228,.07), transparent 70%),
-    radial-gradient(50% 60% at 85% 75%, rgba(239,237,228,.05), transparent 70%),
-    linear-gradient(180deg, var(--chalkboard), var(--chalkboard-2));
+.promo-card { padding: clamp(6.2rem, 12vw, 7.4rem) var(--gutter) clamp(2rem, 5vw, 3rem); background: var(--promo-yellow); color: var(--promo-ink); }
+.promo-card__frame { max-width: 920px; margin: 0 auto; border: clamp(9px, 1.6vw, 15px) solid var(--promo-red); padding: clamp(1.4rem, 4vw, 2.4rem) clamp(1rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 2.6rem); text-align: center; }
+
+/* Cartoon burger: flat fills, thick ink outlines. */
+.promo-burger { display: block; width: clamp(86px, 13vw, 118px); height: auto; margin: 0 auto .7rem; }
+.promo-burger .ink { stroke: var(--promo-ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.promo-burger .bun { fill: var(--promo-bun); }
+.promo-burger .seed { fill: none; stroke: #FFF6DA; stroke-width: 3; stroke-linecap: round; }
+.promo-burger .lettuce { fill: none; stroke: var(--promo-lettuce); stroke-width: 7; stroke-linecap: round; }
+.promo-burger .cheese { fill: var(--promo-yellow); }
+.promo-burger .patty { fill: var(--promo-patty); }
+
+/* Logo-style lettering. The ink outline is what carries the contrast against yellow. */
+.promo-title {
+  margin: 0; font-family: var(--font-promo); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.7rem, 9.4vw, 5.8rem); line-height: 1; letter-spacing: .01em;
+  color: var(--promo-red); -webkit-text-stroke: .035em var(--promo-ink); paint-order: stroke fill;
+  text-shadow: -.07em .07em 0 var(--promo-ink); text-wrap: balance;
 }
-.promo-board__inner { max-width: 860px; margin: 0 auto; padding: clamp(1.6rem, 4vw, 2.6rem) clamp(1rem, 4vw, 2.6rem); border: 2px dashed rgba(239,237,228,.32); border-radius: 6px; text-align: center; }
-.promo-burger { display: block; width: 92px; height: auto; margin: 0 auto .8rem; }
-.promo-burger path, .promo-burger rect { fill: none; stroke: var(--chalk); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.promo-burger .cheese { fill: var(--mustard); stroke: none; }
-.promo-board__kicker { font-family: var(--font-chalk); font-weight: 700; color: var(--chalk-dim); font-size: clamp(1.05rem, 2.4vw, 1.3rem); margin: 0 0 .5rem; }
-.promo-board__title { font-family: var(--font-chalk); font-weight: 700; font-size: clamp(2.3rem, 7.6vw, 4.8rem); line-height: 1; letter-spacing: .01em; color: var(--chalk); text-shadow: 0 0 1px rgba(239,237,228,.45); margin: 0; }
-.promo-board__when { font-family: var(--font-chalk); font-weight: 700; font-size: clamp(1.35rem, 3.8vw, 2.2rem); line-height: 1.1; color: var(--mustard); margin: .8rem 0 0; }
-.promo-board__facts { font-family: var(--font-ui); font-size: clamp(.95rem, 2vw, 1.08rem); line-height: 1.5; color: var(--chalk-dim); max-width: 46ch; margin: 1rem auto 1.6rem; }
-.promo-board__note { display: block; margin-top: .9rem; font-family: var(--font-ui); font-size: .85rem; color: var(--chalk-dim); }
-.promo-board .nowrap { white-space: nowrap; }
+.promo-title .w { display: inline-block; white-space: nowrap; }
+.promo-title .w + .w { margin-left: .26em; }
+.promo-title .l { display: inline-block; }
+.promo-title .l:nth-child(odd) { transform: translateY(-.04em) rotate(-2deg); }
+.promo-title .l:nth-child(3n) { transform: translateY(.05em) rotate(2.5deg); }
+.promo-title .cap { font-size: 1.2em; }
+.promo-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.promo-card__sub { margin: 1.1rem 0 0; font-family: var(--font-promo); font-weight: 900; text-transform: uppercase; font-size: clamp(1.3rem, 3.6vw, 2rem); line-height: 1.05; letter-spacing: .03em; text-wrap: balance; }
+.promo-card__when { display: inline-block; margin: .9rem 0 0; padding: .4rem 1rem .35rem; background: var(--promo-ink); color: var(--promo-yellow); font-family: var(--font-ui); font-weight: 600; font-size: clamp(.98rem, 2.2vw, 1.12rem); letter-spacing: .02em; border-radius: 4px; transform: rotate(-1deg); }
+.promo-card__facts { max-width: 46ch; margin: 1rem auto 1.5rem; font-family: var(--font-ui); font-size: clamp(.98rem, 2vw, 1.08rem); line-height: 1.5; text-wrap: pretty; }
+.promo-card__note { display: block; margin-top: 1rem; font-family: var(--font-ui); font-size: .88rem; font-weight: 500; }
+.promo-card .nowrap { white-space: nowrap; }
 
 .promo-cta {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: .85rem 1.5rem; border-radius: 10px;
-  background: var(--ketchup); color: #fff; font-family: var(--font-ui); font-weight: 600; font-size: .95rem; letter-spacing: .02em;
-  box-shadow: 0 4px 0 var(--ketchup-2); transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+  padding: .72rem 1.5rem .62rem; border-radius: 8px;
+  background: var(--promo-ink); color: var(--promo-yellow);
+  font-family: var(--font-promo); font-weight: 900; font-size: 1.3rem; letter-spacing: .05em; text-transform: uppercase;
+  box-shadow: -5px 5px 0 var(--promo-red); transition: transform .15s var(--ease), box-shadow .15s var(--ease);
 }
-.promo-cta:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--ketchup-2); }
-.promo-cta:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
+.promo-cta:hover { transform: translate(-2px, 2px); box-shadow: -3px 3px 0 var(--promo-red); }
+.promo-cta:focus-visible { outline: 3px solid var(--promo-ink); outline-offset: 4px; }
 
-/* The header floats over the hero; give it a solid ground while the dark board sits under it. */
+/* The header floats over the hero; give it a solid ground while the promo sits under it. */
 body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
 
 @media (prefers-reduced-motion: reduce) { .promo-cta { transition: none; } }
