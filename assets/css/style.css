@@ -319,7 +319,7 @@ p { margin: 0 0 1.1em; }
 
 /* ---------- visit / info ---------- */
 .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.4rem,3vw,3rem); text-align: center; }
-.info h2 { font-family: var(--font-ui); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); margin-bottom: .8rem; }
+.info h2, .info h3 { font-family: var(--font-ui); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-2); margin-bottom: .8rem; }
 .info p { font-family: var(--font-display); font-size: 1.25rem; color: var(--oxblood); line-height: 1.4; }
 .map-embed {
   margin-top: 2.5rem; aspect-ratio: 2.3/1; border-radius: var(--radius); overflow: hidden;
@@ -484,6 +484,18 @@ p { margin: 0 0 1.1em; }
 /* single framed photo inside the side-by-side layout */
 .room-frame { position: relative; margin: 0; min-width: 0; padding: .7rem; background: var(--cream-2); border: 1px solid var(--brass); box-shadow: var(--shadow-soft); }
 .room-frame picture { display: block; }
+
+/* ---------- food photos (home raw bar, menu pair) ---------- */
+.food-frame { min-width: 0; margin: 0 auto; max-width: 460px; width: 100%; }
+.food-photo { display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+.food-frame picture, .menu-photos picture { display: block; }
+.menu-photos { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.8rem,2.5vw,1.6rem); max-width: 780px; margin: 0 auto; }
+.menu-photos figure { margin: 0; }
+.menu-photos figcaption { margin-top: .6rem; text-align: center; font-family: var(--font-ui); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .2em; color: var(--coral-2); }
+
+/* ---------- one-off announcement pill (hero) ---------- */
+.announce { display: inline-flex; align-items: center; gap: .5em; margin-bottom: 1.4rem; padding: .55rem 1.1rem; border-radius: 999px; background: var(--oxblood); color: var(--cream); font-family: var(--font-ui); font-weight: 500; font-size: .82rem; letter-spacing: .04em; line-height: 1.3; text-align: center; transition: background .3s var(--ease); }
+.announce:hover { background: var(--coral-2); }
 
 /* ---------- press list (about) ---------- */
 .press-list { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; }
