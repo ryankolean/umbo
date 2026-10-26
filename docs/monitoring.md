@@ -83,7 +83,21 @@ gh workflow enable site-health.yml --repo ryankolean/umbo
 
 ## Proven
 
-Recorded when the monitor went live. See the PR that added this file.
+2026-10-26, on PR #29 before it merged:
+
+| Step | Result |
+|---|---|
+| PR run against the live site | passed: both pages OK, cert 46.6 days left (expires 2026-12-12) |
+| Forced failure: cert floor raised to 400 days (`3d43b29`) | the run failed and opened #30, assigned to Ryan, at 20:38 UTC. GitHub's email, "[ryankolean/umbo] [site down] https://eatumbo.com is failing its health check (Issue #30)", reached Ryan's Gmail the same minute |
+| Recovery: the forced failure reverted (`976a1e8`) | the run passed and closed #30 at 20:39 UTC with a "Recovered" comment |
+
+Locally, an expired cert (`expired.badssl.com`) and a page without the
+keyword (`example.com`) both fail. #30 was then taken off `site-down`, so the
+quarterly report does not count a test as an outage.
+
+GitHub's emails land in Gmail's Updates tab, next to every CI notification. A
+Gmail filter on the subject `[site down]` that marks the email important keeps
+an alert from getting buried.
 
 ## When an alert fires
 
