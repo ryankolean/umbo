@@ -7,25 +7,65 @@
    ============================================================ */
 :root {
   --promo-yellow: #F8DF20;
+  --promo-yellow-2: #F3D718;   /* sunburst rays */
   --promo-red: #EE2631;
+  --promo-red-lo: #B81A24;     /* frame bevel, shaded edges */
   --promo-ink: #231F20;
-  --promo-bun: #E9A04B;
+  --promo-bun: #EDA44C;
+  --promo-bun-lo: #CF8130;
+  --promo-cheese: #FFB21E;
+  --promo-tomato: #E8402F;
   --promo-lettuce: #5DAE3C;
-  --promo-patty: #7A3E1D;
+  --promo-patty: #6E3517;
   --font-promo: 'Londrina Solid', 'Jost', system-ui, sans-serif;
+  --promo-spring: cubic-bezier(.34, 1.56, .64, 1);
 }
 
-.promo-card { padding: clamp(6.2rem, 12vw, 7.4rem) var(--gutter) clamp(2rem, 5vw, 3rem); background: var(--promo-yellow); color: var(--promo-ink); }
-.promo-card__frame { max-width: 920px; margin: 0 auto; border: clamp(9px, 1.6vw, 15px) solid var(--promo-red); padding: clamp(1.4rem, 4vw, 2.4rem) clamp(1rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 2.6rem); text-align: center; }
+/* Section: yellow ground with sunburst rays behind the card. */
+.promo-card { position: relative; overflow: hidden; isolation: isolate; padding: clamp(6.2rem, 12vw, 7.4rem) var(--gutter) clamp(2.4rem, 5vw, 3.4rem); background: var(--promo-yellow); color: var(--promo-ink); }
+.promo-card::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 55%; width: 150vmax; aspect-ratio: 1;
+  translate: -50% -50%; background: repeating-conic-gradient(var(--promo-yellow) 0 6deg, var(--promo-yellow-2) 6deg 12deg);
+}
+
+/* Frame: a sign board. Two-tone red bevel lit from the top right, ink keylines inside and out,
+   and a hard ink shadow thrown down-left, the same direction as the lettering's shadow. */
+.promo-card__frame {
+  position: relative; isolation: isolate; max-width: 920px; margin: 0 auto;
+  background: var(--promo-yellow);
+  border: clamp(10px, 1.7vw, 16px) solid; border-color: var(--promo-red) var(--promo-red) var(--promo-red-lo) var(--promo-red-lo);
+  border-radius: 6px;
+  --drop: clamp(7px, 1.2vw, 12px);
+  box-shadow: 0 0 0 3px var(--promo-ink), inset 0 0 0 3px var(--promo-ink), calc(-1 * var(--drop)) var(--drop) 0 3px var(--promo-ink);
+  padding: clamp(1.4rem, 4vw, 2.4rem) clamp(1rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 2.6rem); text-align: center;
+}
+/* Comic halftone, strongest at the edges and gone behind the copy. */
+.promo-card__frame::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: radial-gradient(circle, rgba(35, 31, 32, .13) 1.3px, transparent 1.8px) 0 0 / 11px 11px;
+  -webkit-mask: radial-gradient(ellipse at center, transparent 48%, #000 100%);
+          mask: radial-gradient(ellipse at center, transparent 48%, #000 100%);
+}
 
 /* Cartoon burger: flat fills, thick ink outlines. */
-.promo-burger { display: block; width: clamp(86px, 13vw, 118px); height: auto; margin: 0 auto .7rem; }
-.promo-burger .ink { stroke: var(--promo-ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.promo-burger { display: block; width: clamp(124px, 17vw, 168px); height: auto; margin: 0 auto .5rem; overflow: visible; }
+.promo-burger .ink, .promo-burger .ink-line { stroke: var(--promo-ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.promo-burger .ink-line { fill: none; }
 .promo-burger .bun { fill: var(--promo-bun); }
-.promo-burger .seed { fill: none; stroke: #FFF6DA; stroke-width: 3; stroke-linecap: round; }
-.promo-burger .lettuce { fill: none; stroke: var(--promo-lettuce); stroke-width: 7; stroke-linecap: round; }
-.promo-burger .cheese { fill: var(--promo-yellow); }
+.promo-burger .bun-lo { fill: var(--promo-bun-lo); }
+.promo-burger .shine { fill: none; stroke: #FFE6B8; stroke-width: 5; stroke-linecap: round; }
+.promo-burger .seed { fill: #FFF6DA; stroke: var(--promo-ink); stroke-width: 1; }
+.promo-burger .lettuce-ink { fill: none; stroke: var(--promo-ink); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+.promo-burger .lettuce { fill: none; stroke: var(--promo-lettuce); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.promo-burger .tomato { fill: var(--promo-tomato); }
+.promo-burger .tomato-hi { fill: none; stroke: #FF9A80; stroke-width: 2.5; stroke-linecap: round; }
+.promo-burger .cheese { fill: var(--promo-cheese); }
 .promo-burger .patty { fill: var(--promo-patty); }
+.promo-burger .patty-tex { fill: none; stroke: #47200A; stroke-width: 3.2; stroke-linecap: round; }
+.promo-burger .pick-ink { fill: none; stroke: var(--promo-ink); stroke-width: 5; stroke-linecap: round; }
+.promo-burger .pick { fill: none; stroke: #E6C48A; stroke-width: 2.4; stroke-linecap: round; }
+.promo-burger .flag { fill: var(--promo-red); stroke-width: 2.4; }
+.promo-burger .b-shadow { fill: var(--promo-ink); opacity: .18; transform-box: fill-box; transform-origin: center; }
 
 /* Logo-style lettering. The ink outline is what carries the contrast against yellow. */
 .promo-title {
@@ -37,13 +77,13 @@
 .promo-title .w { display: inline-block; white-space: nowrap; }
 .promo-title .w + .w { margin-left: .26em; }
 .promo-title .l { display: inline-block; }
-.promo-title .l:nth-child(odd) { transform: translateY(-.04em) rotate(-2deg); }
-.promo-title .l:nth-child(3n) { transform: translateY(.05em) rotate(2.5deg); }
+.promo-title .l:nth-child(odd) { translate: 0 -.04em; rotate: -2deg; }
+.promo-title .l:nth-child(3n) { translate: 0 .05em; rotate: 2.5deg; }
 .promo-title .cap { font-size: 1.2em; }
 .promo-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .promo-card__sub { margin: 1.1rem 0 0; font-family: var(--font-promo); font-weight: 900; text-transform: uppercase; font-size: clamp(1.3rem, 3.6vw, 2rem); line-height: 1.05; letter-spacing: .03em; text-wrap: balance; }
-.promo-card__when { display: inline-block; margin: .9rem 0 0; padding: .4rem 1rem .35rem; background: var(--promo-ink); color: var(--promo-yellow); font-family: var(--font-ui); font-weight: 600; font-size: clamp(.98rem, 2.2vw, 1.12rem); letter-spacing: .02em; border-radius: 4px; transform: rotate(-1deg); }
+.promo-card__when { display: inline-block; margin: .9rem 0 0; padding: .4rem 1rem .35rem; background: var(--promo-ink); color: var(--promo-yellow); font-family: var(--font-ui); font-weight: 600; font-size: clamp(.98rem, 2.2vw, 1.12rem); letter-spacing: .02em; border-radius: 4px; rotate: -1deg; box-shadow: -4px 4px 0 var(--promo-red); }
 .promo-card__facts { max-width: 46ch; margin: 1rem auto 1.5rem; font-family: var(--font-ui); font-size: clamp(.98rem, 2vw, 1.08rem); line-height: 1.5; text-wrap: pretty; }
 .promo-card__note { display: block; margin-top: 1rem; font-family: var(--font-ui); font-size: .88rem; font-weight: 500; }
 .promo-card .nowrap { white-space: nowrap; }
@@ -60,5 +100,27 @@
 
 /* The header floats over the hero; give it a solid ground while the promo sits under it. */
 html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
+
+/* Motion: one entrance on load (frame, then the letters, then the burger stacks itself, then the
+   date and button land) and the rays turning slowly behind. CSS only, so it needs no JS, and the
+   individual translate/rotate/scale properties compose with the resting jumble of the letters. */
+@media (prefers-reduced-motion: no-preference) {
+  .promo-card::before { animation: promo-spin 140s linear infinite; }
+  .promo-card__frame { animation: promo-frame .6s var(--promo-spring) both; }
+  .promo-title .l { animation: promo-pop .55s var(--promo-spring) both; animation-delay: calc(.15s + var(--i) * 35ms); }
+  .promo-burger .layer { animation: promo-drop .5s var(--promo-spring) both; animation-delay: calc(.55s + var(--i) * 85ms); }
+  .promo-burger .b-shadow { animation: promo-shadow .5s ease-out .5s both; }
+  .promo-card__facts, .promo-card__note { animation: promo-rise .5s ease-out .3s both; }
+  .promo-card__sub { animation: promo-rise .5s ease-out 1s both; }
+  .promo-card__when { animation: promo-slap .45s var(--promo-spring) 1.2s both; }
+  .promo-cta { animation: promo-slap .45s var(--promo-spring) 1.4s both; }
+}
+@keyframes promo-spin { to { rotate: 1turn; } }
+@keyframes promo-frame { from { scale: .94; } }
+@keyframes promo-pop { from { scale: .2; opacity: 0; } 40% { opacity: 1; } }
+@keyframes promo-drop { from { translate: 0 -64px; opacity: 0; } 50% { opacity: 1; } }
+@keyframes promo-shadow { from { scale: .3; opacity: 0; } }
+@keyframes promo-rise { from { translate: 0 14px; opacity: 0; } }
+@keyframes promo-slap { from { scale: 1.5; opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) { .promo-cta { transition: none; } }
