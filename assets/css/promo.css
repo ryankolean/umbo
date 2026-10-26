@@ -3,7 +3,7 @@
    The show's logo colors (yellow panel, red frame, red lettering with an
    ink outline and drop shadow), deliberately not the site palette, so the
    event reads as an event. Evokes the logo; never use the logo itself.
-   Halloween 2026; promo.js removes it after the event.
+   Halloween 2026; hidden from 6pm ET on 10/31 by the promo-over class.
    ============================================================ */
 :root {
   --promo-yellow: #F8DF20;
@@ -59,6 +59,6 @@
 .promo-cta:focus-visible { outline: 3px solid var(--promo-ink); outline-offset: 4px; }
 
 /* The header floats over the hero; give it a solid ground while the promo sits under it. */
-body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
+html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
 
 @media (prefers-reduced-motion: reduce) { .promo-cta { transition: none; } }

@@ -30,6 +30,9 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
+<!-- Halloween 2026: hides every [data-promo] block once the pop-in is over (rule in style.css).
+     Runs before first paint, so a past event never flashes on screen. -->
+<script>if (Date.now() >= Date.parse('2026-10-31T18:00:00-04:00')) document.documentElement.classList.add('promo-over');</script>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&amp;display=swap">
 <link rel="stylesheet" href="assets/css/promo.css">
@@ -57,8 +60,8 @@
 </header>
 
 <!-- ============ EVENT PROMO (Halloween 2026) ============ -->
-<!-- Remove after Saturday 10/31 with promo.css, promo.js, the Londrina Solid font link and the body class.
-     promo.js already hides it from 11/01 on. -->
+<!-- Remove after Saturday 10/31 with promo.css, the Londrina Solid font link, the body class and the promo-over
+     script in the head. It already hides itself from 6pm ET on 10/31. -->
 <section class="promo-card" data-promo aria-labelledby="promo-title">
   <div class="promo-card__frame">
     <svg class="promo-burger" viewBox="0 0 120 92" aria-hidden="true"><path class="bun ink" d="M16 42 C 18 12, 102 12, 104 42 Z"/><path class="seed" d="M40 26 l4 -2 M58 21 l4 1 M76 27 l4 -1 M50 33 l3 2 M68 33 l4 -1"/><path class="lettuce" d="M14 49 Q 25 42 36 49 T 60 49 T 84 49 T 106 49"/><path class="cheese ink" d="M20 54 H 100 L 90 65 L 81 58 L 70 67 L 60 58 L 48 66 L 40 58 L 30 64 Z"/><rect class="patty ink" x="13" y="58" width="94" height="13" rx="6.5"/><path class="bun ink" d="M16 76 H 104 Q 104 89 91 89 H 29 Q 16 89 16 76 Z"/></svg>
@@ -208,6 +211,5 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
-<script src="assets/js/promo.js" defer></script>
 </body>
 </html>
