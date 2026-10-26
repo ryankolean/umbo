@@ -566,3 +566,6 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 .faq__item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--oxblood) 14%, transparent); }
 .faq__item dt { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem,2.2vw,1.4rem); color: var(--oxblood); margin-bottom: .5rem; }
 .faq__item dd { margin: 0; max-width: 64ch; }
+
+/* Event promos: the head script adds .promo-over to <html> once the event is over. */
+.promo-over [data-promo] { display: none; }
