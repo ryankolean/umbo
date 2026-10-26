@@ -495,6 +495,7 @@ p { margin: 0 0 1.1em; }
 .menu-photos { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.8rem,2.5vw,1.6rem); max-width: 780px; margin: 0 auto; }
 .menu-photos figure { margin: 0; }
 .menu-photos figcaption { margin-top: .6rem; text-align: center; font-family: var(--font-ui); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .2em; color: var(--coral-2); }
+.photo-credit { margin: .6rem 0 0; text-align: center; font-family: var(--font-ui); font-size: .72rem; letter-spacing: .04em; color: var(--brass-2); }
 
 
 /* ---------- press list (about) ---------- */
