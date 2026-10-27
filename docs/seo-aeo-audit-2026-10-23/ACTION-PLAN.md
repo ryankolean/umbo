@@ -26,7 +26,7 @@ Audit date: 2026-10-23. Full findings: [FULL-AUDIT-REPORT.md](FULL-AUDIT-REPORT.
   - L1, partly: two photos.
   - H5: the Traverse City Tourism and MyNorth corrections were sent with her okay.
 - **Still waiting on Umbo:**
-  - C3: online gift cards, which depends on her POS.
+  - C3: online gift cards. As of 2026-10-27 Umbo sells physical gift cards in person only. They are not in Toast, and there is no online option. Sarah is deciding whether Toast's gift card add-on (about $50 a month) is worth it. Until she decides, the site says "in person only, not online yet" and the Instagram link has nowhere to point.
   - H1: the GBP manager invite.
   - H2/H4/M12: one call to set up Apple Maps, Tripadvisor and Facebook. Yelp is skipped at her request.
   - Online reservations via Resy in November: swap out every "reservations by text" mention on launch day.
