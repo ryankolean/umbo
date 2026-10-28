@@ -4,6 +4,7 @@
    ink outline and drop shadow), deliberately not the site palette, so the
    event reads as an event. Evokes the logo; never use the logo itself.
    Halloween 2026; hidden from midnight ET on 10/31 (11/01 00:00) by the promo-over class.
+   On Thursdays a ghost steals the burger on a loop: see THURSDAY HEIST at the bottom.
    ============================================================ */
 :root {
   --promo-yellow: #F8DF20;
@@ -124,3 +125,132 @@ html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(
 @keyframes promo-slap { from { scale: 1.5; opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) { .promo-cta { transition: none; } }
+
+/* ============================================================
+   THURSDAY HEIST: on Thursdays (the head script adds .promo-ghost to <html>; ?ghost forces it) a ghost
+   steals the burger on a loop once the entrance has landed. The ghost lives inside the burger SVG, its
+   sheet behind the burger and its hands in front, so it shares the burger's units and scales with it.
+   One 12.5 s cycle, so 1% = 0.125 s:
+     0-3 s      0-24%       pause, burger on the board
+     3-4.5 s    24-36%      ghost floats in from the left wing, bobbing
+     4.5-5.4 s  36-43.2%    dances beside the burger: hop, twirl, shimmy
+     5.4-5.9 s  43.2-47.2%  ducks behind it and grabs the bun
+     5.9-8 s    47.2-64%    lifts it and hops off the right wing with it
+     8-11 s     64-88%      pause, empty board
+     11-12 s    88-96%      a new burger stacks itself, layer by layer, as on load
+   ============================================================ */
+:root {
+  --promo-ghost: #FFFDF5;
+  --promo-ghost-lo: #E2DCCB;
+  --heist: 12.5s;
+  --heist-at: 1.9s;                      /* first cycle starts after the load entrance */
+  --ghost-wing: min(65vw + 80px, 520px); /* in burger units: past the board's edge at every width */
+  --ghost-spot: -124px;                  /* where it dances, left of the burger */
+}
+@media (max-width: 480px) { :root { --ghost-spot: -110px; } }
+.promo-burger .ghost { display: none; }
+.promo-burger .g-sheet, .promo-burger .g-hand { fill: var(--promo-ghost); }
+.promo-burger .g-shade { fill: var(--promo-ghost-lo); }
+.promo-burger .g-arm-ink { fill: none; stroke: var(--promo-ink); stroke-width: 15; stroke-linecap: round; }
+.promo-burger .g-arm-fill { fill: none; stroke: var(--promo-ghost); stroke-width: 9; stroke-linecap: round; }
+.promo-burger .g-eye, .promo-burger .g-mouth { fill: var(--promo-ink); }
+.promo-burger .g-brow { fill: none; stroke: var(--promo-ink); stroke-width: 3.4; stroke-linecap: round; }
+.promo-burger .g-glint { fill: #fff; }
+.promo-burger .g-cheek { fill: #F6A3B1; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .promo-ghost .promo-card__frame { overflow-x: clip; } /* the board's edges are the wings */
+  .promo-ghost .promo-burger .ghost { display: inline; }
+  .promo-ghost .promo-burger :is(.ghost, .b-carry) { transform-box: view-box; transform-origin: 80px 60px; }
+  .promo-ghost .promo-burger .ghost { animation: heist-ghost var(--heist) ease-in-out var(--heist-at) infinite both, heist-dance var(--heist) ease-in-out var(--heist-at) infinite both; }
+  .promo-ghost .promo-burger .b-carry { animation: heist-carry var(--heist) ease-in-out var(--heist-at) infinite both, heist-carry-dance var(--heist) ease-in-out var(--heist-at) infinite both; }
+  .promo-ghost .promo-burger .g-arms { animation: heist-arms var(--heist) linear var(--heist-at) infinite both; }
+  .promo-ghost .promo-burger .g-arm { transform-box: view-box; transform-origin: 36px 66px; animation: ghost-wave .3s ease-in-out infinite alternate; }
+  .promo-ghost .promo-burger .g-arm--r { transform-origin: 124px 66px; }
+  .promo-ghost .promo-burger .g-hands { animation: heist-hands var(--heist) linear var(--heist-at) infinite both; }
+  /* Fill none on the loops, so the load entrance still plays underneath them. */
+  .promo-ghost .promo-burger .layer { animation: promo-drop .5s var(--promo-spring) both, heist-restack var(--heist) ease-in-out infinite; animation-delay: calc(.55s + var(--i) * 85ms), calc(var(--heist-at) + var(--i) * 85ms); }
+  .promo-ghost .promo-burger .b-shadow { animation: promo-shadow .5s ease-out .5s both, heist-shadow var(--heist) ease-in-out var(--heist-at) infinite; }
+}
+/* Ghost path: off the left wing, float in, dance in place, duck behind the burger, lift it, hop off right. */
+@keyframes heist-ghost {
+  0%, 23.9% { translate: calc(-1 * var(--ghost-wing)) 0; opacity: 0; }
+  24% { translate: calc(-1 * var(--ghost-wing)) 0; opacity: 1; animation-timing-function: cubic-bezier(.25, .6, .4, 1); }
+  36%, 43.2% { translate: var(--ghost-spot) 0; animation-timing-function: ease-in; }
+  45.2% { translate: -62px 12px; animation-timing-function: ease-out; }
+  47.2% { translate: 0 0; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }
+  49.2% { translate: 0 -16px; animation-timing-function: ease-out; }
+  51.6% { translate: 60px -32px; animation-timing-function: ease-in; }
+  54% { translate: 120px -8px; animation-timing-function: ease-out; }
+  56.8% { translate: 200px -32px; animation-timing-function: ease-in; }
+  59.6% { translate: 290px -10px; animation-timing-function: ease-in; }
+  64% { translate: var(--ghost-wing) -24px; opacity: 1; }
+  64.1%, 100% { translate: var(--ghost-wing) -24px; opacity: 0; }
+}
+/* Ghost dance on top of the path: bob and lean in, hop, twirl, shimmy, lean into the sneak, squash on the grab, rock off. */
+@keyframes heist-dance {
+  0%, 23.9% { transform: translateY(0); rotate: 0deg; scale: 1; }
+  24% { rotate: 8deg; }
+  26% { transform: translateY(-10px); rotate: 4deg; }
+  28% { transform: translateY(0); rotate: 10deg; }
+  30% { transform: translateY(-10px); rotate: 4deg; }
+  32% { transform: translateY(0); rotate: 10deg; }
+  34% { transform: translateY(-10px); rotate: 4deg; }
+  36% { transform: translateY(0); rotate: -4deg; scale: 1; }
+  37.2% { transform: translateY(-20px); rotate: -10deg; }
+  38.4% { transform: translateY(0); rotate: 8deg; scale: 1.12 .88; }
+  39.4% { transform: translateY(-6px); rotate: 0deg; scale: 1; }
+  40.6% { transform: translateY(-12px); scale: -1 1; }
+  41.8% { transform: translateY(0); scale: 1; }
+  42.2% { rotate: -9deg; }
+  42.7% { rotate: 9deg; }
+  43.2% { rotate: 0deg; }
+  44.4% { rotate: 14deg; scale: .94 1.06; }
+  47.2% { rotate: 0deg; scale: 1; }
+  47.7% { scale: 1.1 .9; }
+  49.2% { rotate: 0deg; scale: 1; }
+  50.4% { rotate: 9deg; }
+  52.8% { rotate: -9deg; }
+  55.2% { rotate: 9deg; }
+  58% { rotate: -9deg; }
+  60.8% { rotate: 9deg; }
+  64%, 100% { transform: translateY(0); rotate: 0deg; scale: 1; }
+}
+/* The burger copies the ghost from the grab on, then jumps home while its layers are hidden. */
+@keyframes heist-carry {
+  0%, 47.2% { translate: 0 0; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }
+  49.2% { translate: 0 -16px; animation-timing-function: ease-out; }
+  51.6% { translate: 60px -32px; animation-timing-function: ease-in; }
+  54% { translate: 120px -8px; animation-timing-function: ease-out; }
+  56.8% { translate: 200px -32px; animation-timing-function: ease-in; }
+  59.6% { translate: 290px -10px; animation-timing-function: ease-in; }
+  64%, 71.9% { translate: var(--ghost-wing) -24px; }
+  72%, 100% { translate: 0 0; }
+}
+@keyframes heist-carry-dance {
+  0%, 47.2% { rotate: 0deg; scale: 1; }
+  47.7% { scale: 1.1 .9; }
+  49.2% { rotate: 0deg; scale: 1; }
+  50.4% { rotate: 9deg; }
+  52.8% { rotate: -9deg; }
+  55.2% { rotate: 9deg; }
+  58% { rotate: -9deg; }
+  60.8% { rotate: 9deg; }
+  64%, 100% { rotate: 0deg; scale: 1; }
+}
+/* Each layer hides once the burger is gone, then drops back in with the load entrance's spring. */
+@keyframes heist-restack {
+  0%, 64.7% { translate: 0 0; opacity: 1; }
+  64.8%, 88% { translate: 0 -64px; opacity: 0; animation-timing-function: cubic-bezier(.34, 1.56, .64, 1); }
+  90% { opacity: 1; }
+  92%, 100% { translate: 0 0; opacity: 1; }
+}
+@keyframes heist-shadow {
+  0%, 47.2% { scale: 1; opacity: .18; }
+  49.2% { scale: .6; opacity: .1; }
+  52.8%, 87.2% { scale: .5; opacity: .06; }
+  91.2%, 100% { scale: 1; opacity: .18; }
+}
+@keyframes heist-arms { 0%, 44% { opacity: 1; } 44.8%, 100% { opacity: 0; } }
+@keyframes heist-hands { 0%, 46.9% { opacity: 0; } 47.2%, 64% { opacity: 1; } 64.1%, 100% { opacity: 0; } }
+@keyframes ghost-wave { from { rotate: -16deg; } to { rotate: 14deg; } }
