@@ -568,5 +568,14 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 .faq__item dt { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem,2.2vw,1.4rem); color: var(--oxblood); margin-bottom: .5rem; }
 .faq__item dd { margin: 0; max-width: 64ch; }
 
+/* ---------- legal pages (privacy, terms) ---------- */
+.legal { max-width: 760px; }
+.legal__updated { font-size: .85rem; }
+.legal h2 { font-size: clamp(1.3rem,2.6vw,1.7rem); margin: clamp(2rem,4vw,2.8rem) 0 .7rem; }
+.legal ul { margin: 0 0 1.1em; padding-left: 1.2em; }
+.legal li { margin-bottom: .5em; }
+.legal a { text-decoration: underline; text-underline-offset: 2px; }
+.newsletter__fine a { text-decoration: underline; text-underline-offset: 2px; }
+
 /* Event promos: the head script adds .promo-over to <html> once the event is over. */
 .promo-over [data-promo] { display: none; }
