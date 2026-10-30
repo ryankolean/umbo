@@ -496,6 +496,7 @@ p { margin: 0 0 1.1em; }
 .menu-photos figure { margin: 0; }
 .menu-photos figcaption { margin-top: .6rem; text-align: center; font-family: var(--font-ui); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .2em; color: var(--coral-2); }
 .photo-credit { margin: .6rem 0 0; text-align: center; font-family: var(--font-ui); font-size: .72rem; letter-spacing: .04em; color: var(--brass-2); }
+.photo-credit a { text-decoration: underline; text-underline-offset: 2px; }
 
 
 /* ---------- press list (about) ---------- */
