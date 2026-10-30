@@ -33,8 +33,8 @@
 <!-- Halloween 2026: hides every [data-promo] block once the pop-in is over (rule in style.css).
      Runs before first paint, so a past event never flashes on screen. -->
 <script>if (Date.now() >= Date.parse('2026-11-01T00:00:00-04:00')) document.documentElement.classList.add('promo-over');</script>
-<!-- Thursdays (Detroit time) a ghost steals the promo burger on a loop. Add ?ghost to the URL to preview it any day. -->
-<script>try { if (/[?&]ghost\b/.test(location.search) || new Intl.DateTimeFormat('en-US', { timeZone: 'America/Detroit', weekday: 'short' }).format(Date.now()) === 'Thu') document.documentElement.classList.add('promo-ghost'); } catch (e) {}</script>
+<!-- Fridays and Saturdays (Detroit time) a ghost steals the promo burger on a loop. Add ?ghost to the URL to preview it any day. -->
+<script>try { if (/[?&]ghost\b/.test(location.search) || /Fri|Sat/.test(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Detroit', weekday: 'short' }).format(Date.now()))) document.documentElement.classList.add('promo-ghost'); } catch (e) {}</script>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&amp;display=swap">
 <link rel="stylesheet" href="assets/css/promo.css">

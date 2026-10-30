@@ -4,7 +4,7 @@
    ink outline and drop shadow), deliberately not the site palette, so the
    event reads as an event. Evokes the logo; never use the logo itself.
    Halloween 2026; hidden from midnight ET on 10/31 (11/01 00:00) by the promo-over class.
-   On Thursdays a ghost steals the burger on a loop: see THURSDAY HEIST at the bottom.
+   On Fridays and Saturdays a ghost steals the burger on a loop: see WEEKEND HEIST at the bottom.
    ============================================================ */
 :root {
   --promo-yellow: #F8DF20;
@@ -127,7 +127,7 @@ html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(
 @media (prefers-reduced-motion: reduce) { .promo-cta { transition: none; } }
 
 /* ============================================================
-   THURSDAY HEIST: on Thursdays (the head script adds .promo-ghost to <html>; ?ghost forces it) a ghost
+   WEEKEND HEIST: on Fridays and Saturdays (the head script adds .promo-ghost to <html>; ?ghost forces it) a ghost
    steals the burger on a loop once the entrance has landed. The ghost lives inside the burger SVG, its
    sheet behind the burger and its hands in front, so it shares the burger's units and scales with it.
    One 12.5 s cycle, so 1% = 0.125 s:
