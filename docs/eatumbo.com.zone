@@ -29,3 +29,7 @@ _github-pages-challenge-ryankolean	3600	IN	TXT	"519d5ed987eadd7c841b072fd8d1bc"
 ; --- Bing Webmaster Tools site verification, owned by ryan.kolean@gmail.com's
 ; --- Bing account. Removing it drops verification.
 9f48691b5133a85612487ed1803f4d10	3600	IN	CNAME	verify.bing.com.
+
+; --- Apple Business organization domain validation, org "Umbo Traverse City".
+; --- Apple checks it when the org is verified; keep it until the org is approved.
+@	3600	IN	TXT	"apple-domain-verification=rz1Ol5twt1WFvANg"
