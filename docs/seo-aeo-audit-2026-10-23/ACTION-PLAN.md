@@ -26,7 +26,7 @@ Audit date: 2026-10-23. Full findings: [FULL-AUDIT-REPORT.md](FULL-AUDIT-REPORT.
   - L1, partly: two photos.
   - H5: the Traverse City Tourism and MyNorth corrections were sent with her okay.
 - **Still waiting on Umbo:**
-  - C3: online gift cards. Decided 2026-10-30: Toast eGift Card Shop. Physical cards stay in person. `/gift-cards` is the one address everything links to, and the old Instagram path redirects to it.
+  - C3: online gift cards. **Live 2026-11-05:** Toast eGift Card Shop (https://order.toasttab.com/egiftcards/umbo-430-east-front-street). Physical cards stay in person. `/gift-cards` is the one address everything links to, and the old Instagram path redirects to it.
   - H1: the GBP manager invite.
   - H2/H4/M12: one call to set up Apple Maps, Tripadvisor and Facebook. Yelp is skipped at her request.
   - Online reservations via Resy in November: swap out every "reservations by text" mention on launch day.
@@ -39,7 +39,7 @@ Owner key: **Ryan** = needs a human sign-in or a business decision. **Code** = a
 |---|---|---|---|
 | C1 | Add `team-1.html`: a redirect stub (meta refresh + `rel=canonical` to `about.html`, `noindex`). The old Squarespace team page `/team-1` is the **#1 Google result for "Sarah Welch Umbo"** and shows as the "Our Founding Team" sitelink on the brand search, and it returns 404. | Code | 10 min |
 | C2 | **Done 2026-10-23.** Domain property verified (owner ryan.kolean@gmail.com, TXT in `docs/eatumbo.com.zone`), `sitemap.xml` submitted, indexing requested for `https://www.eatumbo.com/team-1` (the indexed copy is the www form). Indexing requests for the five pages hit the account's daily quota; all five are already indexed and in the sitemap. | Ryan, then Code | 20 min |
-| C3 | Fix the Instagram bio "Gift Cards" link. It points at the old Squarespace product `/events/p/umbo-gift-card`, which now 404s, going into the holiday gift-card season. Toast chosen 2026-10-30. The redirect waits on the published eGift Card Shop link. | Umbo + Ryan | waiting on Toast |
+| C3 | Fix the Instagram bio "Gift Cards" link. It points at the old Squarespace product `/events/p/umbo-gift-card`, which now 404s, going into the holiday gift-card season. Toast chosen 2026-10-30. **Done 2026-11-05:** `/gift-cards` redirects to the Toast eGift Card Shop, and the old path redirects to `/gift-cards`. | Umbo + Ryan | done |
 
 ## High: within a week
 

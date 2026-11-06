@@ -21,6 +21,7 @@ Full reasoning for the provider choice is in
 | Legacy subscribers | 1,123, imported from the Squarespace export, tagged `legacy-squarespace` |
 | Consent record | the archived `Umbo Contacts` sheet in Drive, timestamps 2025-06-03 onward |
 | Subscriber cap | 10,000 before anything costs money |
+| Privacy policy | https://eatumbo.com/privacy.html, linked from the signup fine print and every footer. Names Kit as the processor. Update it if the provider changes |
 
 ## Sending a blast
 

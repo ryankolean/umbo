@@ -1,6 +1,6 @@
 # Umbo
 
-> Umbo is an oyster bar and restaurant in Traverse City, Michigan, from chef Cameron Rolka and Sarah Welch — the team behind Marrow and Mink in Detroit. The menu centers on oysters, tinned fish and conservas, caviar, and coastal small plates, with an all-Michigan natural wine list, plus Michigan beer and cider. Dinner service, vintage-seaside room, reservations by text.
+> Umbo is an oyster bar and restaurant in Traverse City, Michigan, from chef Cameron Rolka and Sarah Welch — the team behind Marrow and Mink in Detroit. The menu centers on oysters, tinned fish and conservas, caviar, and coastal small plates, with an all-Michigan natural wine list, plus Michigan beer and cider. Dinner service, vintage-seaside room, reservations on Resy.
 
 ## Key facts
 
@@ -9,13 +9,17 @@
 - Address: 430 E. Front Street, Traverse City, MI 49686, USA
 - Phone: (231) 944-2797
 - Email: sarah@eatumbo.com
-- Hours: Thursday–Monday, 4:30pm–9:30pm. Closed Tuesday and Wednesday.
-- Reservations: by text, for parties of 2–5, seated at the indoor bar. Parties of 6 or more are seated on the patio, first come, first served. At least a third of the bar is held for walk-ins; the patio is seated when the weather cooperates, also first come, first served. A private dining space for larger parties is in progress.
+- Hours: Thursday–Monday, 4:30pm–9:30pm. Closed Tuesday and Wednesday, and on Thanksgiving and Christmas Day. New Year's Eve: three seatings, at 4:30, 6:30 and 8:30pm. Closed New Year's Day.
+- Opened: May 1, 2026
+- Reservations: online through Resy (https://resy.com/cities/traverse-city-mi/venues/umbo-mi) for parties of 1–4, seated at the indoor bar. Parties of 5 or more call (231) 944-2797 to book. At least a third of the bar is held for walk-ins; the patio is seated when the weather cooperates, also first come, first served. A private dining space for larger parties is in progress.
 - Cuisine: seafood, oysters, tinned fish and conservas, caviar
 - Drinks: all-Michigan natural wine, Michigan beer and cider
 - Price range: $$$
 - Oysters: East and West Coast on the half shell, $46 a dozen; the list rotates
 - Gift cards: e-gift cards online at https://eatumbo.com/gift-cards; physical cards sold and redeemed in person at the restaurant
+- Takeout: case by case, by text
+- Payment: credit cards accepted
+- Accessibility: wheelchair accessible entrance, accessible parking
 - Owners: Cameron Rolka (chef) and Sarah Welch (managing partner)
 - Also from the team behind: Marrow and Mink, Detroit
 
@@ -26,6 +30,8 @@
 - [About](https://eatumbo.com/about.html): the story and the team — Cameron Rolka and Sarah Welch, of Marrow and Mink, Detroit.
 - [Events & Catering](https://eatumbo.com/events.html): private events, buyouts, raw bars, and coastal catering menus.
 - [Visit](https://eatumbo.com/visit.html): hours, location, directions, and how to make a reservation.
+- [Privacy Policy](https://eatumbo.com/privacy.html): what the site collects and who sees it.
+- [Terms of Use](https://eatumbo.com/terms.html): the terms for using the website.
 
 ## Press
 
@@ -41,4 +47,5 @@
 
 - Instagram: https://www.instagram.com/umbotraversecity/
 - Facebook: https://www.facebook.com/umbotraversecity
-- Reservations: text (231) 944-2797
+- Tripadvisor: https://www.tripadvisor.com/Restaurant_Review-g42758-d34766124-Reviews-Umbo-Traverse_City_Grand_Traverse_County_Michigan.html
+- Reservations: https://resy.com/cities/traverse-city-mi/venues/umbo-mi (parties of 1–4); call (231) 944-2797 for 5 or more
