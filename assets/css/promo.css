@@ -2,7 +2,7 @@
    EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
    A parchment card on a sage band with a small watercolor scene: brush-ink
    lines, soft washes, paper grain. The card slides in on load (CSS only); then
-   the steamer lid lifts away and mist drifts up over three dumplings
+   the steamer lid hinges open like a clamshell and is carried off, and steam rises from behind three dumplings
    (assets/js/promo-dumplings.js). With reduced motion or no JS the scene holds
    one still frame: lid off, a few wisps of mist.
    Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
@@ -59,7 +59,7 @@
 /* Watercolor drawing language: washes with wobbly, pooled edges, brush-ink lines over them. */
 .dd-art .dd-paper-base { fill: var(--dd-paper); }
 .dd-art .dd-paper { mix-blend-mode: multiply; }
-.dd-art .dd-cloud { fill: var(--dd-cloud); opacity: .5; }
+.dd-art .dd-cloud { fill: var(--dd-cloud); opacity: .42; }
 .dd-art .dd-ground { fill: var(--dd-ochre-lo); opacity: .28; }
 .dd-art .dd-w-inside { fill: var(--dd-inside); opacity: .85; }
 .dd-art .dd-w-inside-lo { fill: #8E5E2A; opacity: .5; }
@@ -75,12 +75,15 @@
 .dd-inkline .dd-thin { stroke-width: 2; }
 .dd-inkline .dd-brown { stroke: var(--dd-ink-brown); opacity: .8; }
 
-/* Mist: soft gradient blobs, moved by transform and opacity only. Fades out toward the top of the scene. */
-.dd-mist { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: linear-gradient(transparent 2%, #000 42%); mask-image: linear-gradient(transparent 2%, #000 42%); }
+/* Mist: soft gradient blobs, moved by transform and opacity only. It sits between the back and front art layers,
+   so each wisp starts behind the dumplings and rises clear of them. Fades out toward the top of the scene. */
+.dd-mist { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: linear-gradient(transparent, #000 28%); mask-image: linear-gradient(transparent, #000 28%); }
 .dd-mist span {
-  position: absolute; left: var(--x, 50%); top: 33%; width: 40%; aspect-ratio: 1.35; translate: -50% -50%; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 255, 255, .97), rgba(226, 233, 236, .7) 50%, rgba(214, 224, 229, .25) 78%, rgba(214, 224, 229, 0));
-  filter: blur(4px); opacity: 0; will-change: transform, opacity;
+  /* Centered on (--x, 54%) with left/top offsets, not the translate property, which GSAP would discard.
+     Half the width is 15%; half the height is 22.9% of the 480 x 300 stage. */
+  position: absolute; left: calc(var(--x, 50%) - 15%); top: 31.1%; width: 30%; aspect-ratio: 1.05; border-radius: 50%;
+  background: radial-gradient(closest-side, #fff, rgba(250, 251, 250, .8) 35%, rgba(214, 225, 231, .4) 70%, rgba(214, 225, 231, 0));
+  filter: blur(5px); opacity: 0; will-change: transform, opacity;
 }
 .dd-mist span:nth-child(1) { --x: 40%; } .dd-mist span:nth-child(2) { --x: 56%; } .dd-mist span:nth-child(3) { --x: 48%; }
 .dd-mist span:nth-child(4) { --x: 62%; } .dd-mist span:nth-child(5) { --x: 36%; } .dd-mist span:nth-child(6) { --x: 52%; }
@@ -88,9 +91,9 @@
 
 /* Still frame (reduced motion, no JS, before the script starts): lid off, three wisps hanging over the steamer. */
 .dd-lid { opacity: 0; visibility: hidden; }
-.dd-mist span:nth-child(1) { opacity: .55; transform: translate(0, -18%) scale(.9); }
-.dd-mist span:nth-child(2) { opacity: .45; transform: translate(0, -62%) scale(1.25); }
-.dd-mist span:nth-child(3) { opacity: .3; transform: translate(0, -110%) scale(1.6); }
+.dd-mist span:nth-child(1) { opacity: .55; transform: translate(0, -55%) scale(.9); }
+.dd-mist span:nth-child(2) { opacity: .45; transform: translate(0, -105%) scale(1.25); }
+.dd-mist span:nth-child(3) { opacity: .3; transform: translate(0, -160%) scale(1.6); }
 
 /* The header floats over the hero; give it a solid ground while the promo sits under it. */
 html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
