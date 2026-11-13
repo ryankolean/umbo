@@ -5,7 +5,7 @@
    the steamer lid hinges open like a clamshell and is carried off, and steam rises from behind three dumplings
    (assets/js/promo-dumplings.js). With reduced motion or no JS the scene holds
    one still frame: lid off, a few wisps of mist.
-   Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
+   Hidden from 4pm ET on 11/21, when the event ends, by the promo-over class.
    ============================================================ */
 :root {
   --dd-paper: #F3ECDD;

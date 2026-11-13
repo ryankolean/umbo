@@ -1,6 +1,5 @@
 /* Umbo — Resy booking: links marked data-resy open Resy's booking window in place.
-   data-resy-date="YYYY-MM-DD" opens it on that day (the Dumpling Day banner uses 2026-11-21).
-   Without JS, or if Resy's script fails to load, they go to the link's Resy page. */
+   Without JS, or if Resy's script fails to load, they go to the Resy venue page. */
 (function () {
   'use strict';
 
@@ -33,8 +32,7 @@
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
       e.preventDefault();
       load().then(function (resy) {
-        var date = a.getAttribute('data-resy-date');
-        resy.openModal(date ? { venueId: RESY.venueId, apiKey: RESY.apiKey, date: date } : RESY);
+        resy.openModal(RESY);
       }, function () {
         window.location.href = a.href;
       });

@@ -30,10 +30,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
-<!-- Dumpling Day 2026 (Sat 11/21): hides every [data-promo] block once the day is over (rule in style.css).
-     Runs before first paint, so a past event never flashes on screen. A lead-up window can later add a start
-     gate here the same way (a promo-before class until the lead-up begins). -->
-<script>if (Date.now() >= Date.parse('2026-11-22T00:00:00-05:00')) document.documentElement.classList.add('promo-over');</script>
+<!-- Dumpling Day 2026 runs Sat 11/21, noon to 4pm ET: hides every [data-promo] block from 4pm that day (rule in
+     style.css). Runs before first paint, so a past event never flashes on screen. dumpling-day.html and
+     events.html carry the same cutoff. -->
+<script>if (Date.now() >= Date.parse('2026-11-21T16:00:00-05:00')) document.documentElement.classList.add('promo-over');</script>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/promo.css">
 <script type="application/ld+json">
@@ -61,7 +61,7 @@
 
 <!-- ============ EVENT PROMO (Dumpling Day 2026) ============ -->
 <!-- Mockup for Sarah. Remove after Saturday 11/21 with promo.css, promo-dumplings.js, the GSAP script, the body class
-     and the promo-over script in the head. It already hides itself from midnight ET on 11/21 (11/22 00:00). -->
+     and the promo-over script in the head. It already hides itself from 4pm ET on 11/21, when the event ends. -->
 <section class="dd" data-promo aria-labelledby="dd-title">
   <div class="dd__frame">
     <div class="dd__stage">
@@ -181,8 +181,8 @@
       <span class="eyebrow dd__eyebrow">Saturday, November 21</span>
       <h2 class="dd__title" id="dd-title">Dumpling <span class="script">Day</span></h2>
       <p class="dd__sub">One day of dumplings at Umbo, folded by hand and steamed to order.</p>
-      <p class="dd__note">Menu and times coming soon.</p>
-      <a class="btn btn--coral" href="https://resy.com/cities/traverse-city-mi/venues/umbo-mi?date=2026-11-21&amp;seats=2" data-resy data-resy-date="2026-11-21">Book a Seat <span class="btn__arrow">&rarr;</span></a>
+      <p class="dd__note">Noon to 4pm. Walk-ins only, first come, first served.</p>
+      <a class="btn btn--coral" href="dumpling-day.html">See the Menu <span class="btn__arrow">&rarr;</span></a>
     </div>
   </div>
 </section>
