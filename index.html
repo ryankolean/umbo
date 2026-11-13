@@ -67,7 +67,9 @@
     <div class="dd__stage">
       <!-- Watercolor scene in layers: the painted back of the steamer, the mist (soft gradient blobs, transform +
            opacity only) so steam rises from behind the dumplings, the dumplings and front wall, then the lid
-           (moves as one composited layer). The painted layers are static and filtered once. -->
+           (moves as one composited layer). The painted layers are static and filtered once. Once the lid is
+           gone, .dd-scene (everything but the lid) pushes in so the steamer fills the frame. -->
+      <div class="dd-scene">
       <svg class="dd-art" viewBox="0 0 480 300" role="img" aria-labelledby="dd-art-title">
         <title id="dd-art-title">A watercolor bamboo steamer with its lid lifted away, three plump soup dumplings inside as steam drifts up.</title>
         <defs>
@@ -108,7 +110,7 @@
         <g class="dd-inkline" filter="url(#dd-ink)"><path d="M122 180A118 27 0 0 1 358 180"/></g>
       </svg>
 
-      <div class="dd-mist" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="dd-mist" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
       <svg class="dd-art dd-art--front" viewBox="0 0 480 300" aria-hidden="true">
 
@@ -157,6 +159,7 @@
 
         <rect class="dd-paper" width="480" height="300" filter="url(#dd-paper)"/>
       </svg>
+      </div>
 
       <svg class="dd-lid" viewBox="0 0 480 300" aria-hidden="true">
         <g filter="url(#dd-wash)">

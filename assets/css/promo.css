@@ -39,6 +39,9 @@
 
 .dd__stage { position: relative; aspect-ratio: 480 / 300; overflow: hidden; border-radius: 12px; }
 .dd-art, .dd-lid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+/* Everything but the lid. Its resting (and still-frame) state is pushed in on the steamer: the lid needs the
+   headroom at the start, the steam fills what is left after. The script starts it at scale 1. */
+.dd-scene { position: absolute; inset: 0; transform: scale(1.28); transform-origin: 50% 88%; }
 .dd-lid { will-change: transform; }
 .dd__toggle {
   position: absolute; right: .5rem; bottom: .5rem; padding: .3rem .6rem; border: 1.5px solid var(--oxblood); border-radius: 999px;
@@ -88,6 +91,8 @@
 .dd-mist span:nth-child(1) { --x: 40%; } .dd-mist span:nth-child(2) { --x: 56%; } .dd-mist span:nth-child(3) { --x: 48%; }
 .dd-mist span:nth-child(4) { --x: 62%; } .dd-mist span:nth-child(5) { --x: 36%; } .dd-mist span:nth-child(6) { --x: 52%; }
 .dd-mist span:nth-child(7) { --x: 44%; } .dd-mist span:nth-child(8) { --x: 58%; } .dd-mist span:nth-child(9) { --x: 50%; }
+.dd-mist span:nth-child(10) { --x: 32%; } .dd-mist span:nth-child(11) { --x: 66%; } .dd-mist span:nth-child(12) { --x: 46%; }
+.dd-mist span:nth-child(13) { --x: 54%; }
 
 /* Still frame (reduced motion, no JS, before the script starts): lid off, three wisps hanging over the steamer. */
 .dd-lid { opacity: 0; visibility: hidden; }
