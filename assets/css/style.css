@@ -576,3 +576,9 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 .legal li { margin-bottom: .5em; }
 .legal a { text-decoration: underline; text-underline-offset: 2px; }
 .newsletter__fine a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Event promos: the head script adds .promo-over to <html> once the event is over. */
+.promo-over [data-promo] { display: none; }
+/* ...and blocks that should only show after it (a wrap-up note on the event page). */
+[data-promo-after] { display: none; }
+.promo-over [data-promo-after] { display: block; }

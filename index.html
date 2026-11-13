@@ -30,12 +30,17 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
+<!-- Dumpling Day 2026 runs Sat 11/21, noon to 4pm ET: hides every [data-promo] block from 4pm that day (rule in
+     style.css). Runs before first paint, so a past event never flashes on screen. dumpling-day.html and
+     events.html carry the same cutoff. -->
+<script>if (Date.now() >= Date.parse('2026-11-21T16:00:00-05:00')) document.documentElement.classList.add('promo-over');</script>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/promo.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Restaurant","@id":"https://eatumbo.com/#restaurant","name":"Umbo","alternateName":"Umbo Traverse City","description":"An oyster bar & restaurant in Traverse City, Michigan, from Cameron Rolka & Sarah Welch of Marrow and Mink, Detroit.","url":"https://eatumbo.com/","image":["https://eatumbo.com/assets/img/og.jpg","https://eatumbo.com/assets/img/space/room.jpg","https://eatumbo.com/assets/img/food/oysters-1x1.jpg","https://eatumbo.com/assets/img/food/oysters-4x3.jpg","https://eatumbo.com/assets/img/food/oysters-16x9.jpg"],"logo":"https://eatumbo.com/assets/img/wordmark-ink.png","servesCuisine":["Seafood","Oysters","Tinned fish","Caviar"],"priceRange":"$$$","currenciesAccepted":"USD","paymentAccepted":"Credit Card","foundingDate":"2026-05-01","email":"sarah@eatumbo.com","telephone":"+1-231-944-2797","address":{"@type":"PostalAddress","streetAddress":"430 E. Front Street","addressLocality":"Traverse City","addressRegion":"MI","postalCode":"49686","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":44.7639813,"longitude":-85.6150539},"hasMap":"https://maps.google.com/?cid=5607100604850190325","areaServed":{"@type":"City","name":"Traverse City"},"acceptsReservations":"https://resy.com/cities/traverse-city-mi/venues/umbo-mi","hasMenu":"https://eatumbo.com/menu.html","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday","Saturday","Sunday","Monday"],"opens":"16:30","closes":"21:30"}],"founder":[{"@type":"Person","@id":"https://eatumbo.com/about.html#cameron-rolka","name":"Cameron Rolka","jobTitle":"Chef","sameAs":["https://www.instagram.com/cameronrolka/","https://www.traversecity.com/food-wine/talent/cameron-rolka/"]},{"@type":"Person","@id":"https://eatumbo.com/about.html#sarah-welch","name":"Sarah Welch","jobTitle":"Managing Partner","sameAs":["https://www.bravotv.com/people/sarah-welch","https://www.instagram.com/chefwelch/","https://www.traversecity.com/food-wine/talent/sarah-welch/"]}],"sameAs":["https://www.instagram.com/umbotraversecity/","https://www.facebook.com/umbotraversecity","https://maps.google.com/?cid=5607100604850190325","https://www.yelp.com/biz/umbo-traverse-city-traverse-city","https://maps.apple.com/place?place-id=I8442B6AFCD965E59","https://www.traversecity.com/food-wine/listing/umbo/6651/","https://www.tripadvisor.com/Restaurant_Review-g42758-d34766124-Reviews-Umbo-Traverse_City_Grand_Traverse_County_Michigan.html"]},{"@type":"WebSite","@id":"https://eatumbo.com/#website","url":"https://eatumbo.com/","name":"Umbo","inLanguage":"en-US","publisher":{"@id":"https://eatumbo.com/#restaurant"}}]}
 </script>
 </head>
-<body>
+<body class="has-promo-board">
 
 <!-- ============ HEADER ============ -->
 <header class="site-header">
@@ -53,6 +58,134 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
   </button>
 </header>
+
+<!-- ============ EVENT PROMO (Dumpling Day 2026) ============ -->
+<!-- Mockup for Sarah. Remove after Saturday 11/21 with promo.css, promo-dumplings.js, the GSAP script, the body class
+     and the promo-over script in the head. It already hides itself from 4pm ET on 11/21, when the event ends. -->
+<section class="dd" data-promo aria-labelledby="dd-title">
+  <div class="dd__frame">
+    <div class="dd__stage">
+      <!-- Watercolor scene in layers: the painted back of the steamer, the mist (soft gradient blobs, transform +
+           opacity only) so steam rises from behind the dumplings, the dumplings and front wall, then the lid
+           (moves as one composited layer). The painted layers are static and filtered once. Once the lid is
+           gone, .dd-scene (everything but the lid) pushes in so the steamer fills the frame. -->
+      <div class="dd-scene">
+      <svg class="dd-art" viewBox="0 0 480 300" role="img" aria-labelledby="dd-art-title">
+        <title id="dd-art-title">A watercolor bamboo steamer with its lid lifted away, three plump soup dumplings inside as steam drifts up.</title>
+        <defs>
+          <filter id="dd-wash" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="4" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feGaussianBlur in="d" stdDeviation=".8"/>
+          </filter>
+          <filter id="dd-cloud" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="9" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="38" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feGaussianBlur in="d" stdDeviation="7"/>
+          </filter>
+          <filter id="dd-ink" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="2" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <clipPath id="dd-bun-clip"><path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/></clipPath>
+          <filter id="dd-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter>
+          <filter id="dd-paper" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="7"/>
+            <feColorMatrix values="0 0 0 0 .45  0 0 0 0 .36  0 0 0 0 .24  0 0 0 .09 0"/>
+          </filter>
+        </defs>
+
+        <!-- paper and the blue-gray wash behind -->
+        <rect class="dd-paper-base" width="480" height="300"/>
+        <path class="dd-cloud" filter="url(#dd-cloud)" d="M96 176C70 126 112 70 178 66C214 30 290 30 324 60C384 54 422 104 400 150C424 190 382 226 330 214C290 240 200 236 168 214C116 222 84 206 96 176Z"/>
+        <ellipse class="dd-ground" filter="url(#dd-soft)" cx="244" cy="252" rx="150" ry="14"/>
+
+        <!-- steamer: dark inside, three dumplings, then the front wall -->
+        <g filter="url(#dd-wash)">
+          <ellipse class="dd-w-inside" cx="240" cy="180" rx="118" ry="27"/>
+          <ellipse class="dd-w-inside-lo" cx="240" cy="184" rx="96" ry="18"/>
+        </g>
+
+        <!-- back rim sits behind the dumplings; the front rim is drawn over them below -->
+        <g class="dd-inkline" filter="url(#dd-ink)"><path d="M122 180A118 27 0 0 1 358 180"/></g>
+      </svg>
+
+      <div class="dd-mist" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+      <svg class="dd-art dd-art--front" viewBox="0 0 480 300" aria-hidden="true">
+
+        <g class="dd-bao" transform="translate(174 198)">
+          <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <g class="dd-inkline" filter="url(#dd-ink)">
+            <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
+            <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
+            <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
+          </g>
+        </g>
+        <g class="dd-bao" transform="translate(306 198)">
+          <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <g class="dd-inkline" filter="url(#dd-ink)">
+            <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
+            <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
+            <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
+          </g>
+        </g>
+        <g class="dd-bao" transform="translate(240 206) scale(1.12)">
+          <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <g class="dd-inkline" filter="url(#dd-ink)">
+            <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
+            <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
+            <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
+          </g>
+        </g>
+
+        <g filter="url(#dd-wash)">
+          <path class="dd-w-wall" d="M122 180A118 27 0 0 0 358 180L356 236A116 25 0 0 1 124 236Z"/>
+          <path class="dd-w-wall-lo" d="M124 214A116 25 0 0 0 356 214L356 236A116 25 0 0 1 124 236Z"/>
+          <path class="dd-w-pool" d="M122 180A118 27 0 0 0 358 180"/>
+        </g>
+        <g class="dd-inkline" filter="url(#dd-ink)">
+          <path d="M122 180A118 27 0 0 0 358 180"/>
+          <path d="M122 182L124 236A116 25 0 0 0 356 236L358 182"/>
+          <path class="dd-thin dd-brown" d="M124 198A117 26 0 0 0 357 198M124 224A116 25 0 0 0 356 224"/>
+          <path class="dd-thin dd-brown" d="M150 208l1 10M176 214l1 10M206 218l1 9M240 219v9M274 218l-1 9M304 214l-1 10M330 208l-1 10"/>
+        </g>
+
+        <rect class="dd-paper" width="480" height="300" filter="url(#dd-paper)"/>
+      </svg>
+      </div>
+
+      <svg class="dd-lid" viewBox="0 0 480 300" aria-hidden="true">
+        <g filter="url(#dd-wash)">
+          <path class="dd-lid-base" d="M118 180C120 124 176 94 240 92C304 94 360 124 362 180A122 26 0 0 1 118 180Z"/>
+          <path class="dd-w-lid" d="M118 180C120 124 176 94 240 92C304 94 360 124 362 180A122 26 0 0 1 118 180Z"/>
+          <path class="dd-w-lid-lo" d="M300 104C340 120 358 146 362 180A122 26 0 0 1 300 200Z"/>
+          <path class="dd-w-pool" d="M118 180C120 124 176 94 240 92C304 94 360 124 362 180"/>
+        </g>
+        <g class="dd-inkline" filter="url(#dd-ink)">
+          <path d="M118 180C120 124 176 94 240 92C304 94 360 124 362 180A122 26 0 0 1 118 180"/>
+          <path class="dd-thin dd-brown" d="M140 150Q240 126 340 150M164 122Q240 106 316 122M196 102Q240 94 284 102"/>
+          <path class="dd-thin dd-brown" d="M172 112L150 166M206 98L196 190M274 98L284 190M308 112L330 166"/>
+          <path d="M224 93Q224 80 240 80Q256 80 256 93"/>
+        </g>
+      </svg>
+
+    </div>
+    <div class="dd__copy">
+      <span class="eyebrow dd__eyebrow">Saturday, November 21</span>
+      <h2 class="dd__title" id="dd-title">Dumpling <span class="script">Day</span></h2>
+      <p class="dd__sub">One day of dumplings at Umbo, folded by hand and steamed to order.</p>
+      <p class="dd__note">Noon to 4pm. Walk-ins only, first come, first served.</p>
+      <a class="btn btn--coral" href="dumpling-day.html">See the Menu <span class="btn__arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -195,6 +328,8 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="assets/js/promo-dumplings.js" defer></script>
 <script src="assets/js/resy.js" defer></script>
 </body>
 </html>
