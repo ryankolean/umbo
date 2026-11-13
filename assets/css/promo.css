@@ -2,8 +2,8 @@
    EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
    A parchment card on a sage band, hand-drawn line-art dumplings in the
    site palette. The card slides in on load (CSS only); the stage then runs a
-   looping GSAP sequence (assets/js/promo-dumplings.js): steamer, pan, folding
-   board, money bags. With reduced motion or no JS the stage holds one static
+   looping GSAP sequence (assets/js/promo-dumplings.js): the steamer reveal,
+   then a dumpling folded and pleated by hand. With reduced motion or no JS the stage holds one static
    frame: the open steamer with three soup dumplings.
    Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
    ============================================================ */
@@ -12,13 +12,7 @@
   --dd-bamboo: #DDB86E;
   --dd-bamboo-lo: #B48B45;
   --dd-liner: #B9C7A6;
-  --dd-iron: #3B3128;
-  --dd-floor: #54473A;
-  --dd-china: #FBF8EE;
   --dd-board: #E8CD93;
-  --dd-slate: #4A3E33;
-  --dd-flame: #E9A23B;
-  --dd-flame-hi: #F8DC8A;
   --dd-filling: #C99A82;
   --dd-chive: #5E7E3A;
   --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
@@ -75,34 +69,18 @@
 .dd-svg .dd-bamboo { fill: var(--dd-bamboo); }
 .dd-svg .dd-bamboo-lo { fill: var(--dd-bamboo-lo); }
 .dd-svg .dd-liner { fill: var(--dd-liner); }
-.dd-svg .dd-iron { fill: var(--dd-iron); }
-.dd-svg .dd-floor { fill: var(--dd-floor); }
-.dd-svg .dd-rimhi { fill: none; stroke: #8A7A66; stroke-width: 3; stroke-linecap: round; }
-.dd-svg .dd-china { fill: var(--dd-china); }
-.dd-svg .dd-plate-rim { fill: none; stroke: var(--sage-deep); stroke-width: 2; }
 .dd-svg .dd-board { fill: var(--dd-board); }
 .dd-svg .dd-grain { fill: none; stroke: var(--dd-bamboo-lo); stroke-width: 1.6; stroke-linecap: round; opacity: .7; }
 .dd-svg .dd-flour { fill: #fff; opacity: .85; }
-.dd-svg .dd-slate { fill: var(--dd-slate); }
+.dd-svg .dd-pleat { stroke-width: 2.6; }
 .dd-svg .dd-fill { fill: var(--dd-filling); }
 .dd-svg .dd-fleck { fill: none; stroke: var(--dd-chive); stroke-width: 2.4; stroke-linecap: round; }
-.dd-svg .dd-flame-o { fill: var(--dd-flame); stroke-width: 2.2; }
-.dd-svg .dd-flame-i { fill: var(--dd-flame-hi); }
-.dd-svg .dd-spat { fill: var(--dd-flame-hi); stroke: var(--oxblood); stroke-width: 1.2; }
-.dd-svg .dd-gz-body { fill: var(--dd-dough); }
-.dd-svg .dd-food { --dd-crisp: #F1E6CB; --dd-lace: #E2B865; }
-.dd-svg .dd-gz-crisp { fill: var(--dd-crisp); stroke-width: 2.2; }
-.dd-svg .dd-lace { fill: none; stroke: var(--dd-lace); stroke-width: 3.4; }
-.dd-svg .dd-lace-top { stroke-width: 2.6; }
-.dd-svg .dd-tie-ink { fill: none; stroke: var(--oxblood); stroke-width: 6.4; stroke-linecap: round; }
-.dd-svg .dd-tie { fill: none; stroke: var(--dd-chive); stroke-width: 3.4; stroke-linecap: round; }
 .dd-svg .dd-steam, .dd-svg .dd-leak { fill: none; stroke: var(--oxblood); stroke-width: 2.4; stroke-linecap: round; opacity: .45; }
-.dd-svg .dd-sparkle { fill: none; stroke: var(--oxblood); stroke-width: 3; stroke-linecap: round; }
 /* Lines that draw themselves: pathLength="1" plus a dash the script slides from 1 to 0. */
 .dd-svg [pathLength] { stroke-dasharray: 1 1.01; }
 
 /* Static frame (reduced motion, no JS, before the script starts): the open steamer only. */
-.dd-svg .dd-s2, .dd-svg .dd-s3, .dd-svg .dd-s4, .dd-svg .dd-lid, .dd-svg .dd-leak, .dd-svg .dd-lace-top, .dd-svg .dd-sparkle { opacity: 0; visibility: hidden; }
+.dd-svg .dd-s2, .dd-svg .dd-lid, .dd-svg .dd-leak { opacity: 0; visibility: hidden; }
 
 /* The header floats over the hero; give it a solid ground while the promo sits under it. */
 html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
