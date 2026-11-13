@@ -1,0 +1,122 @@
+/* ============================================================
+   EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
+   A parchment card on a sage band, hand-drawn line-art dumplings in the
+   site palette. The card slides in on load (CSS only); the stage then runs a
+   looping GSAP sequence (assets/js/promo-dumplings.js): steamer, pan, folding
+   board, money bags. With reduced motion or no JS the stage holds one static
+   frame: the open steamer with three soup dumplings.
+   Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
+   ============================================================ */
+:root {
+  --dd-dough: #FBF5E6;
+  --dd-bamboo: #DDB86E;
+  --dd-bamboo-lo: #B48B45;
+  --dd-liner: #B9C7A6;
+  --dd-iron: #3B3128;
+  --dd-floor: #54473A;
+  --dd-china: #FBF8EE;
+  --dd-board: #E8CD93;
+  --dd-slate: #4A3E33;
+  --dd-flame: #E9A23B;
+  --dd-flame-hi: #F8DC8A;
+  --dd-filling: #C99A82;
+  --dd-chive: #5E7E3A;
+  --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Section: sage band under the floating header. */
+.dd { position: relative; overflow: hidden; isolation: isolate; padding: clamp(6rem, 11vw, 7rem) var(--gutter) clamp(2.2rem, 4.5vw, 3.2rem); background: var(--sage); }
+.dd::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background: radial-gradient(circle, color-mix(in srgb, var(--oxblood) 14%, transparent) 1.2px, transparent 1.7px) 0 0 / 16px 16px;
+}
+
+/* Card: parchment, ink keyline, hard ink shadow thrown down-left. */
+.dd__frame {
+  display: grid; gap: clamp(.4rem, 2vw, 1.6rem); align-items: center;
+  max-width: 1060px; margin: 0 auto; padding: clamp(.9rem, 3vw, 2rem) clamp(1rem, 3.4vw, 2.6rem) clamp(1.6rem, 3.4vw, 2.2rem);
+  background: var(--cream-2); border: 3px solid var(--oxblood); border-radius: 18px;
+  box-shadow: -8px 8px 0 var(--oxblood);
+}
+@media (min-width: 768px) { .dd__frame { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+
+.dd__stage { position: relative; }
+.dd-svg { display: block; width: 100%; height: auto; aspect-ratio: 480 / 300; }
+.dd__label {
+  position: absolute; left: 50%; bottom: .1rem; translate: -50% 0; margin: 0; display: grid; justify-items: center;
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-2);
+  white-space: nowrap;
+}
+.dd__label span { grid-area: 1 / 1; }
+.dd__label span + span { opacity: 0; visibility: hidden; }
+.dd__toggle {
+  position: absolute; right: 0; bottom: 0; padding: .3rem .6rem; border: 1.5px solid var(--oxblood); border-radius: 999px;
+  background: var(--cream-2); color: var(--oxblood); font-family: var(--font-ui); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+.dd__toggle:hover { background: var(--cream); }
+.dd__toggle:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
+
+.dd__copy { text-align: center; }
+@media (min-width: 768px) { .dd__copy { text-align: left; } }
+.dd__eyebrow { display: inline-block; }
+.dd__title { margin: .2rem 0 0; font-size: clamp(2.8rem, 7.4vw, 4.6rem); line-height: .95; color: var(--oxblood); }
+.dd__title .script { font-family: var(--font-script); font-weight: 400; color: var(--coral-2); font-size: 1.12em; letter-spacing: 0; }
+.dd__sub { max-width: 34ch; margin: .9rem auto 0; font-size: clamp(1.02rem, 2vw, 1.14rem); line-height: 1.5; text-wrap: pretty; }
+.dd__note { margin: .5rem auto 1.3rem; font-size: .9rem; font-weight: 500; color: var(--brass-2); }
+@media (min-width: 768px) { .dd__sub, .dd__note { margin-inline: 0; } }
+
+/* Drawing language: flat fills, bold ink outlines with round joins. */
+.dd-svg .dd-k { stroke: var(--oxblood); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.dd-svg .dd-k2 { fill: none; stroke: var(--oxblood); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.dd-svg .dd-spot { fill: color-mix(in srgb, var(--sage) 26%, var(--cream-2)); }
+.dd-svg .dd-shadow { fill: var(--oxblood); opacity: .12; }
+.dd-svg .dd-dough { fill: var(--dd-dough); }
+.dd-svg .dd-shine { fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; opacity: .9; }
+.dd-svg .dd-bamboo { fill: var(--dd-bamboo); }
+.dd-svg .dd-bamboo-lo { fill: var(--dd-bamboo-lo); }
+.dd-svg .dd-liner { fill: var(--dd-liner); }
+.dd-svg .dd-iron { fill: var(--dd-iron); }
+.dd-svg .dd-floor { fill: var(--dd-floor); }
+.dd-svg .dd-rimhi { fill: none; stroke: #8A7A66; stroke-width: 3; stroke-linecap: round; }
+.dd-svg .dd-china { fill: var(--dd-china); }
+.dd-svg .dd-plate-rim { fill: none; stroke: var(--sage-deep); stroke-width: 2; }
+.dd-svg .dd-board { fill: var(--dd-board); }
+.dd-svg .dd-grain { fill: none; stroke: var(--dd-bamboo-lo); stroke-width: 1.6; stroke-linecap: round; opacity: .7; }
+.dd-svg .dd-flour { fill: #fff; opacity: .85; }
+.dd-svg .dd-slate { fill: var(--dd-slate); }
+.dd-svg .dd-fill { fill: var(--dd-filling); }
+.dd-svg .dd-fleck { fill: none; stroke: var(--dd-chive); stroke-width: 2.4; stroke-linecap: round; }
+.dd-svg .dd-flame-o { fill: var(--dd-flame); stroke-width: 2.2; }
+.dd-svg .dd-flame-i { fill: var(--dd-flame-hi); }
+.dd-svg .dd-spat { fill: var(--dd-flame-hi); stroke: var(--oxblood); stroke-width: 1.2; }
+.dd-svg .dd-gz-body { fill: var(--dd-dough); }
+.dd-svg .dd-food { --dd-crisp: #F1E6CB; --dd-lace: #E2B865; }
+.dd-svg .dd-gz-crisp { fill: var(--dd-crisp); stroke-width: 2.2; }
+.dd-svg .dd-lace { fill: none; stroke: var(--dd-lace); stroke-width: 3.4; }
+.dd-svg .dd-lace-top { stroke-width: 2.6; }
+.dd-svg .dd-tie-ink { fill: none; stroke: var(--oxblood); stroke-width: 6.4; stroke-linecap: round; }
+.dd-svg .dd-tie { fill: none; stroke: var(--dd-chive); stroke-width: 3.4; stroke-linecap: round; }
+.dd-svg .dd-steam, .dd-svg .dd-leak { fill: none; stroke: var(--oxblood); stroke-width: 2.4; stroke-linecap: round; opacity: .45; }
+.dd-svg .dd-sparkle { fill: none; stroke: var(--oxblood); stroke-width: 3; stroke-linecap: round; }
+/* Lines that draw themselves: pathLength="1" plus a dash the script slides from 1 to 0. */
+.dd-svg [pathLength] { stroke-dasharray: 1 1.01; }
+
+/* Static frame (reduced motion, no JS, before the script starts): the open steamer only. */
+.dd-svg .dd-s2, .dd-svg .dd-s3, .dd-svg .dd-s4, .dd-svg .dd-lid, .dd-svg .dd-leak, .dd-svg .dd-lace-top, .dd-svg .dd-sparkle { opacity: 0; visibility: hidden; }
+
+/* The header floats over the hero; give it a solid ground while the promo sits under it. */
+html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
+
+/* Entrance: the card slides in from the left on load. Transform and opacity only, so nothing shifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .dd__frame { animation: dd-slide .9s var(--dd-ease-in) .1s both; }
+  .dd__copy > * { animation: dd-rise .6s var(--dd-ease-in) both; }
+  .dd__copy > :nth-child(1) { animation-delay: .45s; }
+  .dd__copy > :nth-child(2) { animation-delay: .55s; }
+  .dd__copy > :nth-child(3) { animation-delay: .65s; }
+  .dd__copy > :nth-child(4) { animation-delay: .72s; }
+  .dd__copy > :nth-child(5) { animation-delay: .8s; }
+}
+@keyframes dd-slide { from { transform: translateX(-60px); opacity: 0; } }
+@keyframes dd-rise { from { transform: translateY(10px); opacity: 0; } }
+.dd .nowrap { white-space: nowrap; }
