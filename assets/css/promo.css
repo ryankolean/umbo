@@ -16,8 +16,8 @@
   --dd-ochre-hi: #ECCB92;
   --dd-inside: #A57235;
   --dd-cloud: #A9BEC6;
-  --dd-bao: #FCFAF4;
-  --dd-bao-shade: #C3CFD5;
+  --dd-bao: #F0E0BE;
+  --dd-bao-shade: #C9A46C;
   --dd-blush: #E8968E;
   --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
 }
@@ -69,7 +69,8 @@
 .dd-art .dd-w-wall-lo, .dd-lid .dd-w-lid-lo { fill: var(--dd-ochre-lo); opacity: .45; }
 .dd-art .dd-w-pool, .dd-lid .dd-w-pool { fill: none; stroke: var(--dd-ochre-lo); stroke-width: 5; opacity: .5; }
 .dd-art .dd-bao-fill { fill: var(--dd-bao); }
-.dd-art .dd-bao-shade { fill: var(--dd-bao-shade); opacity: .55; }
+.dd-art .dd-bao-shade { fill: var(--dd-bao-shade); opacity: .4; }
+.dd-art .dd-bao-hi { fill: #FBF2DE; opacity: .8; }
 .dd-art .dd-blush { fill: var(--dd-blush); opacity: .6; }
 .dd-art .dd-eye { fill: var(--dd-ink); }
 .dd-art .dd-mouth { fill: #C8706A; stroke: var(--dd-ink); stroke-width: 1.8; stroke-linejoin: round; }
@@ -80,7 +81,7 @@
 /* Mist: soft gradient blobs, moved by transform and opacity only. Fades out toward the top of the scene. */
 .dd-mist { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: linear-gradient(transparent 2%, #000 42%); mask-image: linear-gradient(transparent 2%, #000 42%); }
 .dd-mist span {
-  position: absolute; left: var(--x, 50%); top: 40%; width: 40%; aspect-ratio: 1.35; translate: -50% -50%; border-radius: 50%;
+  position: absolute; left: var(--x, 50%); top: 33%; width: 40%; aspect-ratio: 1.35; translate: -50% -50%; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255, 255, 255, .97), rgba(226, 233, 236, .7) 50%, rgba(214, 224, 229, .25) 78%, rgba(214, 224, 229, 0));
   filter: blur(4px); opacity: 0; will-change: transform, opacity;
 }
