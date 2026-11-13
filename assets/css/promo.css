@@ -1,21 +1,24 @@
 /* ============================================================
    EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
-   A parchment card on a sage band, hand-drawn line-art dumplings in the
-   site palette. The card slides in on load (CSS only); the stage then runs a
-   looping GSAP sequence (assets/js/promo-dumplings.js): the steamer reveal,
-   then a dumpling folded and pleated by hand. With reduced motion or no JS the stage holds one static
-   frame: the open steamer with three soup dumplings.
+   A parchment card on a sage band with a small watercolor scene: brush-ink
+   lines, soft washes, paper grain. The card slides in on load (CSS only); then
+   the steamer lid lifts away and mist drifts up over three little dumplings
+   (assets/js/promo-dumplings.js). With reduced motion or no JS the scene holds
+   one still frame: lid off, a few wisps of mist.
    Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
    ============================================================ */
 :root {
-  --dd-dough: #FBF5E6;
-  --dd-bamboo: #DDB86E;
-  --dd-bamboo-lo: #B48B45;
-  --dd-liner: #B9C7A6;
-  --dd-board: #E8CD93;
-  --dd-skin: #EBC6A2;
-  --dd-filling: #C99A82;
-  --dd-chive: #5E7E3A;
+  --dd-paper: #F3ECDD;
+  --dd-ink: #2B2117;
+  --dd-ink-brown: #7A4E26;
+  --dd-ochre: #DDA962;
+  --dd-ochre-lo: #B9803F;
+  --dd-ochre-hi: #ECCB92;
+  --dd-inside: #A57235;
+  --dd-cloud: #A9BEC6;
+  --dd-bao: #FCFAF4;
+  --dd-bao-shade: #C3CFD5;
+  --dd-blush: #E8968E;
   --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
 }
 
@@ -35,19 +38,11 @@
 }
 @media (min-width: 768px) { .dd__frame { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
 
-.dd__stage { position: relative; }
-.dd-svg { display: block; width: 100%; height: auto; aspect-ratio: 480 / 300; }
-/* The cook's sleeves run off the bottom of the stage: fade that edge instead of cutting it. */
-.dd-svg { -webkit-mask-image: linear-gradient(#000 86%, transparent 99%); mask-image: linear-gradient(#000 86%, transparent 99%); }
-.dd__label {
-  position: absolute; left: 50%; top: .2rem; translate: -50% 0; margin: 0; display: grid; justify-items: center;
-  font-family: var(--font-ui); font-size: .78rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-2);
-  white-space: nowrap;
-}
-.dd__label span { grid-area: 1 / 1; }
-.dd__label span + span { opacity: 0; visibility: hidden; }
+.dd__stage { position: relative; aspect-ratio: 480 / 300; overflow: hidden; border-radius: 12px; }
+.dd-art, .dd-lid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.dd-lid { will-change: transform; }
 .dd__toggle {
-  position: absolute; right: 0; bottom: 0; padding: .3rem .6rem; border: 1.5px solid var(--oxblood); border-radius: 999px;
+  position: absolute; right: .5rem; bottom: .5rem; padding: .3rem .6rem; border: 1.5px solid var(--oxblood); border-radius: 999px;
   background: var(--cream-2); color: var(--oxblood); font-family: var(--font-ui); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
 }
 .dd__toggle:hover { background: var(--cream); }
@@ -62,31 +57,42 @@
 .dd__note { margin: .5rem auto 1.3rem; font-size: .9rem; font-weight: 500; color: var(--brass-2); }
 @media (min-width: 768px) { .dd__sub, .dd__note { margin-inline: 0; } }
 
-/* Drawing language: flat fills, bold ink outlines with round joins. */
-.dd-svg .dd-k { stroke: var(--oxblood); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
-.dd-svg .dd-k2 { fill: none; stroke: var(--oxblood); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
-.dd-svg .dd-spot { fill: color-mix(in srgb, var(--sage) 26%, var(--cream-2)); }
-.dd-svg .dd-shadow { fill: var(--oxblood); opacity: .12; }
-.dd-svg .dd-dough { fill: var(--dd-dough); }
-.dd-svg .dd-shine { fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; opacity: .9; }
-.dd-svg .dd-bamboo { fill: var(--dd-bamboo); }
-.dd-svg .dd-bamboo-lo { fill: var(--dd-bamboo-lo); }
-.dd-svg .dd-liner { fill: var(--dd-liner); }
-.dd-svg .dd-board { fill: var(--dd-board); }
-.dd-svg .dd-grain { fill: none; stroke: var(--dd-bamboo-lo); stroke-width: 1.6; stroke-linecap: round; opacity: .7; }
-.dd-svg .dd-flour { fill: #fff; opacity: .85; }
-.dd-svg .dd-pleat { stroke-width: 2.6; }
-.dd-svg .dd-skin { fill: var(--dd-skin); }
-.dd-svg .dd-cuff { fill: #FBF8EE; }
-.dd-svg .dd-dshadow { fill: var(--oxblood); opacity: .1; }
-.dd-svg .dd-fill { fill: var(--dd-filling); }
-.dd-svg .dd-fleck { fill: none; stroke: var(--dd-chive); stroke-width: 2.4; stroke-linecap: round; }
-.dd-svg .dd-steam, .dd-svg .dd-leak { fill: none; stroke: var(--oxblood); stroke-width: 2.4; stroke-linecap: round; opacity: .45; }
-/* Lines that draw themselves: pathLength="1" plus a dash the script slides from 1 to 0. */
-.dd-svg [pathLength] { stroke-dasharray: 1 1.01; }
+/* Watercolor drawing language: washes with wobbly, pooled edges, brush-ink lines over them. */
+.dd-art .dd-paper-base { fill: var(--dd-paper); }
+.dd-art .dd-paper { mix-blend-mode: multiply; }
+.dd-art .dd-cloud { fill: var(--dd-cloud); opacity: .5; }
+.dd-art .dd-ground { fill: var(--dd-ochre-lo); opacity: .28; }
+.dd-art .dd-w-inside { fill: var(--dd-inside); opacity: .85; }
+.dd-art .dd-w-inside-lo { fill: #8E5E2A; opacity: .5; }
+.dd-lid .dd-lid-base { fill: var(--dd-paper); }
+.dd-art .dd-w-wall, .dd-lid .dd-w-lid { fill: var(--dd-ochre); opacity: .9; }
+.dd-art .dd-w-wall-lo, .dd-lid .dd-w-lid-lo { fill: var(--dd-ochre-lo); opacity: .45; }
+.dd-art .dd-w-pool, .dd-lid .dd-w-pool { fill: none; stroke: var(--dd-ochre-lo); stroke-width: 5; opacity: .5; }
+.dd-art .dd-bao-fill { fill: var(--dd-bao); }
+.dd-art .dd-bao-shade { fill: var(--dd-bao-shade); opacity: .55; }
+.dd-art .dd-blush { fill: var(--dd-blush); opacity: .6; }
+.dd-art .dd-eye { fill: var(--dd-ink); }
+.dd-art .dd-mouth { fill: #C8706A; stroke: var(--dd-ink); stroke-width: 1.8; stroke-linejoin: round; }
+.dd-inkline { fill: none; stroke: var(--dd-ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.dd-inkline .dd-thin { stroke-width: 2; }
+.dd-inkline .dd-brown { stroke: var(--dd-ink-brown); opacity: .8; }
 
-/* Static frame (reduced motion, no JS, before the script starts): the open steamer only. */
-.dd-svg .dd-s2, .dd-svg .dd-lid, .dd-svg .dd-leak { opacity: 0; visibility: hidden; }
+/* Mist: soft gradient blobs, moved by transform and opacity only. Fades out toward the top of the scene. */
+.dd-mist { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: linear-gradient(transparent 2%, #000 42%); mask-image: linear-gradient(transparent 2%, #000 42%); }
+.dd-mist span {
+  position: absolute; left: var(--x, 50%); top: 40%; width: 40%; aspect-ratio: 1.35; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .97), rgba(226, 233, 236, .7) 50%, rgba(214, 224, 229, .25) 78%, rgba(214, 224, 229, 0));
+  filter: blur(4px); opacity: 0; will-change: transform, opacity;
+}
+.dd-mist span:nth-child(1) { --x: 40%; } .dd-mist span:nth-child(2) { --x: 56%; } .dd-mist span:nth-child(3) { --x: 48%; }
+.dd-mist span:nth-child(4) { --x: 62%; } .dd-mist span:nth-child(5) { --x: 36%; } .dd-mist span:nth-child(6) { --x: 52%; }
+.dd-mist span:nth-child(7) { --x: 44%; } .dd-mist span:nth-child(8) { --x: 58%; } .dd-mist span:nth-child(9) { --x: 50%; }
+
+/* Still frame (reduced motion, no JS, before the script starts): lid off, three wisps hanging over the steamer. */
+.dd-lid { opacity: 0; visibility: hidden; }
+.dd-mist span:nth-child(1) { opacity: .55; transform: translate(0, -18%) scale(.9); }
+.dd-mist span:nth-child(2) { opacity: .45; transform: translate(0, -62%) scale(1.25); }
+.dd-mist span:nth-child(3) { opacity: .3; transform: translate(0, -110%) scale(1.6); }
 
 /* The header floats over the hero; give it a solid ground while the promo sits under it. */
 html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
