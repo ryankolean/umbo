@@ -1,6 +1,6 @@
 /* Dumpling Day promo (11/21/2026): the looping stage animation in the home-page banner.
    Two scenes glide through right to left: a bamboo steamer that opens on three soup dumplings,
-   then a dumpling folded over and pleated by hand. Smooth eases only, no bounce.
+   then two hands fold a dumpling over and pleat it. Smooth eases only, no bounce.
    Needs GSAP (loaded from cdnjs just before this file). With reduced motion, no JS or no GSAP,
    the stage keeps its static frame (open steamer, three soup dumplings) from promo.css. */
 (function () {
@@ -47,24 +47,40 @@
       .to(steam, { autoAlpha: 0, y: -28, duration: 1.3, ease: 'sine.in', stagger: .15 }, 4);
     exit('.dd-s1', 5.7);
 
-    // ---- 2. By hand: filling set on a wrapper, the wrapper folds over, pleats pinched along the edge.
-    var A = 6.4;
-    var flap = q('.dd-flap'), pleats = q('.dd-pleat');
+    // ---- 2. By hand: filling set on a wrapper; two hands lift the near edge up to meet the far one,
+    // the dumpling stands on its belly, then the right hand pinches pleats along the seam while the left holds the end.
+    var A = 6.4, CX = 240, CY = 224, STAND = 64 / 30;  // standing height over the lying wrapper's half-depth
+    var PLEATS = [[172.1, 186.9], [190.4, 171.4], [213.9, 161.4], [240.0, 158.0], [266.1, 161.4], [289.6, 171.4], [307.9, 186.9]];  // pinch points along the seam, left to right (from the SVG build)
+    var flap = q('.dd-flap'), back = q('.dd-back'), pleats = q('.dd-pleat'), hr = q('.dd-hand-r'), hl = q('.dd-hand-l');
     caption(1, A + .2);
     enter('.dd-s2', A);
-    tl.set('.dd-filling', { autoAlpha: 0, y: -24 }, A)
-      .set(flap, { scaleY: 1, svgOrigin: '240 216' }, A)
-      .set('.dd-crease', { autoAlpha: 0 }, A)
-      .set('.dd-wrap-edge', { autoAlpha: 1 }, A)
+    tl.set('.dd-filling', { autoAlpha: 0, y: -20 }, A)
+      .set([flap, back], { scaleY: 1, svgOrigin: CX + ' ' + CY }, A)
+      .set(['.dd-belly', '.dd-dshine'], { autoAlpha: 0 }, A)
       .set(pleats, { strokeDashoffset: HID }, A)
-      .set('.dd-dumpling', { y: 0 }, A)
-      .to('.dd-filling', { autoAlpha: 1, y: 0, duration: .7, ease: 'power2.out' }, A + 1.1)
-      .to(flap, { scaleY: -1, duration: 1.1 }, A + 2)
-      .to('.dd-crease', { autoAlpha: 1, duration: .3 }, A + 2.85)
-      .set('.dd-wrap-edge', { autoAlpha: 0 }, A + 3.1)
-      .to(pleats, { strokeDashoffset: 0, duration: .32, ease: 'power1.inOut', stagger: .26 }, A + 3.3)
-      .to('.dd-dumpling', { y: -3, duration: 1.2, ease: 'sine.inOut' }, A + 5.5);
-    exit('.dd-s2', A + 7);
+      .set(hr, { x: CX + 46, y: 430 }, A)
+      .set(hl, { x: CX - 46, y: 430 }, A)
+      .to('.dd-filling', { autoAlpha: 1, y: 0, duration: .7, ease: 'power2.out' }, A + 1)
+      .to(hr, { y: CY + 27, duration: .9, ease: 'power2.out' }, A + 1.8)
+      .to(hl, { y: CY + 27, duration: .9, ease: 'power2.out' }, A + 1.9)
+      // the fold: near half swings up over the filling, far half rises to meet it, hands carry the edge
+      .to(flap, { scaleY: -STAND, duration: 1.3 }, A + 2.9)
+      .to(back, { scaleY: STAND, duration: 1.3 }, A + 2.9)
+      .to(hr, { y: CY - 51, duration: 1.3 }, A + 2.9)
+      .to(hl, { y: CY - 51, duration: 1.3 }, A + 2.9)
+      .to('.dd-belly', { autoAlpha: 1, duration: .5 }, A + 3.8)
+      // left hand settles on the left end, right hand works along the seam
+      .to(hl, { x: CX - 74, y: CY - 8, duration: .6 }, A + 4.3);
+    PLEATS.forEach(function (pt, i) {
+      var t = A + 4.4 + i * .55;
+      tl.to(hr, { x: pt[0], y: pt[1], duration: .35 }, t)
+        .to(hr, { y: pt[1] + 3, duration: .12, yoyo: true, repeat: 1, ease: 'sine.inOut' }, t + .35)
+        .to(pleats[i], { strokeDashoffset: 0, duration: .24, ease: 'power1.out' }, t + .38);
+    });
+    tl.to(hr, { y: 430, duration: .8, ease: 'power2.in' }, A + 8.5)
+      .to(hl, { y: 430, duration: .8, ease: 'power2.in' }, A + 8.6)
+      .to('.dd-dshine', { autoAlpha: 1, duration: .6 }, A + 9);
+    exit('.dd-s2', A + 10.4);
 
     // Pause control (WCAG 2.2.2), and no work while the banner is off screen.
     var userPaused = false, inView = true;

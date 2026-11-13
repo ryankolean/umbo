@@ -13,6 +13,7 @@
   --dd-bamboo-lo: #B48B45;
   --dd-liner: #B9C7A6;
   --dd-board: #E8CD93;
+  --dd-skin: #EBC6A2;
   --dd-filling: #C99A82;
   --dd-chive: #5E7E3A;
   --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
@@ -36,8 +37,10 @@
 
 .dd__stage { position: relative; }
 .dd-svg { display: block; width: 100%; height: auto; aspect-ratio: 480 / 300; }
+/* The cook's sleeves run off the bottom of the stage: fade that edge instead of cutting it. */
+.dd-svg { -webkit-mask-image: linear-gradient(#000 86%, transparent 99%); mask-image: linear-gradient(#000 86%, transparent 99%); }
 .dd__label {
-  position: absolute; left: 50%; bottom: .1rem; translate: -50% 0; margin: 0; display: grid; justify-items: center;
+  position: absolute; left: 50%; top: .2rem; translate: -50% 0; margin: 0; display: grid; justify-items: center;
   font-family: var(--font-ui); font-size: .78rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-2);
   white-space: nowrap;
 }
@@ -73,6 +76,9 @@
 .dd-svg .dd-grain { fill: none; stroke: var(--dd-bamboo-lo); stroke-width: 1.6; stroke-linecap: round; opacity: .7; }
 .dd-svg .dd-flour { fill: #fff; opacity: .85; }
 .dd-svg .dd-pleat { stroke-width: 2.6; }
+.dd-svg .dd-skin { fill: var(--dd-skin); }
+.dd-svg .dd-cuff { fill: #FBF8EE; }
+.dd-svg .dd-dshadow { fill: var(--oxblood); opacity: .1; }
 .dd-svg .dd-fill { fill: var(--dd-filling); }
 .dd-svg .dd-fleck { fill: none; stroke: var(--dd-chive); stroke-width: 2.4; stroke-linecap: round; }
 .dd-svg .dd-steam, .dd-svg .dd-leak { fill: none; stroke: var(--oxblood); stroke-width: 2.4; stroke-linecap: round; opacity: .45; }
