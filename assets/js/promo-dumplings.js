@@ -11,7 +11,6 @@
   var root = document.querySelector('.dd');
   if (!root || !window.gsap || document.documentElement.classList.contains('promo-over')) return;
 
-  var toggle = root.querySelector('.dd__toggle');
   var lid = root.querySelector('.dd-lid');
   var scene = root.querySelector('.dd-scene');
   var wisps = gsap.utils.toArray(root.querySelectorAll('.dd-mist span'));
@@ -48,25 +47,14 @@
     var misting = false;
     tl.call(function () { misting = true; mist.play(CYCLE * .35); }, null, LIFT + .4);
 
-    // Pause control (WCAG 2.2.2), and no work while the banner is off screen.
-    var userPaused = false, inView = true;
-    function sync() { var off = userPaused || !inView; tl.paused(off); if (misting) mist.paused(off); }
-    toggle.hidden = false;
-    function onToggle() {
-      userPaused = !userPaused;
-      toggle.setAttribute('aria-pressed', String(userPaused));
-      toggle.textContent = userPaused ? 'Play' : 'Pause';
-      sync();
-    }
-    toggle.addEventListener('click', onToggle);
-    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e) { inView = e[0].isIntersecting; sync(); }) : null;
+    // No work while the banner is off screen. There is no pause button by choice; reduced motion gets the still frame.
+    function sync(inView) { tl.paused(!inView); if (misting) mist.paused(!inView); }
+    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e) { sync(e[0].isIntersecting); }) : null;
     if (io) io.observe(root);
 
     return function () {  // reduced motion switched on: matchMedia reverts the tweens to the still frame
       mist.kill();
       if (io) io.disconnect();
-      toggle.removeEventListener('click', onToggle);
-      toggle.hidden = true;
     };
   });
 })();

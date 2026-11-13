@@ -43,12 +43,6 @@
    headroom at the start, the steam fills what is left after. The script starts it at scale 1. */
 .dd-scene { position: absolute; inset: 0; transform: scale(1.28); transform-origin: 50% 88%; }
 .dd-lid { will-change: transform; }
-.dd__toggle {
-  position: absolute; right: .5rem; bottom: .5rem; padding: .3rem .6rem; border: 1.5px solid var(--oxblood); border-radius: 999px;
-  background: var(--cream-2); color: var(--oxblood); font-family: var(--font-ui); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-}
-.dd__toggle:hover { background: var(--cream); }
-.dd__toggle:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
 
 .dd__copy { text-align: center; }
 @media (min-width: 768px) { .dd__copy { text-align: left; } }
