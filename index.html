@@ -68,7 +68,7 @@
       <!-- Watercolor scene, three layers: the painted steamer (static, filtered once), the lid (moves as one
            composited layer) and the mist (soft gradient blobs, transform + opacity only). -->
       <svg class="dd-art" viewBox="0 0 480 300" role="img" aria-labelledby="dd-art-title">
-        <title id="dd-art-title">A watercolor bamboo steamer with its lid lifted away, three little soup dumplings smiling inside as steam drifts up.</title>
+        <title id="dd-art-title">A watercolor bamboo steamer with its lid lifted away, three plump soup dumplings inside as steam drifts up.</title>
         <defs>
           <filter id="dd-wash" x="-15%" y="-15%" width="130%" height="130%">
             <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="4" result="n"/>
@@ -84,6 +84,7 @@
             <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="2" result="n"/>
             <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
           </filter>
+          <clipPath id="dd-bun-clip"><path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/></clipPath>
           <filter id="dd-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter>
           <filter id="dd-paper" x="0" y="0" width="100%" height="100%">
             <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="7"/>
@@ -102,46 +103,38 @@
           <ellipse class="dd-w-inside-lo" cx="240" cy="184" rx="96" ry="18"/>
         </g>
 
+        <!-- back rim sits behind the dumplings; the front rim is drawn over them below -->
+        <g class="dd-inkline" filter="url(#dd-ink)"><path d="M122 180A118 27 0 0 1 358 180"/></g>
+
         <g class="dd-bao" transform="translate(174 198)">
           <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
-          <ellipse class="dd-bao-shade" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
-          <ellipse class="dd-bao-hi" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
           <g class="dd-inkline" filter="url(#dd-ink)">
             <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
             <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
             <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
-            <path class="dd-thin" d="M-15-22H-7M7-22H15M-4-14Q0-11 4-14"/>
           </g>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="-19" cy="-14" rx="6" ry="3.4"/>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="19" cy="-14" rx="6" ry="3.4"/>
         </g>
         <g class="dd-bao" transform="translate(306 198)">
           <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
-          <ellipse class="dd-bao-shade" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
-          <ellipse class="dd-bao-hi" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
           <g class="dd-inkline" filter="url(#dd-ink)">
             <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
             <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
             <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
-            <path class="dd-thin" d="M-5-15Q0-10 5-15"/>
           </g>
-          <circle class="dd-eye" cx="-10" cy="-23" r="2.6"/><circle class="dd-eye" cx="10" cy="-23" r="2.6"/>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="-19" cy="-15" rx="6" ry="3.4"/>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="19" cy="-15" rx="6" ry="3.4"/>
         </g>
         <g class="dd-bao" transform="translate(240 206) scale(1.12)">
           <path class="dd-bao-fill" d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0Z"/>
-          <ellipse class="dd-bao-shade" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
-          <ellipse class="dd-bao-hi" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
+          <ellipse class="dd-bao-shade" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-16" cy="-9" rx="22" ry="12"/>
+          <ellipse class="dd-bao-hi" clip-path="url(#dd-bun-clip)" filter="url(#dd-soft)" cx="-10" cy="-36" rx="15" ry="8"/>
           <g class="dd-inkline" filter="url(#dd-ink)">
             <path d="M-42 0C-48-24-34-50-6-53Q0-55 6-53C34-50 48-24 42 0"/>
             <path d="M-7-52C-10-60-2-64 0-58C2-64 10-60 7-52"/>
             <path class="dd-thin" d="M-4-51Q-16-44-22-33M-1-51Q-4-44-6-37M2-51Q6-44 8-37M5-51Q16-44 22-33"/>
-            <path class="dd-thin" d="M-15-24Q-11-28-7-24M7-24Q11-28 15-24"/>
           </g>
-          <path class="dd-mouth" d="M-6-16Q0-7 6-16Z"/>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="-20" cy="-15" rx="6.5" ry="3.6"/>
-          <ellipse class="dd-blush" filter="url(#dd-soft)" cx="20" cy="-15" rx="6.5" ry="3.6"/>
         </g>
 
         <g filter="url(#dd-wash)">
@@ -150,7 +143,7 @@
           <path class="dd-w-pool" d="M122 180A118 27 0 0 0 358 180"/>
         </g>
         <g class="dd-inkline" filter="url(#dd-ink)">
-          <path d="M122 180A118 27 0 0 0 358 180M122 180A118 27 0 0 1 358 180"/>
+          <path d="M122 180A118 27 0 0 0 358 180"/>
           <path d="M122 182L124 236A116 25 0 0 0 356 236L358 182"/>
           <path class="dd-thin dd-brown" d="M124 198A117 26 0 0 0 357 198M124 224A116 25 0 0 0 356 224"/>
           <path class="dd-thin dd-brown" d="M150 208l1 10M176 214l1 10M206 218l1 9M240 219v9M274 218l-1 9M304 214l-1 10M330 208l-1 10"/>

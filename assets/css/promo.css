@@ -2,7 +2,7 @@
    EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
    A parchment card on a sage band with a small watercolor scene: brush-ink
    lines, soft washes, paper grain. The card slides in on load (CSS only); then
-   the steamer lid lifts away and mist drifts up over three little dumplings
+   the steamer lid lifts away and mist drifts up over three dumplings
    (assets/js/promo-dumplings.js). With reduced motion or no JS the scene holds
    one still frame: lid off, a few wisps of mist.
    Hidden from midnight ET on 11/21 (11/22 00:00) by the promo-over class.
@@ -18,7 +18,6 @@
   --dd-cloud: #A9BEC6;
   --dd-bao: #F0E0BE;
   --dd-bao-shade: #C9A46C;
-  --dd-blush: #E8968E;
   --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
 }
 
@@ -68,12 +67,10 @@
 .dd-art .dd-w-wall, .dd-lid .dd-w-lid { fill: var(--dd-ochre); opacity: .9; }
 .dd-art .dd-w-wall-lo, .dd-lid .dd-w-lid-lo { fill: var(--dd-ochre-lo); opacity: .45; }
 .dd-art .dd-w-pool, .dd-lid .dd-w-pool { fill: none; stroke: var(--dd-ochre-lo); stroke-width: 5; opacity: .5; }
-.dd-art .dd-bao-fill { fill: var(--dd-bao); }
+/* The fill reaches a little past the wobbly ink line, so a bun in front fully hides the one behind it. */
+.dd-art .dd-bao-fill { fill: var(--dd-bao); stroke: var(--dd-bao); stroke-width: 4; stroke-linejoin: round; }
 .dd-art .dd-bao-shade { fill: var(--dd-bao-shade); opacity: .4; }
 .dd-art .dd-bao-hi { fill: #FBF2DE; opacity: .8; }
-.dd-art .dd-blush { fill: var(--dd-blush); opacity: .6; }
-.dd-art .dd-eye { fill: var(--dd-ink); }
-.dd-art .dd-mouth { fill: #C8706A; stroke: var(--dd-ink); stroke-width: 1.8; stroke-linejoin: round; }
 .dd-inkline { fill: none; stroke: var(--dd-ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
 .dd-inkline .dd-thin { stroke-width: 2; }
 .dd-inkline .dd-brown { stroke: var(--dd-ink-brown); opacity: .8; }
