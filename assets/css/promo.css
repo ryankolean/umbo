@@ -1,0 +1,112 @@
+/* ============================================================
+   EVENT PROMO: Dumpling Day, Saturday 11/21/2026 (mockup for Sarah).
+   A parchment card on a sage band with a small watercolor scene: brush-ink
+   lines, soft washes, paper grain. The card slides in on load (CSS only); then
+   the steamer lid hinges open like a clamshell and is carried off, and steam rises from behind three dumplings
+   (assets/js/promo-dumplings.js). With reduced motion or no JS the scene holds
+   one still frame: lid off, a few wisps of mist.
+   Hidden from 4pm ET on 11/21, when the event ends, by the promo-over class.
+   ============================================================ */
+:root {
+  --dd-paper: #F3ECDD;
+  --dd-ink: #2B2117;
+  --dd-ink-brown: #7A4E26;
+  --dd-ochre: #DDA962;
+  --dd-ochre-lo: #B9803F;
+  --dd-ochre-hi: #ECCB92;
+  --dd-inside: #A57235;
+  --dd-cloud: #A9BEC6;
+  --dd-bao: #F0E0BE;
+  --dd-bao-shade: #C9A46C;
+  --dd-ease-in: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Section: sage band under the floating header. */
+.dd { position: relative; overflow: hidden; isolation: isolate; padding: clamp(6rem, 11vw, 7rem) var(--gutter) clamp(2.2rem, 4.5vw, 3.2rem); background: var(--sage); }
+.dd::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background: radial-gradient(circle, color-mix(in srgb, var(--oxblood) 14%, transparent) 1.2px, transparent 1.7px) 0 0 / 16px 16px;
+}
+
+/* Card: parchment, ink keyline, hard ink shadow thrown down-left. */
+.dd__frame {
+  display: grid; gap: clamp(.4rem, 2vw, 1.6rem); align-items: center;
+  max-width: 1060px; margin: 0 auto; padding: clamp(.9rem, 3vw, 2rem) clamp(1rem, 3.4vw, 2.6rem) clamp(1.6rem, 3.4vw, 2.2rem);
+  background: var(--cream-2); border: 3px solid var(--oxblood); border-radius: 18px;
+  box-shadow: -8px 8px 0 var(--oxblood);
+}
+@media (min-width: 768px) { .dd__frame { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+
+.dd__stage { position: relative; aspect-ratio: 480 / 300; overflow: hidden; border-radius: 12px; }
+.dd-art, .dd-lid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+/* Everything but the lid. Its resting (and still-frame) state is pushed in on the steamer: the lid needs the
+   headroom at the start, the steam fills what is left after. The script starts it at scale 1. */
+.dd-scene { position: absolute; inset: 0; transform: scale(1.28); transform-origin: 50% 88%; }
+.dd-lid { will-change: transform; }
+
+.dd__copy { text-align: center; }
+@media (min-width: 768px) { .dd__copy { text-align: left; } }
+.dd__eyebrow { display: inline-block; }
+.dd__title { margin: .2rem 0 0; font-size: clamp(2.8rem, 7.4vw, 4.6rem); line-height: .95; color: var(--oxblood); }
+.dd__title .script { font-family: var(--font-script); font-weight: 400; color: var(--coral-2); font-size: 1.12em; letter-spacing: 0; }
+.dd__sub { max-width: 34ch; margin: .9rem auto 0; font-size: clamp(1.02rem, 2vw, 1.14rem); line-height: 1.5; text-wrap: pretty; }
+.dd__note { margin: .5rem auto 1.3rem; font-size: .9rem; font-weight: 500; color: var(--brass-2); }
+@media (min-width: 768px) { .dd__sub, .dd__note { margin-inline: 0; } }
+
+/* Watercolor drawing language: washes with wobbly, pooled edges, brush-ink lines over them. */
+.dd-art .dd-paper-base { fill: var(--dd-paper); }
+.dd-art .dd-paper { mix-blend-mode: multiply; }
+.dd-art .dd-cloud { fill: var(--dd-cloud); opacity: .42; }
+.dd-art .dd-ground { fill: var(--dd-ochre-lo); opacity: .28; }
+.dd-art .dd-w-inside { fill: var(--dd-inside); opacity: .85; }
+.dd-art .dd-w-inside-lo { fill: #8E5E2A; opacity: .5; }
+.dd-lid .dd-lid-base { fill: var(--dd-paper); }
+.dd-art .dd-w-wall, .dd-lid .dd-w-lid { fill: var(--dd-ochre); opacity: .9; }
+.dd-art .dd-w-wall-lo, .dd-lid .dd-w-lid-lo { fill: var(--dd-ochre-lo); opacity: .45; }
+.dd-art .dd-w-pool, .dd-lid .dd-w-pool { fill: none; stroke: var(--dd-ochre-lo); stroke-width: 5; opacity: .5; }
+/* The fill reaches a little past the wobbly ink line, so a bun in front fully hides the one behind it. */
+.dd-art .dd-bao-fill { fill: var(--dd-bao); stroke: var(--dd-bao); stroke-width: 4; stroke-linejoin: round; }
+.dd-art .dd-bao-shade { fill: var(--dd-bao-shade); opacity: .4; }
+.dd-art .dd-bao-hi { fill: #FBF2DE; opacity: .8; }
+.dd-inkline { fill: none; stroke: var(--dd-ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.dd-inkline .dd-thin { stroke-width: 2; }
+.dd-inkline .dd-brown { stroke: var(--dd-ink-brown); opacity: .8; }
+
+/* Mist: soft gradient blobs, moved by transform and opacity only. It sits between the back and front art layers,
+   so each wisp starts behind the dumplings and rises clear of them. Fades out toward the top of the scene. */
+.dd-mist { position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: linear-gradient(transparent, #000 28%); mask-image: linear-gradient(transparent, #000 28%); }
+.dd-mist span {
+  /* Centered on (--x, 54%) with left/top offsets, not the translate property, which GSAP would discard.
+     Half the width is 15%; half the height is 22.9% of the 480 x 300 stage. */
+  position: absolute; left: calc(var(--x, 50%) - 15%); top: 31.1%; width: 30%; aspect-ratio: 1.05; border-radius: 50%;
+  background: radial-gradient(closest-side, #fff, rgba(250, 251, 250, .8) 35%, rgba(214, 225, 231, .4) 70%, rgba(214, 225, 231, 0));
+  filter: blur(5px); opacity: 0; will-change: transform, opacity;
+}
+.dd-mist span:nth-child(1) { --x: 40%; } .dd-mist span:nth-child(2) { --x: 56%; } .dd-mist span:nth-child(3) { --x: 48%; }
+.dd-mist span:nth-child(4) { --x: 62%; } .dd-mist span:nth-child(5) { --x: 36%; } .dd-mist span:nth-child(6) { --x: 52%; }
+.dd-mist span:nth-child(7) { --x: 44%; } .dd-mist span:nth-child(8) { --x: 58%; } .dd-mist span:nth-child(9) { --x: 50%; }
+.dd-mist span:nth-child(10) { --x: 32%; } .dd-mist span:nth-child(11) { --x: 66%; } .dd-mist span:nth-child(12) { --x: 46%; }
+.dd-mist span:nth-child(13) { --x: 54%; }
+
+/* Still frame (reduced motion, no JS, before the script starts): lid off, three wisps hanging over the steamer. */
+.dd-lid { opacity: 0; visibility: hidden; }
+.dd-mist span:nth-child(1) { opacity: .55; transform: translate(0, -55%) scale(.9); }
+.dd-mist span:nth-child(2) { opacity: .45; transform: translate(0, -105%) scale(1.25); }
+.dd-mist span:nth-child(3) { opacity: .3; transform: translate(0, -160%) scale(1.6); }
+
+/* The header floats over the hero; give it a solid ground while the promo sits under it. */
+html:not(.promo-over) body.has-promo-board .site-header { background: color-mix(in srgb, var(--cream) 94%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--oxblood) 12%, transparent); }
+
+/* Entrance: the card slides in from the left on load. Transform and opacity only, so nothing shifts. */
+@media (prefers-reduced-motion: no-preference) {
+  .dd__frame { animation: dd-slide .9s var(--dd-ease-in) .1s both; }
+  .dd__copy > * { animation: dd-rise .6s var(--dd-ease-in) both; }
+  .dd__copy > :nth-child(1) { animation-delay: .45s; }
+  .dd__copy > :nth-child(2) { animation-delay: .55s; }
+  .dd__copy > :nth-child(3) { animation-delay: .65s; }
+  .dd__copy > :nth-child(4) { animation-delay: .72s; }
+  .dd__copy > :nth-child(5) { animation-delay: .8s; }
+}
+@keyframes dd-slide { from { transform: translateX(-60px); opacity: 0; } }
+@keyframes dd-rise { from { transform: translateY(10px); opacity: 0; } }
+.dd .nowrap { white-space: nowrap; }
