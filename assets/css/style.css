@@ -582,3 +582,109 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 /* ...and blocks that should only show after it (a wrap-up note on the event page). */
 [data-promo-after] { display: none; }
 .promo-over [data-promo-after] { display: block; }
+
+/* ---------- holiday gift card strip (assets/js/gift-strip.js) ---------- */
+:root { --gs-h: 40px; }
+.has-gift-strip body { padding-top: var(--gs-h); }
+.has-gift-strip .site-header { top: var(--gs-h); }
+.has-gift-strip:has(.nav.open) .gift-strip { visibility: hidden; }
+.has-gift-strip:has(.nav.open) .site-header { top: 0; }
+.gift-strip {
+  --gs-bg: var(--oxblood); --gs-fg: var(--cream-2); --gs-accent: var(--coral);
+  position: fixed; inset: 0 0 auto 0; z-index: 101; height: var(--gs-h);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gs-bg); color: var(--gs-fg); overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--gs-accent) 45%, transparent);
+}
+.gift-strip__link {
+  position: relative; z-index: 1; display: flex; align-items: center; gap: .7rem;
+  max-width: calc(100% - 5rem); white-space: nowrap; font-size: .8rem; letter-spacing: .02em;
+}
+.gift-strip__icon svg { width: 18px; height: 18px; display: block; fill: currentColor; color: var(--gs-accent); }
+.gift-strip__script { font-family: var(--font-script); font-size: 1.32rem; line-height: 1; color: var(--gs-accent); transform: translateY(-1px); }
+.gift-strip__text { overflow: hidden; text-overflow: ellipsis; }
+.gift-strip__short { display: none; }
+.gift-strip__cta {
+  font-weight: 500; font-size: .7rem; text-transform: uppercase; letter-spacing: .18em;
+  padding: .32em .9em; border: 1px solid color-mix(in srgb, var(--gs-accent) 70%, transparent); border-radius: 99px;
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+.gift-strip__link:hover .gift-strip__cta, .gift-strip__link:focus-visible .gift-strip__cta { background: var(--gs-accent); color: var(--gs-bg); }
+.gift-strip__link:focus-visible { outline: 2px solid var(--gs-accent); outline-offset: 3px; }
+.gift-strip__close {
+  position: absolute; z-index: 1; right: .5rem; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 32px; border: 0; background: none; color: inherit; font-size: 1.3rem; line-height: 1; opacity: .7;
+}
+.gift-strip__close:hover, .gift-strip__close:focus-visible { opacity: 1; }
+@media (max-width: 760px) {
+  .gift-strip__text, .gift-strip__cta { display: none; }
+  .gift-strip__short { display: inline; }
+  .gift-strip__short::after { content: " \2192"; }
+  .gift-strip__link { gap: .5rem; font-size: .78rem; }
+  .gift-strip__script { font-size: 1.18rem; }
+}
+
+/* the moving layer: particles drift behind the copy */
+.gift-strip__fx { position: absolute; inset: 0; pointer-events: none; }
+.gift-strip__fx i { position: absolute; left: var(--x); top: 0; display: block; animation: var(--t) linear var(--d) infinite; }
+
+/* Thanksgiving: leaves tumble across, ink + gold */
+.gift-strip--harvest { --gs-bg: var(--oxblood); --gs-accent: var(--coral); }
+.gift-strip__fx--leaf i { width: 15px; height: 15px; animation-name: gs-leaf; opacity: .7; }
+.gift-strip__fx--leaf i:nth-child(3n) svg { fill: #B5562F; }
+.gift-strip__fx--leaf i:nth-child(3n+1) svg { fill: var(--coral); }
+.gift-strip__fx--leaf i:nth-child(3n+2) svg { fill: var(--sage-2); }
+.gift-strip__fx--leaf svg { width: 100%; height: 100%; display: block; }
+@keyframes gs-leaf {
+  0%   { transform: translate(0, -14px) rotate(0) scale(var(--z)); }
+  50%  { transform: translate(18px, 14px) rotate(160deg) scale(var(--z)); }
+  100% { transform: translate(-6px, 44px) rotate(320deg) scale(var(--z)); }
+}
+
+/* Shop small: parchment bar, pearls roll along the bottom edge, the shell's pearl glows */
+.gift-strip--shopsmall { --gs-bg: var(--cream-2); --gs-fg: var(--oxblood); --gs-accent: var(--coral-2); }
+.gift-strip__fx--pearl i { top: auto; bottom: 5px; width: 6px; height: 6px; border-radius: 50%; animation-name: gs-pearl;
+  background: radial-gradient(circle at 35% 35%, #fff, #E4DCC8 55%, #B9AE95); box-shadow: 0 0 6px rgba(199,154,68,.5); }
+@keyframes gs-pearl {
+  0% { transform: translateX(-40vw) scale(var(--z)); opacity: 0; }
+  15%, 85% { opacity: .9; }
+  100% { transform: translateX(40vw) scale(var(--z)); opacity: 0; }
+}
+.gift-strip--shopsmall .gs-pearl { fill: #fff; stroke: var(--coral-2); stroke-width: .8; animation: gs-glow 2.4s ease-in-out infinite; }
+@keyframes gs-glow { 50% { fill: var(--blush); } }
+
+/* Stocking: sage bar, steady snowfall */
+.gift-strip--stocking { --gs-bg: var(--sage-deep); --gs-fg: #F7F4EA; --gs-accent: #F3DFA8; }
+.gift-strip__fx--snow i { width: 4px; height: 4px; border-radius: 50%; background: #fff; opacity: .75; animation-name: gs-snow; }
+.gift-strip__fx--snow i:nth-child(even) { width: 3px; height: 3px; opacity: .5; }
+@keyframes gs-snow {
+  0%   { transform: translate(0, -6px) scale(var(--z)); }
+  50%  { transform: translate(8px, 20px) scale(var(--z)); }
+  100% { transform: translate(-4px, 46px) scale(var(--z)); }
+}
+
+/* Last call: ink bar strung with twinkling lights along the top */
+.gift-strip--lastcall { --gs-bg: var(--oxblood-2); --gs-accent: var(--coral); }
+.gift-strip__fx--bulb::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 1px; background: rgba(241,237,221,.18); }
+.gift-strip__fx--bulb i { top: 4px; width: 5px; height: 7px; border-radius: 50% 50% 45% 45%;
+  animation: gs-twinkle 1.8s ease-in-out var(--d) infinite; }
+.gift-strip__fx--bulb i:nth-child(4n)   { background: #E7CB8C; color: #E7CB8C; }
+.gift-strip__fx--bulb i:nth-child(4n+1) { background: #D9765A; color: #D9765A; }
+.gift-strip__fx--bulb i:nth-child(4n+2) { background: #A9B8A4; color: #A9B8A4; }
+.gift-strip__fx--bulb i:nth-child(4n+3) { background: #F1EDDD; color: #F1EDDD; }
+@keyframes gs-twinkle { 0%, 100% { opacity: .35; box-shadow: none; } 50% { opacity: 1; box-shadow: 0 0 8px 1px currentColor; } }
+
+/* New Year: near-black bar, champagne bubbles rise */
+.gift-strip--newyear { --gs-bg: #17120C; --gs-accent: #E7CB8C; }
+.gift-strip__fx--bubble i { top: auto; bottom: -8px; width: 5px; height: 5px; border-radius: 50%;
+  border: 1px solid rgba(231,203,140,.75); animation-name: gs-bubble; }
+.gift-strip__fx--bubble i:nth-child(3n) { width: 3px; height: 3px; background: rgba(231,203,140,.6); }
+@keyframes gs-bubble {
+  0% { transform: translate(0, 0) scale(var(--z)); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(6px, -52px) scale(var(--z)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-strip__fx { display: none; }
+}
