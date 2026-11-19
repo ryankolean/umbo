@@ -35,6 +35,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;family=Jost:ital,wght@0,300..700;1,400..500&amp;family=Yellowtail&amp;display=swap">
 <!-- Dumpling Day 2026 (Sat 11/21, noon to 4pm ET): hides every [data-promo] block from 4pm that day (rule in style.css). -->
 <script>if (Date.now() >= Date.parse('2026-11-21T16:00:00-05:00')) document.documentElement.classList.add('promo-over');</script>
+<!-- New Year's Eve 2026: hides every [data-nye] block from midnight ET on 1/1/2027 (rule in style.css). new-years-eve.html
+     carries the same cutoff. -->
+<script>if (Date.now() >= Date.parse('2027-01-01T00:00:00-05:00')) document.documentElement.classList.add('nye-over');</script>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -66,6 +69,16 @@
     <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin-top:1rem">Dumpling <span class="script" style="font-size:.8em">Day</span></h2>
     <p class="muted" style="max-width:52ch;margin:1rem auto 0">One day of dumplings at Umbo, folded by hand and steamed to order. Walk-ins only, first come, first served.</p>
     <p style="margin-top:1.4rem"><a class="btn btn--coral" href="dumpling-day.html">See the Menu <span class="btn__arrow">&rarr;</span></a></p>
+  </div>
+</section>
+
+<!-- ============ EVENT PROMO (New Year's Eve 2026) ============ -->
+<section class="section" style="padding-top:clamp(2rem,4vw,3rem);padding-bottom:0" data-nye>
+  <div class="wrap center" data-reveal>
+    <span class="eyebrow" style="justify-content:center">New Year&rsquo;s Eve &middot; Seatings at 4:30, 6:30 &amp; 8:30</span>
+    <h2 style="font-size:clamp(1.9rem,4vw,2.8rem);margin-top:1rem">Feast of Many <span class="script" style="font-size:.8em">Fishes</span></h2>
+    <p class="muted" style="max-width:52ch;margin:1rem auto 0">A seafood tasting menu to close out the year, $125 per person, with a curated beverage pairing for $45.</p>
+    <p style="margin-top:1.4rem"><a class="btn btn--coral" href="new-years-eve.html">See the Menu <span class="btn__arrow">&rarr;</span></a></p>
   </div>
 </section>
 

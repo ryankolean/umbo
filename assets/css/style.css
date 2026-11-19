@@ -582,6 +582,8 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 /* ...and blocks that should only show after it (a wrap-up note on the event page). */
 [data-promo-after] { display: none; }
 .promo-over [data-promo-after] { display: block; }
+/* A second event with its own cutoff on the same page (New Year's Eve on events.html). */
+.nye-over [data-nye] { display: none; }
 
 /* ---------- holiday gift card strip (assets/js/gift-strip.js) ---------- */
 :root { --gs-h: 40px; }
