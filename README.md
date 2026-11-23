@@ -9,6 +9,13 @@ Hosted on GitHub Pages at **https://eatumbo.com** (apex; `www` redirects to it).
 The canonical base URL lives in one place — change it with
 `./scripts/set-base-url.sh https://new-domain.com`, never by hand.
 
+## Events
+
+Each event gets its own page with `FoodEvent` JSON-LD and a teaser on
+`events.html`. Follow `docs/events.md` to add or retire one, and run
+`./scripts/event-check.py`, which also runs daily in CI and fails on a past
+event that was never retired.
+
 ## Menu content
 
 No date ranges anywhere in menu content — not on `menu.html`, not on the

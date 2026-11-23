@@ -98,7 +98,9 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 
 - [ ] Add `AggregateRating` / `Review` schema once real reviews exist
       (don't fabricate — Google penalizes self-serving markup).
-- [ ] Add `Event` schema + a listing page when hosting ticketed/one-off events.
+- [x] `Event` schema + listing: one page per event (`FoodEvent` JSON-LD),
+      teasers on `events.html`. `scripts/event-check.py` runs daily and fails
+      on a past or incomplete event. Recipe in `docs/events.md`.
 - [x] Expand `Menu` JSON-LD with per-item pricing. Generated from the visible
       rows by `scripts/menu-jsonld.py`, which also writes the catering
       `OfferCatalog` on `events.html`; rerun it after every menu edit.
