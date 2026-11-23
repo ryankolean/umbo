@@ -103,7 +103,10 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 - [x] Expand `Menu` JSON-LD with per-item pricing. Generated from the visible
       rows by `scripts/menu-jsonld.py`, which also writes the catering
       `OfferCatalog` on `events.html`; rerun it after every menu edit.
-- [ ] Add `suitableForDiet` / allergen info if the menu starts marking it.
+- [x] `suitableForDiet` from the printed menu tags: `menu-jsonld.py` maps a
+      tag word ("vegetarian", "vegan", "gluten-free") to the schema.org diet.
+      Today only Row 7 is tagged (vegetarian). Allergen info stays off until
+      the kitchen prints it; never infer a diet from a description.
 
 ## 4. Content / AEO
 
