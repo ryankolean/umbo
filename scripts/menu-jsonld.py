@@ -14,7 +14,10 @@ menu.html: the `Menu` node gets one `MenuSection` per `.menu-cat` heading, each
 with its `MenuItem`s. A single price becomes an `Offer`; "51 | 120" or "20/80"
 (caviar sizes, glass / bottle) becomes an `AggregateOffer`. A section note like
 "$95 per person." becomes the section's own offer (the prix-fixe), and "$46 a
-dozen." becomes an offer for a quantity of 12 (the oysters).
+dozen." becomes an offer for a quantity of 12 (the oysters). A dietary word in
+a row's tag ("USA · vegetarian") becomes `suitableForDiet`. Only the printed tag
+counts, never the description: an oyster bar must not claim a diet the menu
+does not state.
 
 events.html: the catering `Service` gets a `hasOfferCatalog` with every package
 priced as a plain "$N / pp" or "$N / hr". Upgrades (+$), estimates (~$) and
@@ -104,6 +107,20 @@ def menu_offer(price):
             "offerCount": len(nums), "priceCurrency": "USD"}
 
 
+# Printed tag word -> schema.org RestrictedDiet. Add a word here only when the
+# menu starts printing it.
+DIETS = {
+    "vegetarian": "https://schema.org/VegetarianDiet",
+    "vegan": "https://schema.org/VeganDiet",
+    "gluten-free": "https://schema.org/GlutenFreeDiet",
+}
+
+
+def diets(tag):
+    words = [w.strip().lower() for w in re.split(r"[·,]", tag)]
+    return [DIETS[w] for w in words if w in DIETS]
+
+
 def describe(row):
     if row["tag"] and row["desc"]:
         return f'{row["desc"]} ({row["tag"]})'
@@ -121,6 +138,9 @@ def menu_sections():
             offer = menu_offer(row["price"])
             if offer:
                 item["offers"] = offer
+            suitable = diets(row["tag"])
+            if suitable:
+                item["suitableForDiet"] = suitable[0] if len(suitable) == 1 else suitable
             items.append(item)
         node = {"@type": "MenuSection", "name": section["name"], "hasMenuItem": items}
         per_person = re.search(r"\$(\d+(?:\.\d+)?) per person", section["note"])
