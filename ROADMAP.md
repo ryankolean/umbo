@@ -106,13 +106,15 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 
 ## 4. Content / AEO
 
-> `llms.txt` and the visit FAQ each carry the reservation policy, and the
-> visit FAQ answer exists **twice** — once as visible copy and once inside
-> the `FAQPage` JSON-LD. Edit both together or the structured data goes stale.
+> `llms.txt` and the visit FAQ each carry the reservation policy. The visit
+> FAQ answer exists twice, as visible copy and inside the `FAQPage` JSON-LD,
+> but only the visible `<dd>` is edited by hand: `scripts/faq-jsonld.py`
+> rebuilds the JSON-LD from it, and the Content checks workflow fails any PR
+> or push where the two disagree. `llms.txt` is still hand-kept.
 
 - [ ] Keep `llms.txt` and the FAQ in sync with real hours, menu, and policies.
       When hours change, update all of these together: the five page footers,
-      the visit page Hours block, the FAQ answer (visible copy and JSON-LD),
+      the visit page Hours block, the FAQ answer (then run `faq-jsonld.py`),
       the `Restaurant` hours on `index.html` and `visit.html`, `llms.txt`, and
       the GBP, Apple, Yelp and Instagram listings.
 - [x] Press: "In the Press" section on `about.html`, mirrored as `subjectOf`
