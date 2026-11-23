@@ -1,0 +1,24 @@
+name: Content checks
+
+# The menu, catering and FAQ structured data repeat the visible copy. These
+# checks fail when a page was edited without rerunning its generator, so the
+# JSON-LD cannot silently disagree with what visitors read. Fix a failure by
+# running the script without --check and committing the result.
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Menu and catering JSON-LD match the visible rows
+        run: python3 scripts/menu-jsonld.py --check
+      - name: FAQ JSON-LD matches the visible FAQ
+        run: python3 scripts/faq-jsonld.py --check
