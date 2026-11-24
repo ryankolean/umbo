@@ -80,8 +80,8 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 - [ ] **Google Business Profile** already exists ("Umbo Traverse City", 4.8
       from 107 reviews, hours correct), but the panel shows "Own this
       business?" next to an owner-written description, so who controls it is
-      unclear. Confirm access with Sarah, then add the Oyster bar category, the
-      menu link and the text-to-reserve wording.
+      unclear. Confirm access with Sarah, then add the Oyster bar category and
+      the menu link. The Bookings link points at Resy (set 2026-11-05).
 - [ ] Claim the **Apple Maps** listing in Apple Business Connect (exists,
       unclaimed; feeds Apple Maps + Siri).
 - [ ] Claim **Yelp** (exists, unclaimed, 5 reviews; Apple Maps shows Yelp's
@@ -90,29 +90,37 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
       Yelp, and directories. Listings use "Umbo Traverse City"; the site
       schema carries it as `alternateName`.
 
-> Reservations are **by text**, not phone, for parties of 2–5 indoors, with
-> 6+ on the patio first come first served (`9ea1077`). Any listing built from
-> older notes will say "reservations by phone" and will be wrong.
+> Reservations are on **Resy** for parties of 1-4 at the indoor bar, and
+> parties of 5 or more call (231) 944-2797 (`509ae99`, 2026-11-05). Any listing
+> built from older notes will say "text to book" or "reservations by phone"
+> and will be wrong. Listings still to move to Resy are tracked on SUMMIT-355.
 
 ## 3. Structured data — extend as content grows
 
 - [ ] Add `AggregateRating` / `Review` schema once real reviews exist
       (don't fabricate — Google penalizes self-serving markup).
-- [ ] Add `Event` schema + a listing page when hosting ticketed/one-off events.
+- [x] `Event` schema + listing: one page per event (`FoodEvent` JSON-LD),
+      teasers on `events.html`. `scripts/event-check.py` runs daily and fails
+      on a past or incomplete event. Recipe in `docs/events.md`.
 - [x] Expand `Menu` JSON-LD with per-item pricing. Generated from the visible
       rows by `scripts/menu-jsonld.py`, which also writes the catering
       `OfferCatalog` on `events.html`; rerun it after every menu edit.
-- [ ] Add `suitableForDiet` / allergen info if the menu starts marking it.
+- [x] `suitableForDiet` from the printed menu tags: `menu-jsonld.py` maps a
+      tag word ("vegetarian", "vegan", "gluten-free") to the schema.org diet.
+      Today only Row 7 is tagged (vegetarian). Allergen info stays off until
+      the kitchen prints it; never infer a diet from a description.
 
 ## 4. Content / AEO
 
-> `llms.txt` and the visit FAQ each carry the reservation policy, and the
-> visit FAQ answer exists **twice** — once as visible copy and once inside
-> the `FAQPage` JSON-LD. Edit both together or the structured data goes stale.
+> `llms.txt` and the visit FAQ each carry the reservation policy. The visit
+> FAQ answer exists twice, as visible copy and inside the `FAQPage` JSON-LD,
+> but only the visible `<dd>` is edited by hand: `scripts/faq-jsonld.py`
+> rebuilds the JSON-LD from it, and the Content checks workflow fails any PR
+> or push where the two disagree. `llms.txt` is still hand-kept.
 
 - [ ] Keep `llms.txt` and the FAQ in sync with real hours, menu, and policies.
       When hours change, update all of these together: the five page footers,
-      the visit page Hours block, the FAQ answer (visible copy and JSON-LD),
+      the visit page Hours block, the FAQ answer (then run `faq-jsonld.py`),
       the `Restaurant` hours on `index.html` and `visit.html`, `llms.txt`, and
       the GBP, Apple, Yelp and Instagram listings.
 - [x] Press: "In the Press" section on `about.html`, mirrored as `subjectOf`
@@ -121,10 +129,10 @@ Tracked in **SUMMIT-151**. GitHub Pages domain verification is already done
 
 ## 5. Nice-to-have
 
-- [x] Real reservation booking: **decided against, 2026-09-15.** Umbo is
-      staying on text-only reservations. Guests text (231) 944-2797 and a
-      person answers, which is what the site has said since `9ea1077`. There
-      is no booking system and none is planned.
+- [x] Real reservation booking: **live on Resy since 2026-11-05** (`509ae99`,
+      SUMMIT-355). "Book a Seat" opens the Resy modal on desktop and Resy's
+      booking page on phones; parties of 5 or more still call. This replaced
+      the 2026-09-15 decision to stay on text-only reservations.
 
       > Umbo is **not** the HostStand pilot. An earlier version of this line
       > said SUMMIT-111 put an Umbo agreement on HostStand's critical path,
